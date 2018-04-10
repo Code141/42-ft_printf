@@ -6,48 +6,53 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/08 14:38:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/10 21:53:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 
-int	get_arg_size(const char *str, int *i, va_list *arg)
+void	flags(const char *format, int *i, int size, va_list *args)
 {
-	char	*s;
-
-	*i = (*i)++;
-	if (str[*i] == 's')
+	while (format[*i])
 	{
-			s = va_arg(*arg, char *);
-			return (5);
+/*
+		if (format[*i] == '#')
+		else if (format[*i] == '0')	// [0-9] check for big pad numbers
+		else if (format[*i] == '-')
+		else if (format[*i] == '+')
+		else if (format[*i] == ' ')
+		else if (format[*i] == '\'')
+		else if (format[*i] == 'I')
+		else
+*/
+		(*i)++;
 	}
-	return (0);
 }
 
-int	get_buff_size(const char *str, va_list *arg)
+int		get_buff_size(const char *format, va_list *args)
 {
 	int	i;
 	int	size;
 
 	i = 0;
-	if (str[0] == '%')
+	size = 0;
+	while (format[i])
 	{
-		size += get_arg_size(str, &i, arg);
-	}
-	else
-	{
-		i++;
-		size++;
-	}
-	while (str[i])
-	{
-		if (str[i] == '%' && str[i - 1] != '\\')
+		if (format[i] == '%')
 		{
-			size += get_arg_size(str, &i, arg);
+			i++;
+			flags(format, &i, &size, args);
+			width(format, &i, &size, args);
+			precision(format, &i, &size, args);
+			length(format, &i, &size, args);
+			specifier(format, &i, &size, args);
 		}
-		size++;
-		i++;
+		else
+		{
+			i++;
+			size++;
+		}
 	}
 	return (size);
 }

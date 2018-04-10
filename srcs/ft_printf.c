@@ -6,11 +6,11 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/05 14:16:19 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/10 20:10:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>	// Args
+#include <stdarg.h>	// argss
 #include <stdlib.h>	// Malloc
 #include <unistd.h>	// Write
 
@@ -18,37 +18,36 @@
 
 #include <eval.h>
 
-int	copy_eval(const char *eval, va_list arg, char *buff)
+int	copy_format(const char *format, va_list args, char *buff)
 {
 	int i;
 
 	i = 0;
-	while (eval[i])
+	while (format[i])
 	{
-		*buff = eval[i];
+		*buff = format[i];
 		buff++;
 		i++;
 	}
 	return (0);
 }
 
-int	ft_printf(const char *eval, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list	arg;
+	va_list	args;
 	int		size;
 	char	*buff;
 
-	va_start(arg, eval);
-
-	size = get_buff_size(eval, &arg);
-	va_end(arg);
+	va_start(args, format);
+		size = get_buff_size(format, &args);
+	va_end(args);
 
 	if (size < 0)
 		return (-1);
 	buff = (char*)malloc((sizeof(*buff) * size) + 1);
 	if (!buff)
 		return (-1);
-	copy_eval(eval, arg, buff);
+	copy_format(format, args, buff);
 	write(1, buff, size);
 	return (size);
 }
@@ -65,16 +64,16 @@ void foo(char *fmt, ...)
 	while (*fmt)
 		switch(*fmt++) {
 			case 's':                       // string
-				s = va_arg(ap, char *);
+				s = va_args(ap, char *);
 				printf("string %s\n", s);
 				break;
 			case 'd':                       // int
-				d = va_arg(ap, int);
+				d = va_args(ap, int);
 				printf("int %d\n", d);
 				break;
 			case 'c':                       // char
 				// Note: char is promoted to int.
-				c = va_arg(ap, int);
+				c = va_args(ap, int);
 				printf("char %c\n", c);
 				break;
 		}

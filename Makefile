@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/04/08 14:40:05 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/04/10 18:20:07 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -48,10 +48,10 @@ re			:
 ################################################################################
 
 test		:	$(NAME)
-	$(CC) -I./includes -L./ -lftprintf main.c -o test
+	$(CC) -g -fsanitize=address -I./includes -L./ -lftprintf main.c -o test
 
-g			: $(OBJS)
+g			:	$(OBJS)
 	$(CC) -g $(OBJS) -o $(NAME)
 
-fsanitize	: $(OBJS)
+fsanitize	:	$(OBJS)
 	$(CC) -g -fsanitize=address $(OBJS) -o $(NAME)
