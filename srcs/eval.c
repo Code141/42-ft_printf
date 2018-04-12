@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/12 20:37:14 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/12 20:38:24 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		get_buff_size(const char *text, va_list *va_args)
 	flags = (t_printf_flags*)malloc(sizeof(t_printf_flags) * nb_arg);
 	if (!flags)
 		exit (0); // MALLOC
-	wile (text[i])
+	while (text[i])
 	{
 		if (text[i] == '%')
 			i += new_arg(text + i, &(flags + current_arg++));
