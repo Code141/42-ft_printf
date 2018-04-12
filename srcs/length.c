@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_arg.h                                            :+:      :+:    :+:   */
+/*   length.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/05 11:38:57 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/11 17:50:14 by gelambin         ###   ########.fr       */
+/*   Created: 2018/04/11 18:19:04 by gelambin          #+#    #+#             */
+/*   Updated: 2018/04/11 18:32:11 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef U_ARG_H
-# define U_ARG_H
-# include <flags.h>
-
-typedef union	u_va_data
+int	length(const char *str)
 {
-	unsigned char	c;
-	int				d;
-	unsigned int	u;
-	unsigned int	x;
-	unsigned int	X;
-	double			e;
-	double			E;
-	double			f;
-	char			*s;
-	void			*p;
-}				t_va_data;
+	int	i;
 
-typedef struct	s_printf_arg
-{
-	t_printf_flags	flags;
-}				t_printf_arg;
+	if (str[i] == 'h' && str[i + 1] == 'h')
+		i = 2;
+	if (str[i] == 'l' && str[i + 1] == 'l')
 
+	if (str[i] == 'h')
 
-#endif
+	if (str[i] == 'l')
+
+	if (str[i] == 'j')
+
+	if (str[i] == 'z')
+
+	if (str[i] == 't')
+
+	if (str[i] == 'L')
+
+	return (i);
+}

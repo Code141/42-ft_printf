@@ -6,47 +6,47 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/10 21:53:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:26:30 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
+#include <u_arg.h>
 
-void	flags(const char *format, int *i, int size, va_list *args)
+int		new_arg(const char *str_arg)
 {
-	while (format[*i])
-	{
+	t_printf_arg	arg;
+	int				jump;
+
+	jump = 0;
+	jump = flags(str_arg, &arg.flags);
+	if (jump < 0)
+		error();
+	str_arg += jump;
+	jump = 0;
+	
 /*
-		if (format[*i] == '#')
-		else if (format[*i] == '0')	// [0-9] check for big pad numbers
-		else if (format[*i] == '-')
-		else if (format[*i] == '+')
-		else if (format[*i] == ' ')
-		else if (format[*i] == '\'')
-		else if (format[*i] == 'I')
-		else
+	width(str_arg + jump, &i, &size, args);
+	precision(str_arg + jump, &i, &size, args);
+	length(str_arg + jump, &i, &size, args);
+	specifier(str_arg + jump, &i, &size, args);
 */
-		(*i)++;
-	}
+	return (1);
 }
 
-int		get_buff_size(const char *format, va_list *args)
+int		get_buff_size(const char *text, va_list *va_args)
 {
 	int	i;
 	int	size;
 
 	i = 0;
 	size = 0;
-	while (format[i])
+	while (text[i])
 	{
-		if (format[i] == '%')
+		if (text[i] == '%')
 		{
 			i++;
-			flags(format, &i, &size, args);
-			width(format, &i, &size, args);
-			precision(format, &i, &size, args);
-			length(format, &i, &size, args);
-			specifier(format, &i, &size, args);
+			new_arg(text + i);
 		}
 		else
 		{

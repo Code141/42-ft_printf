@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_arg.h                                            :+:      :+:    :+:   */
+/*   precision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/05 11:38:57 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/11 17:50:14 by gelambin         ###   ########.fr       */
+/*   Created: 2018/04/11 17:47:46 by gelambin          #+#    #+#             */
+/*   Updated: 2018/04/11 18:17:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef U_ARG_H
-# define U_ARG_H
-# include <flags.h>
+// Think to the possibility to read next arg for get an int precision
+// * for next argument
+// *3$ for 3em argument
 
-typedef union	u_va_data
+int	precision(const char *str, int *precision)
 {
-	unsigned char	c;
-	int				d;
-	unsigned int	u;
-	unsigned int	x;
-	unsigned int	X;
-	double			e;
-	double			E;
-	double			f;
-	char			*s;
-	void			*p;
-}				t_va_data;
+	int	i;
 
-typedef struct	s_printf_arg
-{
-	t_printf_flags	flags;
-}				t_printf_arg;
-
-
-#endif
+	i = 0;
+	if (str[i] == '.')
+		while (str[i] >= '0' && str[i] <= '9')
+			*width *= 10 + str[i++] - '0';
+	return (i);
+}
