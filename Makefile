@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/04/11 16:51:43 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/04/12 15:53:35 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -24,7 +24,8 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 CPPFLAGS	=	-I./includes/
 
 SRCS		=	ft_printf.c									\
-				eval.c
+				eval.c										\
+				flags.c
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
 

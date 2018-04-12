@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_arg.h                                            :+:      :+:    :+:   */
+/*   s_printf_flags.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/05 11:38:57 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/12 16:31:21 by gelambin         ###   ########.fr       */
+/*   Created: 2018/04/12 16:34:37 by gelambin          #+#    #+#             */
+/*   Updated: 2018/04/12 16:43:57 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef U_ARG_H
-# define U_ARG_H
-# include <flags.h>
+#ifndef S_PRINTF_FLAGS_H
+# define  S_PRINTF_FLAGS_H
 
 typedef union	u_va_data
 {
@@ -64,8 +63,8 @@ typedef struct	s_printf_flags
 	char	space_for_signe;
 	char	grouping_thousands;
 	int		width;
+	int		length;
 	int		precision;
 }				t_printf_flags;
-
 
 #endif
