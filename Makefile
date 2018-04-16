@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/04/12 15:53:35 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/04/16 19:58:01 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -20,6 +20,12 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 				#-std=c89 -pedantic							\
 				#-Wmissing-prototypes -Wstrict-prototypes	\
 				#-Wold-style-definition
+
+# DEPENDENCIES .H FILES || Maybe commande or keyword MD to dress dependencies list
+
+%.o: %.c includes/
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
 
 CPPFLAGS	=	-I./includes/
 

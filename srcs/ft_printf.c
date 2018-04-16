@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/11 17:41:37 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:02:11 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,54 @@
 #include <stdio.h>	// Printf
 
 #include <eval.h>
+#include <s_ctx.h>
 
-int	copy_text(const char *text, va_list args, char *buff)
+static t_ctx	*init(const char *text, va_list *args)
 {
-	int i;
+	t_ctx	*ctx;
+	int		i;
+	int		nb_arg;
 
 	i = 0;
+	nb_arg = 0;
 	while (text[i])
 	{
-		*buff = text[i];
-		buff++;
+		if (text[i] == '%' && text[i + 1] != '%')
+			nb_arg++;
+		if (text[i] == '%' && text[i + 1] == '%')
+			i++;
 		i++;
 	}
-	return (0);
+	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
+	if (!ctx)
+		exit (0); // MALLOC
+	ctx->text = text;
+	ctx->args = args;
+	return (ctx);
 }
 
 int	ft_printf(const char *text, ...)
 {
-	va_list	va_args;
+	va_list	args;
+	t_ctx	*ctx;
+	
 	int		size;
-	char	*buff;
 
-	va_start(va_args, text);
-		size = get_buff_size(text, &va_args);
-	va_end(va_args);
+	va_start(args, text);
 
-	if (size < 0)
-		return (-1);
-	buff = (char*)malloc((sizeof(*buff) * size) + 1);
+	ctx = init(text, &args);
+	size = get_buff_size(ctx);
+
+	va_end(args);
+
+/*	buff = (char*)malloc((sizeof(*buff) * size) + 1);
 	if (!buff)
 		return (-1);
 //	copy_text(text, args, buff);
 	write(1, buff, size);
-	return (size);
+*/	return (size);
 }
+
 /*
 void foo(char *fmt, ...)
 {

@@ -6,13 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/12 19:36:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:31:57 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <s_printf_flags.h>
+#include <s_ctx.h>
 
-int	flag(const char *str, int *pos, t_printf_flags *flags)
+int	flag(const char *str, int *pos, t_flag *flags)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ int	flag(const char *str, int *pos, t_printf_flags *flags)
 // * for next argument
 // *3$ for 3em argument
 
-void	width_precision(const char *str, int *pos, t_printf_flags *flags)
+void	width_precision(const char *str, int *pos, t_flag *flags)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ void	width_precision(const char *str, int *pos, t_printf_flags *flags)
 
 //---------
 
-int	length(const char *str, t_printf_flags *flags)
+int	length(const char *str, t_flag *flags)
 {
 /*	if (*str == 'h' && str[i + 1] == 'h')
 		flags->length = e_length_hh;
@@ -84,7 +84,7 @@ int	length(const char *str, t_printf_flags *flags)
 */	return (0);
 }
 
-int	specifier(const char *str, t_printf_flags *flags)
+int	specifier(const char *str, t_flag *flags)
 {
 /*	if (*str == 'c')
 		flags->length = e_length_c;

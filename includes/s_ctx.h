@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_printf_flags.h                                   :+:      :+:    :+:   */
+/*   s_ctx.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/12 16:34:37 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/12 16:43:57 by gelambin         ###   ########.fr       */
+/*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
+/*   Updated: 2018/04/16 18:32:30 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_PRINTF_FLAGS_H
-# define  S_PRINTF_FLAGS_H
+#ifndef S_CTX_H
+# define S_CTX_H
+# include <stdarg.h>
 
 typedef union	u_va_data
 {
@@ -54,7 +55,7 @@ enum			e_length
 	e_length_z
 };
 
-typedef struct	s_printf_flags
+typedef struct	s_flag
 {
 	char	alternate;
 	char	pad;
@@ -65,6 +66,14 @@ typedef struct	s_printf_flags
 	int		width;
 	int		length;
 	int		precision;
-}				t_printf_flags;
+}				t_flag;
+
+typedef struct	s_ctx
+{
+	const char	*text;
+	va_list		*args;
+	char		*buff;
+	t_flag		flags[];
+}				t_ctx;
 
 #endif
