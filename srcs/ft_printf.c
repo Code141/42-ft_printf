@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/16 20:02:11 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:20:12 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_ctx	*init(const char *text, va_list *args)
 	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
 	if (!ctx)
 		exit (0); // MALLOC
-	ctx->text = text;
+	ctx->text = (char*)text;
 	ctx->args = args;
 	return (ctx);
 }
@@ -47,7 +47,7 @@ int	ft_printf(const char *text, ...)
 {
 	va_list	args;
 	t_ctx	*ctx;
-	
+
 	int		size;
 
 	va_start(args, text);

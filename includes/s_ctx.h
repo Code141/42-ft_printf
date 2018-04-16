@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/16 18:32:30 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:12:26 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct	s_flag
 
 typedef struct	s_ctx
 {
-	const char	*text;
+	char		*text;
 	va_list		*args;
 	char		*buff;
 	t_flag		flags[];
