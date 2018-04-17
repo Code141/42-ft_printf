@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/16 20:12:26 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:23:13 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ enum			e_length
 
 typedef struct	s_flag
 {
+	char	arg_no;
 	char	alternate;
 	char	pad;
 	char	left_align;
