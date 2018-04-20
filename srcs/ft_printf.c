@@ -6,18 +6,19 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/20 02:20:12 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 15:13:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>	// argss
-#include <stdlib.h>	// Malloc
-#include <unistd.h>	// Write
+#include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#include <stdio.h>	// Printf
+#include <stdio.h>
 
-#include <eval.h>
+#include <interceptor.h>
 #include <s_ctx.h>
+#include <ft_printf.h>
 
 static t_ctx	*init(const char *text, va_list *args)
 {
@@ -37,7 +38,7 @@ static t_ctx	*init(const char *text, va_list *args)
 	}
 	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
 	if (!ctx)
-		exit (0); // MALLOC
+		exit (0);
 	ctx->text = (char*)text;
 	ctx->args = args;
 	return (ctx);

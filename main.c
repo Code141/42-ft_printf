@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/20 03:31:08 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 23:58:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(void)
 	j = 20;
 	k = 30;
 	str = "world";
+	printf("|%10.0d|\n", i, j, k, str);
+/*
 	printf("	: [%d] Std", printf("Hello"));
 	printf("\n");
 	printf("	: [%d] Std", printf("|%d", k));
@@ -37,8 +39,11 @@ int	main(void)
 	printf("|%#1$0d|\n", i, j, k);
 	printf("|%10#d|\n", i, j, k);
 	printf("|%#0+0-d|\n", i, j, k);
+	printf("|%100hd|\n", i, j, k);
+	printf("|%02$*d|\n", i, j, k);
 	printf("-|%.11d-%d-%d|\n", i, j, k, str);
 	printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
+*/
 	char c;
 	c = 'x';
 //	foo("c", c);

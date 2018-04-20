@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/04/16 19:58:01 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/04/20 15:15:08 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,9 +17,9 @@ SRCSPATH	=	srcs
 CC			=	gcc
 
 CFLAGS		=	#-Wall -Wextra -Werror						\
-				#-std=c89 -pedantic							\
-				#-Wmissing-prototypes -Wstrict-prototypes	\
-				#-Wold-style-definition
+				-std=c89 -pedantic							\
+				-Wmissing-prototypes -Wstrict-prototypes	\
+				-Wold-style-definition
 
 # DEPENDENCIES .H FILES || Maybe commande or keyword MD to dress dependencies list
 
@@ -30,7 +30,7 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 CPPFLAGS	=	-I./includes/
 
 SRCS		=	ft_printf.c									\
-				eval.c										\
+				interceptor.c								\
 				flags.c
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))

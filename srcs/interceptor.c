@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eval.c                                             :+:      :+:    :+:   */
+/*   interceptor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/20 03:23:10 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/21 00:08:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	error()
 
 int		new_arg(char *arg, t_flag *flags)
 {
-	int				pos;
+	int	pos;
 
 	pos = 0;
 	if (arg[pos] >= '0' && arg[pos] <= '9')
@@ -34,10 +34,8 @@ int		new_arg(char *arg, t_flag *flags)
 	if (!flags->width)
 		if (!flag(arg, &pos, flags))
 			error();
-	if (!width_precision(arg, &pos, flags))
-		error();
-	if (!length(arg, &pos, flags))
-		error();
+	pos += width_precision(arg + pos flags);
+	pos += length(arg + pos, flags);
 	if (!specifier(arg, &pos, flags))
 		error();
 	return (pos);
@@ -46,19 +44,21 @@ int		new_arg(char *arg, t_flag *flags)
 void		interceptor(t_ctx *ctx)
 {
 	int		i;
+	int		j;
 	int		current_arg;
 	char	*text;
 
 	i = 0;
-	text = ctx->text;
+	j = 0;
 	current_arg = 0;
-	while (text[i])
-	{
-		//if (text[i] == '%' && ctx->text[i + 1] == '%')
-		if (text[i] == '%' && text[i + 1] != '%')
-			i += new_arg(text + i, ctx->flags + current_arg++);
+	text = ctx->text;
+	while (text[i + j])
+		if (text[i + j] == '%')
+			if (text[++i + j] == '%')
+				j++;
+			else
+				i += new_arg(text + i + j, ctx->flags + current_arg++);
 		else
-			ctx->buff_size++;
-		i++;
-	}
+			j++;
+	ctx->buff_size = j;
 }

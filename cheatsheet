@@ -1,7 +1,7 @@
-%[flags][min field width][precision][length]conversion specifier
-  -----  ---------------  ---------  ------ -------------------
-   \             # *        .# .*      /             \
-    \                                 /               \
+%[n$][flags][min field width][.precision][length]conversion specifier
+      -----  ---------------   ---------  ------ -------------------
+        |           # *          .# .*      /             \
+        |                                  /               \
    # 0 - +   ' I                 hh h l ll j z L    c d u x X e f g s p %
    -------------                 ---------------    -----------------------
    # | Alternate (0  0x  0X)      hh | char            c | unsigned char 

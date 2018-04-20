@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/20 02:17:56 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/21 00:06:44 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ enum			e_specifier
 	e_specifier_g,
 	e_specifier_G,
 	e_specifier_s,
-	e_specifier_p,
-	e_specifier_percent
+	e_specifier_p
 };
 
 enum			e_length
