@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/17 17:08:59 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 03:23:56 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void	argument_access(const char *str, int *pos, t_flag *flags)
 {
-	int	arg_no;
+	int	nb;
 	int	i;
 
 	i = *pos;
-	arg_no = 0;
-	if (str[i] >= '1' && str[i] <= '9')
+	nb = 0;
+	if (str[i] == '0')
 	{
-		while (str[i] >= '0' && str[i] <= '9')
-			arg_no = (arg_no * 10) + str[i++] - '0';
-		if (str[i] == '$')
-			flags->arg_no = arg_no;
-		*pos = i;
-	}
-	else if (str[i] == '0')
 		flags->pad = 1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+		nb = (nb * 10) + str[i++] - '0';
+	if (str[i] == '$')
+	{
+		flags->parameter = nb;
+		i++;
+	}
+	else
+		flags->width = nb;
+	*pos = i;
 }
 
 int	flag(const char *str, int *pos, t_flag *flags)
@@ -40,8 +45,6 @@ int	flag(const char *str, int *pos, t_flag *flags)
 	{
 		if (str[i] == '#')
 			flags->alternate = 1;
-		else if (str[i] >= '0' && str[i] <= '9')
-			argument_access(str, &i, flags);
 		else if (str[i] == '-')
 			flags->left_align = 1;
 		else if (str[i] == '+')

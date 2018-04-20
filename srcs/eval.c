@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/17 16:00:17 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 03:23:10 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,41 @@ void	error()
 	write (1, "ERROR\n", 6);
 }
 
-int		new_arg(char *arg, int current_arg, t_ctx *ctx)
+int		new_arg(char *arg, t_flag *flags)
 {
 	int				pos;
 
 	pos = 0;
-	if (!flag(arg, &pos, ctx->flags))
+	if (arg[pos] >= '0' && arg[pos] <= '9')
+		argument_access(arg, &pos, flags);
+	if (!flags->width)
+		if (!flag(arg, &pos, flags))
+			error();
+	if (!width_precision(arg, &pos, flags))
 		error();
-	if (!width_precision(arg, &pos, ctx->flags))
+	if (!length(arg, &pos, flags))
 		error();
-	if (!length(arg, &pos, ctx->flags))
-		error();
-	if (!specifier(arg, &pos, ctx->flags))
+	if (!specifier(arg, &pos, flags))
 		error();
 	return (pos);
 }
 
-int		get_buff_size(t_ctx *ctx)
+void		interceptor(t_ctx *ctx)
 {
 	int		i;
 	int		current_arg;
-	int		size;
 	char	*text;
 
 	i = 0;
-	size = 0;
 	text = ctx->text;
 	current_arg = 0;
 	while (text[i])
 	{
 		//if (text[i] == '%' && ctx->text[i + 1] == '%')
 		if (text[i] == '%' && text[i + 1] != '%')
-			i += new_arg(text + i, current_arg++, ctx);
+			i += new_arg(text + i, ctx->flags + current_arg++);
 		else
-			size++;
+			ctx->buff_size++;
 		i++;
 	}
-	return (size);
 }

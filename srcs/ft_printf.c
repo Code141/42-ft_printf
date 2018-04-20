@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/16 20:20:12 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 02:20:12 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	ft_printf(const char *text, ...)
 {
 	va_list	args;
 	t_ctx	*ctx;
-
-	int		size;
+	int		ret;
 
 	va_start(args, text);
 
 	ctx = init(text, &args);
-	size = get_buff_size(ctx);
+
+	interceptor(ctx);
 
 	va_end(args);
 
@@ -62,7 +62,10 @@ int	ft_printf(const char *text, ...)
 		return (-1);
 //	copy_text(text, args, buff);
 	write(1, buff, size);
-*/	return (size);
+*/
+	ret = ctx->buff_size;
+	free(ctx);
+	return (ret);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/17 16:49:30 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/20 03:31:08 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ int	main(void)
 	printf("|%02d|\n", i, j, k, str);
 	printf("|%2$010d|\n", i, j, k, str);
 	printf("|%3$d-%d-%d|\n", i, j, k, str);
+	printf("|%03$10d|\n", i, j, k);
+	printf("|%+10d|\n", i, j, k);
+	printf("|%#1$0d|\n", i, j, k);
+	printf("|%10#d|\n", i, j, k);
+	printf("|%#0+0-d|\n", i, j, k);
+	printf("-|%.11d-%d-%d|\n", i, j, k, str);
+	printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
 	char c;
 	c = 'x';
 //	foo("c", c);
