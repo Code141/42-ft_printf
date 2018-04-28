@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/21 00:08:38 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:42:00 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,22 @@ void	error()
 	write (1, "ERROR\n", 6);
 }
 
-int		new_arg(char *arg, t_flag *flags)
+int		new_arg(char *arg, t_ctx *ctx)
 {
-	int	pos;
+	int		pos;
+	t_flag	flag;
 
+	// BZERO FLAG
+	ctx->flag = &flag;
 	pos = 0;
 	if (arg[pos] >= '0' && arg[pos] <= '9')
-		argument_access(arg, &pos, flags);
-	if (!flags->width)
-		if (!flag(arg, &pos, flags))
+		argument_access(arg, &pos, ctx);
+	if (!ctx->flags.width)
+		if (!flag(arg, &pos, ctx))
 			error();
-	pos += width_precision(arg + pos flags);
-	pos += length(arg + pos, flags);
-	if (!specifier(arg, &pos, flags))
+	pos += width_precision(arg + pos, ctx);
+	pos += length(arg + pos, ctx);
+	if (!specifier(arg, &pos, ctx))
 		error();
 	return (pos);
 }
@@ -45,20 +48,37 @@ void		interceptor(t_ctx *ctx)
 {
 	int		i;
 	int		j;
-	int		current_arg;
+
+	i = 0;
+	j = 0;
+	while (ctx->text[i])
+	{
+		if (ctx->text[i] == '%')
+			i += new_arg(ctx->text + i, ctx);
+		else
+			ctx->buff[] = ctx->text[i];
+		i++;
+	}
+}
+
+/*
+void		interceptor(t_ctx *ctx)
+{
+	int		i;
+	int		j;
 	char	*text;
 
 	i = 0;
 	j = 0;
-	current_arg = 0;
 	text = ctx->text;
 	while (text[i + j])
 		if (text[i + j] == '%')
 			if (text[++i + j] == '%')
 				j++;
 			else
-				i += new_arg(text + i + j, ctx->flags + current_arg++);
+				i += new_arg(text + i + j, ctx);
 		else
 			j++;
 	ctx->buff_size = j;
 }
+*/

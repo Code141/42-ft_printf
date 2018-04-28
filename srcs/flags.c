@@ -6,13 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/21 00:19:02 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:33:30 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
-void	argument_access(const char *str, int *pos, t_flag *flags)
+void	argument_access(const char *str, int *pos, t_ctx *ctx)
 {
 	int	nb;
 	int	i;
@@ -20,23 +20,22 @@ void	argument_access(const char *str, int *pos, t_flag *flags)
 	i = *pos;
 	nb = 0;
 	if (str[i] == '0')
-	{
-		flags->pad = 1;
-		i++;
-	}
+		ctx->flags.pad = 1;
+
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
+
 	if (str[i] == '$')
 	{
-		flags->parameter = nb;
+		ctx->flags.parameter = nb;
 		i++;
 	}
 	else
-		flags->width = nb;
+		ctx->flags.width = nb;
 	*pos = i;
 }
 
-int	flag(const char *str, int *pos, t_flag *flags)
+int	flag(const char *str, int *pos, t_ctx *ctx)
 {
 	int	i;
 
@@ -44,17 +43,17 @@ int	flag(const char *str, int *pos, t_flag *flags)
 	while (str[i])
 	{
 		if (str[i] == '#')
-			flags->alternate = 1;
+			ctx->flags.alternate = 1;
 		else if (str[i] == '0')
-			flags->pad = 1;
+			ctx->flags.pad = 1;
 		else if (str[i] == '-')
-			flags->left_align = 1;
+			ctx->flags.left_align = 1;
 		else if (str[i] == '+')
-			flags->explicite_sign = 1;
+			ctx->flags.explicite_sign = 1;
 		else if (str[i] == ' ')
-			flags->space_for_signe = 1;
+			ctx->flags.space_for_signe = 1;
 		else if (str[i] == '\'')
-			flags->grouping_thousands = 1;
+			ctx->flags.grouping_thousands = 1;
 		else
 			return (1);
 		i++;
@@ -63,15 +62,14 @@ int	flag(const char *str, int *pos, t_flag *flags)
 	return (0);
 }
 
-
-int		width_precision(const char *str, int *pos, t_flag *flags)
+int		width_precision(const char *str, t_ctx *ctx)
 {
 	int	i;
 
-	flags->precision = 1; // DEFAULT BEHAVIOR
+	ctx->flags.precision = 1; // DEFAULT BEHAVIOR
 	i = 0;
 	while (str[i] >= '0' && str[i] <= '9')
-		flags->width = (flags->width * 10) + str[i++] - '0';
+		ctx->flags.width = (ctx->flags.width * 10) + str[i++] - '0';
 
 	if (str[i] == '.')
 		i++;
@@ -79,59 +77,61 @@ int		width_precision(const char *str, int *pos, t_flag *flags)
 	// * for next argument
 
 	while (str[i] >= '0' && str[i] <= '9')
-		flags->precision = (flags->precision * 10) + str[i++] - '0';
+		ctx->flags.precision = (ctx->flags.precision * 10) + str[i++] - '0';
 	return (1);
 }
 
 //---------
 
-int		length(const char *str, t_flag *flags)
+int		length(const char *str, t_ctx *ctx)
 {
 	if (*str == 'h' && *(str + 1) == 'h')
-		flags->length = e_length_hh;
+		ctx->flags.length = e_length_hh;
 	else if (*str == 'l' && *(str + 1) == 'l')
-		flags->length = e_length_ll;
-	if (flags->length)
+		ctx->flags.length = e_length_ll;
+	if (ctx->flags.length)
 		return (2);
 	if (*str == 'h')
-		flags->length = e_length_h;
+		ctx->flags.length = e_length_h;
 	else if (*str == 'l')
-		flags->length = e_length_l;
+		ctx->flags.length = e_length_l;
 	else if (*str == 'j')
-		flags->length = e_length_j;
+		ctx->flags.length = e_length_j;
 	else if (*str == 'z')
-		flags->length = e_length_z;
-	if (flags->length)
+		ctx->flags.length = e_length_z;
+	if (ctx->flags.length)
 		return (1);
 	return (0);
 }
 
-int		specifier(const char *str, t_flag *flags)
+int		specifier(const char *str, t_ctx *ctx)
 {
 	if (*str == 'c')
-		flags->length = e_length_c;
+		ctx->flags.specifier = e_specifier_c;
 	else if (*str == 'd')
-		flags->length = e_length_d;
+		ctx->flags.specifier = e_specifier_d;
 	else if (*str == 'u')
-		flags->length = e_length_u;
+		ctx->flags.specifier = e_specifier_u;
 	else if (*str == 'x')
-		flags->length = e_length_x;
+		ctx->flags.specifier = e_specifier_x;
 	else if (*str == 'X')
-		flags->length = e_length_X;
+		ctx->flags.specifier = e_specifier_X;
 	else if (*str == 'e')
-		flags->length = e_length_e;
+		ctx->flags.specifier = e_specifier_e;
 	else if (*str == 'E')
-		flags->length = e_length_E;
+		ctx->flags.specifier = e_specifier_E;
 	else if (*str == 'f')
-		flags->length = e_length_f;
+		ctx->flags.specifier = e_specifier_f;
 	else if (*str == 'g')
-		flags->length = e_length_g;
+		ctx->flags.specifier = e_specifier_g;
 	else if (*str == 'G')
-		flags->length = e_length_G;
+		ctx->flags.specifier = e_specifier_G;
 	else if (*str == 's')
-		flags->length = e_length_s;
+		ctx->flags.specifier = e_specifier_s;
 	else if (*str == 'p')
-		flags->length = e_length_p;
+		ctx->flags.specifier = e_specifier_p;
+	else if (*str == '%')
+		ctx->flags.specifier = e_specifier_percent;
 	else
 		return (-1); // UNKNOW SPECIFIER
 	return (1);

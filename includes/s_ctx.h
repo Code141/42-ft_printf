@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/21 00:06:44 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:40:23 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef union	u_va_data
 	void			*p;
 }				t_va_data;
 
-enum			e_specifier
+typedef enum	e_specifier
 {
 	e_specifier_c,
 	e_specifier_d,
@@ -41,10 +41,11 @@ enum			e_specifier
 	e_specifier_g,
 	e_specifier_G,
 	e_specifier_s,
-	e_specifier_p
-};
+	e_specifier_p,
+	e_specifier_percent
+}				t_specifier;
 
-enum			e_length
+typedef enum	e_length
 {
 	e_length_hh,
 	e_length_h,
@@ -52,30 +53,31 @@ enum			e_length
 	e_length_l,
 	e_length_j,
 	e_length_z
-};
+}				t_length; 
 
 typedef struct	s_flag
 {
-	char	parameter;
-	char	alternate;
-	char	pad;
-	char	left_align;
-	char	explicite_sign;
-	char	space_for_signe;
-	char	grouping_thousands;
-	int		width;
-	int		length;
-	int		precision;
+	char		parameter;
+	char		alternate;
+	char		pad;
+	char		left_align;
+	char		explicite_sign;
+	char		space_for_signe;
+	char		grouping_thousands;
+	int			width;
+	int			precision;
+	t_length	length;
+	t_specifier	specifier;
 }				t_flag;
 
 typedef struct	s_ctx
 {
-	char		*text;
-	int			nb_arg;
 	va_list		*args;
-	int			buff_size;
+	char		*text;
 	char		*buff;
-	t_flag		flags[];
+	t_flag		*flags;
+	int			buff_i;
+	int			buff_size;
 }				t_ctx;
 
 #endif
