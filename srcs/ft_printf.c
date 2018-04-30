@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/27 17:40:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:57:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,21 @@
 static t_ctx	*init(const char *text, va_list *args)
 {
 	t_ctx	*ctx;
+	int		i;
+	int		nb_arg;
 
-	ctx = (t_ctx*)malloc(sizeof(t_ctx));
+	i = 0;
+	nb_arg = 0;
+	while (text[i])
+	{
+		if (text[i] == '%' && text[i + 1] != '%')
+			nb_arg++;
+		if (text[i] == '%' && text[i + 1] == '%')
+			i++;
+		i++;
+	}
+	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
 	if (!ctx)
-		exit (0);
-	ctx->buff = (char*)malloc(BUFF_SIZE);
-	if (!ctx->buff)
 		exit (0);
 	ctx->text = (char*)text;
 	ctx->args = args;
@@ -52,6 +61,7 @@ int	ft_printf(const char *text, ...)
 /*
 	write(1, buff, size);
 */
+
 	ret = ctx->buff_size;
 	free(ctx);
 	return (ret);

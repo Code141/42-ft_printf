@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/27 17:40:23 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/01 01:29:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ typedef struct	s_ctx
 	va_list		*args;
 	char		*text;
 	char		*buff;
-	t_flag		*flags;
 	int			buff_i;
 	int			buff_size;
+	t_flag		flags[];
 }				t_ctx;
 
 #endif

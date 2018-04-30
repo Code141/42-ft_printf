@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/04/20 15:15:08 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/01 00:45:11 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -31,7 +31,8 @@ CPPFLAGS	=	-I./includes/
 
 SRCS		=	ft_printf.c									\
 				interceptor.c								\
-				flags.c
+				flags.c										\
+				string.c
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
 
