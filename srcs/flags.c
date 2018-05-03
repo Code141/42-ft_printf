@@ -6,11 +6,12 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/30 23:47:00 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/01 12:49:10 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+#include <specifiers/spec_s.h>
 
 void	argument_access(const char *str, int *pos, t_flag *flags)
 {
@@ -105,32 +106,32 @@ int		length(const char *str, t_flag *flags)
 int		specifier(const char *str, t_flag *flags)
 {
 	if (*str == 'c')
-		flags->specifier = e_specifier_c;
-	else if (*str == 'd')
-		flags->specifier = e_specifier_d;
+		flags->specifier = &spec_c;
+/*	else if (*str == 'd')
+		flags->specifier = &spec_d;
 	else if (*str == 'u')
-		flags->specifier = e_specifier_u;
+		flags->specifier = &spec_u;
 	else if (*str == 'x')
-		flags->specifier = e_specifier_x;
+		flags->specifier = &spec_x;
 	else if (*str == 'X')
-		flags->specifier = e_specifier_X;
+		flags->specifier = &spec_X;
 	else if (*str == 'e')
-		flags->specifier = e_specifier_e;
+		flags->specifier = &spec_e;
 	else if (*str == 'E')
-		flags->specifier = e_specifier_E;
+		flags->specifier = &spec_E;
 	else if (*str == 'f')
-		flags->specifier = e_specifier_f;
+		flags->specifier = &spec_f;
 	else if (*str == 'g')
-		flags->specifier = e_specifier_g;
+		flags->specifier = &spec_g;
 	else if (*str == 'G')
-		flags->specifier = e_specifier_G;
-	else if (*str == 's')
-		flags->specifier = e_specifier_s;
-	else if (*str == 'p')
-		flags->specifier = e_specifier_p;
+		flags->specifier = &spec_G;
+*/	else if (*str == 's')
+		flags->specifier = &spec_s;
+/*	else if (*str == 'p')
+		flags->specifier = &spec_p;
 	else if (*str == '%')
-		flags->specifier = e_specifier_percent;
-	else
+		flags->specifier = &spec_percent;
+*/	else
 		return (-1); // UNKNOW SPECIFIER
 	return (1);
 }
