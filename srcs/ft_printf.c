@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/30 22:57:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:41:50 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static t_ctx	*init(const char *text, va_list *args)
 	nb_arg = 0;
 	while (text[i])
 	{
-		if (text[i] == '%' && text[i + 1] != '%')
+		if (text[i] == '%')
 			nb_arg++;
-		if (text[i] == '%' && text[i + 1] == '%')
-			i++;
 		i++;
+		if (text[i] == '%')
+			i++;
 	}
 	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
 	if (!ctx)
@@ -51,10 +51,13 @@ int	ft_printf(const char *text, ...)
 	int		ret;
 
 	va_start(args, text);
-
 	ctx = init(text, &args);
 
 	interceptor(ctx);
+
+//	calculator(ctx);
+		// mallocator
+//	rewritor(ctx);
 
 	va_end(args);
 

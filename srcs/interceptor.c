@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/03 20:51:02 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:08:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 
 #include <unistd.h>
 
-void	error()
+void	error(const char *arg, int pos)
 {
-	write (1, "ERROR\n", 6);
+	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
+			, 63);
+	write (1, arg, pos);
+	write (1, "\n", 1);
 }
 
 int		new_arg(char *arg, t_ctx *ctx, int current_arg)
@@ -31,16 +34,16 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	// BZERO FLAG
 	flags = ctx->flags + current_arg;
-	pos = 0;
+	flags->width = 0;
+	pos = 1;
 	if (arg[pos] >= '0' && arg[pos] <= '9')
-		argument_access(arg, &pos, flags);
+		pos += argument_access(arg + pos, flags);
 	if (!flags->width)
-		if (!flag(arg, &pos, flags))
-			error();
+		pos += flag(arg + pos, flags);
 	pos += width_precision(arg + pos, flags);
 	pos += length(arg + pos, flags);
-	if (!specifier(arg, &pos, flags))
-		error();
+	if (!specifier(arg + pos++, flags))
+		error(arg, pos);
 	return (pos);
 }
 
@@ -57,10 +60,7 @@ void		interceptor(t_ctx *ctx)
 	text = ctx->text;
 	while (text[i + j])
 		if (text[i + j] == '%')
-			if (text[++i + j] == '%')
-				j++;
-			else
-				i += new_arg(text + i + j, ctx, current_arg++);
+			i += new_arg(text + i + j, ctx, current_arg++);
 		else
 			j++;
 	ctx->buff_size = j;

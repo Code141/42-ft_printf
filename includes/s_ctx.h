@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/01 12:56:09 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:45:52 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum	e_length
 	e_length_l,
 	e_length_j,
 	e_length_z
-}				t_length; 
+}				t_length;
 
 struct			s_flag
 {

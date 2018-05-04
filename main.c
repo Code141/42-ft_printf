@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/01 00:32:38 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:49:15 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	main(void)
 	int		j;
 	int		k;
 
-	i = 123456;
+	i = 123456789;
 	j = 20;
 	k = 30;
 	str = "world";
-	ft_printf("|%-4d|\n", i);
-	ft_printf("%d", i, j);
+	printf("|Hello%wHolla%10$0-4.10QQ|\n", i);
+//	ft_printf("%d", i, j);
 /*
 	printf("	: [%d] Std", printf("Hello"));
 	printf("\n");
@@ -48,5 +48,6 @@ int	main(void)
 	char c;
 	c = 'x';
 //	foo("c", c);
+	while (1);
 	return (0);
 }
