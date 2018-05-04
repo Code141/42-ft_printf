@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/04/30 23:46:57 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/03 20:51:02 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	error()
 	write (1, "ERROR\n", 6);
 }
 
-int		new_arg(char *arg, t_ctx *ctx, int argument)
+int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 {
 	int		pos;
 	t_flag	*flags;
 
 	// BZERO FLAG
-	flags = ctx->flags + argument;
+	flags = ctx->flags + current_arg;
 	pos = 0;
 	if (arg[pos] >= '0' && arg[pos] <= '9')
 		argument_access(arg, &pos, flags);
