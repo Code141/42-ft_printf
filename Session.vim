@@ -12,8 +12,8 @@ map  h
 map <NL> j
 map  k
 map  l
-map  cl :clist!
 map  cn :cNext
+map  cl :clist!
 map  hea :call Speed_open_header()
 map  sh :tabe:r!
 map  hls :set hlsearch!			" Highlight Search
@@ -84,7 +84,7 @@ badd +45 includes/u_arg.h
 badd +33 main.c
 badd +15 includes/s_flags.h
 badd +1 srcs/flags.c
-badd +10 includes/flags.h
+badd +20 includes/flags.h
 badd +12 src/width.c
 badd +1 ~/cursus/ft_printf
 badd +1 srcs/precision>c
@@ -96,11 +96,11 @@ badd +12 srcs/length.c
 badd +67 includes/s_printf_flags.h
 badd +53 includes/s_ctx.h
 badd +17 includes/eval.h
-badd +1 srcs/interceptor.c
+badd +68 srcs/interceptor.c
 badd +1 includes/interceptor.h
 badd +1 srcs/specifiers
 badd +1 srcs/specifiers/spec_s.c
-badd +1 includes/specifiers/spec_s.h
+badd +18 includes/specifiers/spec_s.h
 argglobal
 silent! argdel *
 argadd Makefile
@@ -196,6 +196,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -243,11 +244,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 11) / 22)
+let s:l = 18 - ((14 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+18
 normal! 036|
 wincmd w
 argglobal
@@ -308,6 +309,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -420,6 +422,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -468,12 +471,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 18 - ((5 * winheight(0) + 3) / 6)
+let s:l = 16 - ((3 * winheight(0) + 3) / 6)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-18
-normal! 0
+16
+normal! 032|
 wincmd w
 argglobal
 edit srcs/ft_printf.c
@@ -533,6 +536,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -581,12 +585,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 59 - ((43 * winheight(0) + 36) / 73)
+let s:l = 67 - ((40 * winheight(0) + 36) / 73)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-59
-normal! 05|
+67
+normal! 0
 wincmd w
 argglobal
 edit includes/s_ctx.h
@@ -646,6 +650,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -694,11 +699,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 43 - ((42 * winheight(0) + 40) / 80)
+let s:l = 2 - ((1 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-43
+2
 normal! 0
 wincmd w
 argglobal
@@ -759,6 +764,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -806,15 +812,14 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 33 - ((32 * winheight(0) + 40) / 80)
+let s:l = 32 - ((31 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-33
-normal! 05|
+32
+normal! 022|
 lcd ~/cursus/ft_printf
 wincmd w
-4wincmd w
 exe '1resize ' . ((&lines * 22 + 42) / 84)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe '2resize ' . ((&lines * 57 + 42) / 84)
@@ -853,17 +858,17 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 20 + 42) / 84)
+exe '1resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
-exe '2resize ' . ((&lines * 59 + 42) / 84)
+exe '2resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe '3resize ' . ((&lines * 20 + 42) / 84)
+exe '3resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
-exe '4resize ' . ((&lines * 59 + 42) / 84)
+exe '4resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
-exe '5resize ' . ((&lines * 20 + 42) / 84)
+exe '5resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
-exe '6resize ' . ((&lines * 59 + 42) / 84)
+exe '6resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 6resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 7resize ' . ((&columns * 109 + 182) / 364)
 argglobal
@@ -923,6 +928,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -971,11 +977,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 10) / 20)
+let s:l = 19 - ((9 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+19
 normal! 0
 wincmd w
 argglobal
@@ -1036,6 +1042,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1084,11 +1091,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 56 - ((47 * winheight(0) + 29) / 59)
+let s:l = 43 - ((42 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-56
+43
 normal! 0
 wincmd w
 argglobal
@@ -1149,6 +1156,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1197,12 +1205,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 19 - ((16 * winheight(0) + 10) / 20)
+let s:l = 20 - ((7 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-19
-normal! 014|
+20
+normal! 0
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/srcs/flags.c
@@ -1262,6 +1270,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1310,11 +1319,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 112 - ((29 * winheight(0) + 29) / 59)
+let s:l = 23 - ((19 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-112
+23
 normal! 0
 wincmd w
 argglobal
@@ -1375,6 +1384,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1423,12 +1433,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 18 - ((17 * winheight(0) + 10) / 20)
+let s:l = 20 - ((9 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-18
-normal! 014|
+20
+normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
 argglobal
@@ -1489,6 +1499,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1537,11 +1548,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 24 - ((23 * winheight(0) + 29) / 59)
+let s:l = 21 - ((17 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-24
+21
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -1603,6 +1614,7 @@ setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
+set linebreak
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -1651,28 +1663,29 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 24 - ((23 * winheight(0) + 40) / 80)
+let s:l = 29 - ((28 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-24
-normal! 011|
+29
+normal! 019|
 lcd ~/cursus/ft_printf
 wincmd w
-exe '1resize ' . ((&lines * 20 + 42) / 84)
+4wincmd w
+exe '1resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
-exe '2resize ' . ((&lines * 59 + 42) / 84)
+exe '2resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe '3resize ' . ((&lines * 20 + 42) / 84)
+exe '3resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
-exe '4resize ' . ((&lines * 59 + 42) / 84)
+exe '4resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
-exe '5resize ' . ((&lines * 20 + 42) / 84)
+exe '5resize ' . ((&lines * 10 + 42) / 84)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
-exe '6resize ' . ((&lines * 59 + 42) / 84)
+exe '6resize ' . ((&lines * 69 + 42) / 84)
 exe 'vert 6resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 7resize ' . ((&columns * 109 + 182) / 364)
-tabnext 1
+tabnext 2
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

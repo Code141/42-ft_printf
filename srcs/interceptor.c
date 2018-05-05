@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/04 19:08:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 12:37:46 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	pos += length(arg + pos, flags);
 	if (!specifier(arg + pos++, flags))
 		error(arg, pos);
+	flags->jump = pos;
 	return (pos);
 }
 
@@ -52,15 +53,15 @@ void		interceptor(t_ctx *ctx)
 	int		i;
 	int		j;
 	int		current_arg;
-	char	*text;
+	char	*format;
 
 	i = 0;
 	j = 0;
 	current_arg = 0;
-	text = ctx->text;
-	while (text[i + j])
-		if (text[i + j] == '%')
-			i += new_arg(text + i + j, ctx, current_arg++);
+	format = ctx->format;
+	while (format[i + j])
+		if (format[i + j] == '%')
+			i += new_arg(format + i + j, ctx, current_arg++);
 		else
 			j++;
 	ctx->buff_size = j;

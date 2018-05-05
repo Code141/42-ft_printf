@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/04 18:38:16 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:04:17 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,21 @@ int		width_precision(char *str, t_flag *flags)
 {
 	int	i;
 
-	flags->precision = 1; // DEFAULT BEHAVIOR
 	i = 0;
+	if (str[i] == '*')
+		i = i;
 	while (str[i] >= '0' && str[i] <= '9')
 		flags->width = (flags->width * 10) + str[i++] - '0';
 
+	flags->precision = 1; // DEFAULT BEHAVIOR
 	if (str[i] == '.')
+	{
 		i++;
-
-	// * for next argument
-
-	while (str[i] >= '0' && str[i] <= '9')
-		flags->precision = (flags->precision * 10) + str[i++] - '0';
-
+		if (str[i] == '*')
+			i = i;
+		while (str[i] >= '0' && str[i] <= '9')
+			flags->precision = (flags->precision * 10) + str[i++] - '0';
+	}
 	return (i);
 }
 

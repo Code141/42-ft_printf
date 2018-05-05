@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/04 18:49:15 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:23:35 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ int	main(void)
 	int		j;
 	int		k;
 
-	i = 123456789;
+	i = 10;
 	j = 20;
 	k = 30;
 	str = "world";
-	printf("|Hello%wHolla%10$0-4.10QQ|\n", i);
+	printf("|Hello%-01+Holla|\n", i);
+	
+	printf("|%*d|%1$*%|\n", i, j, k);
 //	ft_printf("%d", i, j);
 /*
 	printf("	: [%d] Std", printf("Hello"));

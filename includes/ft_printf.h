@@ -6,13 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:48:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/03 19:54:00 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 12:34:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-int ft_printf(const char *str, ...);
+int ft_printf(const char *format, ...);
 
 #endif

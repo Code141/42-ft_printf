@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/04 17:13:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:00:57 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	spec_c(t_ctx *ctx)
 
 void	spec_s(t_ctx *ctx)
 {
-
 }
 
 void	spec_d(t_ctx *ctx)

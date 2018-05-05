@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/04 19:41:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:34:32 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <s_ctx.h>
 #include <ft_printf.h>
 
-static t_ctx	*init(const char *text, va_list *args)
+static t_ctx	*init(const char *format, va_list *args)
 {
 	t_ctx	*ctx;
 	int		i;
@@ -28,30 +28,30 @@ static t_ctx	*init(const char *text, va_list *args)
 
 	i = 0;
 	nb_arg = 0;
-	while (text[i])
+	while (format[i])
 	{
-		if (text[i] == '%')
+		if (format[i] == '%')
 			nb_arg++;
 		i++;
-		if (text[i] == '%')
+		if (format[i] == '%')
 			i++;
 	}
 	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
 	if (!ctx)
 		exit (0);
-	ctx->text = (char*)text;
+	ctx->format = (char*)format;
 	ctx->args = args;
 	return (ctx);
 }
 
-int	ft_printf(const char *text, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	t_ctx	*ctx;
 	int		ret;
 
-	va_start(args, text);
-	ctx = init(text, &args);
+	va_start(args, format);
+	ctx = init(format, &args);
 
 	interceptor(ctx);
 
