@@ -6,14 +6,15 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/05 13:04:17 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/07 18:27:55 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+#include <va_args.h>
 #include <specifiers/spec_s.h>
 
-int		argument_access(char *str, t_flag *flags)
+int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 {
 	int	i;
 	int	nb;
@@ -26,11 +27,12 @@ int		argument_access(char *str, t_flag *flags)
 		nb = (nb * 10) + str[i++] - '0';
 	//IF NB && $
 	if (str[i] == '$' && nb)
-		flags->parameter = nb;
+	{
+		pos_arg(ctx, nb);
+		i++;
+	}
 	else
 		flags->width = nb;
-	if (str[i] == '$')
-		i++;
 	return (i);
 }
 
@@ -58,24 +60,32 @@ int		flag(char *str, t_flag *flags)
 	return (i);
 }
 
-int		width_precision(char *str, t_flag *flags)
+int		width_precision(char *str, t_ctx *ctx, t_flag *flags)
 {
 	int	i;
 
 	i = 0;
 	if (str[i] == '*')
-		i = i;
-	while (str[i] >= '0' && str[i] <= '9')
-		flags->width = (flags->width * 10) + str[i++] - '0';
+	{
+		flags->width = va_arg(ctx->current_args, int);
+		i++;
+	}
+	else
+		while (str[i] >= '0' && str[i] <= '9')
+			flags->width = (flags->width * 10) + str[i++] - '0';
 
 	flags->precision = 1; // DEFAULT BEHAVIOR
 	if (str[i] == '.')
 	{
 		i++;
 		if (str[i] == '*')
-			i = i;
-		while (str[i] >= '0' && str[i] <= '9')
-			flags->precision = (flags->precision * 10) + str[i++] - '0';
+		{
+			flags->precision = va_arg(ctx->current_args, int);
+			i++;
+		}
+		else
+			while (str[i] >= '0' && str[i] <= '9')
+				flags->precision = (flags->precision * 10) + str[i++] - '0';
 	}
 	return (i);
 }

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spec_s.c                                           :+:      :+:    :+:   */
+/*   va_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/07 19:37:29 by gelambin         ###   ########.fr       */
+/*   Created: 2018/05/07 17:02:07 by gelambin          #+#    #+#             */
+/*   Updated: 2018/05/07 19:35:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
 #include <s_ctx.h>
 
-void	spec_c(t_ctx *ctx, t_flag *flags)
+void	pos_arg(t_ctx *ctx, int nb)
 {
-	write(1, flags->data.s, 1);
+//	va_end(ctx->current_args);							???
+	va_copy(ctx->current_args, ctx->args);
+	while (nb-- > 1)
+		va_arg(ctx->current_args, void*);
 }
 
-void	spec_s(t_ctx *ctx, t_flag *flags)
+void	get_arg(t_flag *flags, t_ctx *ctx)
 {
-	int		i;
-	char	*str;
-
-	i = 0;
-	str = flags->data.s;
-	while (str[i])
-		i++;
-	write(1, str, i);
-}
-
-void	spec_d(t_ctx *ctx, t_flag *flags)
-{
-
+	flags->data.data = (long long)va_arg(ctx->current_args, long long);
 }

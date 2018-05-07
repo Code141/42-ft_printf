@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/05 13:34:32 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/07 19:47:23 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <s_ctx.h>
 #include <ft_printf.h>
 
-static t_ctx	*init(const char *format, va_list *args)
+static t_ctx	*init(const char *format)
 {
 	t_ctx	*ctx;
 	int		i;
@@ -40,7 +40,6 @@ static t_ctx	*init(const char *format, va_list *args)
 	if (!ctx)
 		exit (0);
 	ctx->format = (char*)format;
-	ctx->args = args;
 	return (ctx);
 }
 
@@ -50,8 +49,10 @@ int	ft_printf(const char *format, ...)
 	t_ctx	*ctx;
 	int		ret;
 
-	va_start(args, format);
-	ctx = init(format, &args);
+
+	ctx = init(format);
+	va_start(ctx->args, format);
+	va_copy(ctx->current_args, ctx->args);
 
 	interceptor(ctx);
 

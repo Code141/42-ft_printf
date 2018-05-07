@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/05 13:05:29 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/07 18:04:05 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef union	u_va_data
 	double			f;
 	char			*s;
 	void			*p;
+	long long		data;
 }				t_va_data;
 
 typedef enum	e_length
@@ -44,7 +45,6 @@ typedef enum	e_length
 struct			s_flag
 {
 	int			jump;
-	char		parameter;
 	char		alternate;
 	char		pad;
 	char		left_align;
@@ -55,12 +55,13 @@ struct			s_flag
 	int			precision;
 	t_length	length;
 	t_va_data	data;
-	void		(*specifier)(t_ctx *ctx);
+	void		(*specifier)(t_ctx *ctx, t_flag *flags);
 };
 
 struct			s_ctx
 {
-	va_list		*args;
+	va_list		args;
+	va_list		current_args;
 	char		*format;
 	char		*buff;
 	int			buff_i;
