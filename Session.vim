@@ -12,13 +12,13 @@ map  h
 map <NL> j
 map  k
 map  l
-map  cl :clist!
 map  cn :cNext
+map  cl :clist!
 map  hea :call Speed_open_header()
 map  sh :tabe:r!
 map  hls :set hlsearch!			" Highlight Search
 map  rel :set relativenumber!	" Switch relative num
-map  mak :make
+map  mak :make:clist!
 map  mks :mksession!				" Fast Mksession 
 map  vrc :-tabe $MYVIMRC			" open vimrc in new tab
 map  hle :tab h					" open help in new tab
@@ -100,10 +100,12 @@ badd +17 includes/eval.h
 badd +68 srcs/interceptor.c
 badd +1 includes/interceptor.h
 badd +1 srcs/specifiers
-badd +1 srcs/specifiers/spec_s.c
+badd +29 srcs/specifiers/spec_s.c
 badd +20 includes/specifiers/spec_s.h
-badd +13 srcs/va_args.c
-badd +0 includes/va_args.h
+badd +27 srcs/va_args.c
+badd +1 includes/va_args.h
+badd +16 includes/specifiers/spec_s.h
+badd +0 srcs/specifiers/spec_d.c
 argglobal
 silent! argdel *
 argadd Makefile
@@ -247,11 +249,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 3 - ((2 * winheight(0) + 11) / 22)
+let s:l = 4 - ((3 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3
+4
 normal! 036|
 wincmd w
 argglobal
@@ -590,11 +592,11 @@ setlocal wrapmargin=0
 silent! normal! zE
 24,44fold
 47,72fold
-let s:l = 69 - ((50 * winheight(0) + 36) / 72)
+let s:l = 78 - ((59 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-69
+78
 normal! 0
 wincmd w
 argglobal
@@ -704,12 +706,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 59 - ((57 * winheight(0) + 39) / 79)
+let s:l = 51 - ((49 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-59
-normal! 02|
+51
+normal! 05|
 wincmd w
 argglobal
 edit main.c
@@ -856,13 +858,7 @@ wincmd w
 wincmd w
 wincmd _ | wincmd |
 split
-wincmd _ | wincmd |
-split
-wincmd _ | wincmd |
-split
-3wincmd k
-wincmd w
-wincmd w
+1wincmd k
 wincmd w
 wincmd w
 set nosplitbelow
@@ -879,13 +875,9 @@ exe '4resize ' . ((&lines * 68 + 41) / 83)
 exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
 exe '5resize ' . ((&lines * 22 + 41) / 83)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
-exe '6resize ' . ((&lines * 22 + 41) / 83)
+exe '6resize ' . ((&lines * 56 + 41) / 83)
 exe 'vert 6resize ' . ((&columns * 84 + 182) / 364)
-exe '7resize ' . ((&lines * 15 + 41) / 83)
-exe 'vert 7resize ' . ((&columns * 84 + 182) / 364)
-exe '8resize ' . ((&lines * 17 + 41) / 83)
-exe 'vert 8resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 9resize ' . ((&columns * 109 + 182) / 364)
+exe 'vert 7resize ' . ((&columns * 109 + 182) / 364)
 argglobal
 setlocal noautoindent
 setlocal backupcopy=
@@ -1106,12 +1098,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 76 - ((51 * winheight(0) + 34) / 68)
+let s:l = 46 - ((21 * winheight(0) + 34) / 68)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-76
-normal! 020|
+46
+normal! 05|
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/includes/flags.h
@@ -1225,7 +1217,7 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 18
-normal! 046|
+normal! 045|
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/srcs/flags.c
@@ -1334,12 +1326,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 47 - ((9 * winheight(0) + 34) / 68)
+let s:l = 42 - ((7 * winheight(0) + 34) / 68)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
-normal! 024|
+42
+normal! 0
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/includes/va_args.h
@@ -1457,7 +1449,7 @@ normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
 argglobal
-edit ~/cursus/ft_printf/srcs/va_args.c
+edit ~/cursus/ft_printf/srcs/specifiers/spec_d.c
 setlocal noautoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -1563,242 +1555,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 27 - ((21 * winheight(0) + 11) / 22)
+let s:l = 56 - ((38 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-27
+56
 normal! 0
-lcd ~/cursus/ft_printf
-wincmd w
-argglobal
-edit ~/cursus/ft_printf/includes/specifiers/spec_s.h
-setlocal noautoindent
-setlocal backupcopy=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-set colorcolumn=81
-setlocal colorcolumn=81
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'cpp'
-setlocal filetype=cpp
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-set list
-setlocal list
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-set relativenumber
-setlocal relativenumber
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'cpp'
-setlocal syntax=cpp
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal undolevels=-123456
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 16 - ((10 * winheight(0) + 7) / 15)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-16
-normal! 027|
-lcd ~/cursus/ft_printf
-wincmd w
-argglobal
-edit ~/cursus/ft_printf/srcs/specifiers/spec_s.c
-setlocal noautoindent
-setlocal backupcopy=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-set colorcolumn=81
-setlocal colorcolumn=81
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'c'
-setlocal filetype=c
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-set linebreak
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-set list
-setlocal list
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-set relativenumber
-setlocal relativenumber
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal undolevels=-123456
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 29 - ((10 * winheight(0) + 8) / 17)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-29
-normal! 016|
 lcd ~/cursus/ft_printf
 wincmd w
 argglobal
@@ -1908,15 +1670,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 33 - ((32 * winheight(0) + 39) / 79)
+let s:l = 31 - ((30 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-33
-normal! 015|
+31
+normal! 021|
 lcd ~/cursus/ft_printf
 wincmd w
-9wincmd w
+6wincmd w
 exe '1resize ' . ((&lines * 10 + 41) / 83)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe '2resize ' . ((&lines * 68 + 41) / 83)
@@ -1927,13 +1689,9 @@ exe '4resize ' . ((&lines * 68 + 41) / 83)
 exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
 exe '5resize ' . ((&lines * 22 + 41) / 83)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
-exe '6resize ' . ((&lines * 22 + 41) / 83)
+exe '6resize ' . ((&lines * 56 + 41) / 83)
 exe 'vert 6resize ' . ((&columns * 84 + 182) / 364)
-exe '7resize ' . ((&lines * 15 + 41) / 83)
-exe 'vert 7resize ' . ((&columns * 84 + 182) / 364)
-exe '8resize ' . ((&lines * 17 + 41) / 83)
-exe 'vert 8resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 9resize ' . ((&columns * 109 + 182) / 364)
+exe 'vert 7resize ' . ((&columns * 109 + 182) / 364)
 tabnext 2
 set stal=1
 if exists('s:wipebuf')
