@@ -6,13 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/07 18:27:55 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:29:35 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <va_args.h>
-#include <specifiers/spec_s.h>
+#include <specifiers.h>
 
 int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 {
@@ -40,6 +40,11 @@ int		flag(char *str, t_flag *flags)
 {
 	int	i;
 
+	flags->alternate = 0;
+	flags->pad = 0;
+	flags->left_align = 0;
+	flags->explicite_sign = 0;
+	flags->space_for_sign = 0;
 	i = 0;
 	while (str[i])
 	{
@@ -52,7 +57,7 @@ int		flag(char *str, t_flag *flags)
 		else if (str[i] == '+')
 			flags->explicite_sign = 1;
 		else if (str[i] == ' ')
-			flags->space_for_signe = 1;
+			flags->space_for_sign = 1;
 		else
 			return (i);
 		i++;
@@ -84,8 +89,12 @@ int		width_precision(char *str, t_ctx *ctx, t_flag *flags)
 			i++;
 		}
 		else
+		{
+			if (str[i] >= '0' && str[i] <= '9')
+				flags->precision = 0;
 			while (str[i] >= '0' && str[i] <= '9')
 				flags->precision = (flags->precision * 10) + str[i++] - '0';
+		}
 	}
 	return (i);
 }
@@ -145,9 +154,9 @@ int		specifier(char *str, t_flag *flags)
 		flags->specifier = &spec_s;
 /*	else if (*str == 'p')
 		flags->specifier = &spec_p;
-	else if (*str == '%')
+*/	else if (*str == '%')
 		flags->specifier = &spec_percent;
-*/	else
+	else
 		return (0); // UNKNOW SPECIFIER
 	return (1);
 }

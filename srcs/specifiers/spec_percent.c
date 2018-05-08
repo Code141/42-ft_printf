@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spec_s.c                                           :+:      :+:    :+:   */
+/*   spec_percent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 16:26:55 by gelambin         ###   ########.fr       */
+/*   Created: 2018/05/08 15:15:42 by gelambin          #+#    #+#             */
+/*   Updated: 2018/05/08 15:19:44 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
-void	spec_s(t_ctx *ctx, t_flag *flags)
+void	spec_percent(t_ctx *ctx, t_flag *flags)
 {
-	int		i;
-	char	*str;
-
-	str = "(null)";
-	i = 6;
-	if (flags->data.s)
-	{
-		str = flags->data.s;
-		i = 0;
-		while (str[i])
-			i++;
-	}
-	write(1, str, i);
-	ctx->buff_size += i;
+	if (flags->width)
+		ctx->buff_size += flags->width - 1;
+	if (!flags->left_align)
+		while (flags->width-- > 1)
+			write(1, " ", 1);
+	write(1, "%", 1);
+	ctx->buff_size++;
+	while (flags->width-- > 1)
+		write(1, " ", 1);
 }

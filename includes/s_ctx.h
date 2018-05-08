@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/07 18:04:05 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:30:21 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ struct			s_flag
 	char		pad;
 	char		left_align;
 	char		explicite_sign;
-	char		space_for_signe;
+	char		space_for_sign;
 	char		grouping_thousands;
 	int			width;
 	int			precision;

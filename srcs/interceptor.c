@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/07 19:47:16 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:47:06 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 
 void	error(const char *arg, int pos)
 {
+/*
 	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
 			, 63);
 	write (1, arg, pos);
 	write (1, "\n", 1);
+*/
 }
 
 int		new_arg(char *arg, t_ctx *ctx, int current_arg)
@@ -35,7 +37,14 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	// BZERO FLAG
 	flags = ctx->flags + current_arg;
+	flags->specifier = 0;
+	flags->alternate = 0;
+	flags->pad = 0;
+	flags->left_align = 0;
+	flags->explicite_sign = 0;
+	flags->space_for_sign = 0;
 	flags->width = 0;
+
 	pos = 1;
 	if (arg[pos] >= '0' && arg[pos] <= '9')
 		pos += argument_access(arg + pos, ctx, flags);
@@ -43,12 +52,16 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 		pos += flag(arg + pos, flags);
 	pos += width_precision(arg + pos, ctx, flags);
 	pos += length(arg + pos, flags);
-	if (!specifier(arg + pos++, flags))
-		error(arg, pos);
-	flags->jump = pos;
-	get_arg(flags, ctx);
-	if (flags->specifier)
+
+	if (arg[pos] && !specifier(arg + pos, flags))
+		error(arg, pos + 1);
+	else if (flags->specifier)
+	{
+		pos++;
+		get_arg(flags, ctx);
 		flags->specifier(ctx, flags);
+	}
+	flags->jump = pos;
 	return (pos);
 }
 

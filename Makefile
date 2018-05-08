@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/07 18:23:33 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/08 15:42:23 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -34,7 +34,10 @@ SRCS		=	ft_printf.c									\
 				interceptor.c								\
 				flags.c										\
 				va_args.c									\
-				specifiers/spec_s.c
+				specifiers/spec_c.c							\
+				specifiers/spec_d.c							\
+				specifiers/spec_s.c							\
+				specifiers/spec_percent.c
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
 
