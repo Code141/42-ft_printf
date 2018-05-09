@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 21:53:58 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 21:59:10 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	pos = 1;
 
-	if (arg[pos] >= '0' && arg[pos] <= '9')
-		pos += argument_access(arg + pos, ctx, flags);
+//	if (arg[pos] >= '0' && arg[pos] <= '9')
+//		pos += argument_access(arg + pos, ctx, flags);
 
 	pos += flag(arg + pos, ctx, flags);
 	pos += width_precision(arg + pos, ctx, flags);
