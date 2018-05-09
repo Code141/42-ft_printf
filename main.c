@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 19:00:55 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:00:41 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,26 @@ int	main(void)
 	str2 = "Salut bebe";
 
 	//ft_printf("   %3$*s   %1$*s  ", i, str, j, str2);
-	ft_printf("% 10.2d", 123);
+	ft_printf("%+10.5d\n", 123);
+	ft_printf("%- 10.5d\n", 123);
+	ft_printf("% 10.5d\n", 123);
+	ft_printf("%+10.5d\n", -123);
+	ft_printf("%-10.5d\n", -123);
+	ft_printf("% 10.5d\n", -123);
+	ft_printf("% 10.0d\n", 0);
+
+	printf("\n\n", 123);
+	printf("%+10.5d\n", 123);
+	printf("%- 10.5d\n", 123);
+	printf("% 10.5d\n", 123);
+	printf("%+10.5d\n", -123);
+	printf("%-10.5d\n", -123);
+	printf("% 10.5d\n", -123);
+	printf("% 10.0d\n", 0);
+
+
+
+
 
 	//	ft_printf("%d", i, j);
 /*

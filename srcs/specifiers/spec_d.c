@@ -6,10 +6,9 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 19:05:33 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:25:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <s_ctx.h>
 
@@ -22,15 +21,19 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 
 	nb = flags->data.d;
 	neg = (nb < 0) ? 1 : 0;
-	size = 1;
-	while (nb /= 10)
+
+	size = 0;
+	while (nb)
+	{
+		nb /= 10;
 		size++;
+	}
+
 	ctx->buff_size += size;
 
 	nb_size = (neg || flags->space_for_sign || flags->explicite_sign);
 	nb_size += (flags->precision > size) ? flags->precision : size;
 	nb_size = flags->width - nb_size;
-
 
 //---------	width
 
@@ -68,6 +71,6 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 
 //---------	! width !	(if) left aligne
 
-	while (--nb_size > 0)
+	while (nb_size-- > 0)
 			write(1, " ", 1);
 }
