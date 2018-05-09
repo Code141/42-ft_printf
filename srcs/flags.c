@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 18:29:35 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 21:54:28 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
 	//IF NB && $
+//	if (str[-1] == '.')
+//		flags->precision = nb;
 	if (str[i] == '$' && nb)
 	{
 		pos_arg(ctx, nb);
@@ -36,15 +38,10 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 	return (i);
 }
 
-int		flag(char *str, t_flag *flags)
+int		flag(char *str, t_ctx *ctx, t_flag *flags)
 {
 	int	i;
 
-	flags->alternate = 0;
-	flags->pad = 0;
-	flags->left_align = 0;
-	flags->explicite_sign = 0;
-	flags->space_for_sign = 0;
 	i = 0;
 	while (str[i])
 	{
@@ -79,7 +76,6 @@ int		width_precision(char *str, t_ctx *ctx, t_flag *flags)
 		while (str[i] >= '0' && str[i] <= '9')
 			flags->width = (flags->width * 10) + str[i++] - '0';
 
-	flags->precision = 1; // DEFAULT BEHAVIOR
 	if (str[i] == '.')
 	{
 		i++;
@@ -90,8 +86,7 @@ int		width_precision(char *str, t_ctx *ctx, t_flag *flags)
 		}
 		else
 		{
-			if (str[i] >= '0' && str[i] <= '9')
-				flags->precision = 0;
+			flags->precision = 0;
 			while (str[i] >= '0' && str[i] <= '9')
 				flags->precision = (flags->precision * 10) + str[i++] - '0';
 		}

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 18:30:32 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 21:21:54 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	ft_printf(const char *format, ...)
 	t_ctx	*ctx;
 	int		ret;
 
+	if (format == NULL)
+		return (0);
 
 	ctx = init(format);
 	va_start(ctx->args, format);
@@ -67,7 +69,7 @@ int	ft_printf(const char *format, ...)
 */
 
 	ret = ctx->buff_size;
-	free(ctx);
+//	free(ctx);
 	return (ret);
 }
 

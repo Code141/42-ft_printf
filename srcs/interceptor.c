@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/08 18:47:06 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 21:53:58 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	flags->explicite_sign = 0;
 	flags->space_for_sign = 0;
 	flags->width = 0;
+	flags->precision = -1;
 
 	pos = 1;
+
 	if (arg[pos] >= '0' && arg[pos] <= '9')
 		pos += argument_access(arg + pos, ctx, flags);
-	if (!flags->width)
-		pos += flag(arg + pos, flags);
+
+	pos += flag(arg + pos, ctx, flags);
 	pos += width_precision(arg + pos, ctx, flags);
 	pos += length(arg + pos, flags);
 
@@ -82,29 +84,6 @@ void		interceptor(t_ctx *ctx)
 		if (format[i + j] == '%')
 			i += new_arg(format + i + j, ctx, current_arg++);
 		else
-		{
-			write(1, format + i + j, 1);
-			j++;
-		}
+			write(1, format + i + j++, 1);
 	ctx->buff_size += j;
 }
-/*
-void		interceptor(t_ctx *ctx)
-{
-	int		i;
-	int		j;
-	int		current_arg;
-	char	*format;
-
-	i = 0;
-	j = 0;
-	current_arg = 0;
-	format = ctx->format;
-	while (format[i + j])
-		if (format[i + j] == '%')
-			i += new_arg(format + i + j, ctx, current_arg++);
-		else
-			j++;
-	ctx->buff_size = j;
-}
-*/

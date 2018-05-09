@@ -6,11 +6,38 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 13:34:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 19:37:24 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+
+void	print_int(int nb, int size)
+{
+	char	c;
+	int		pow;
+	int		i;
+
+	if (nb < 0)
+	{
+		if (nb == -2147483648)
+		{
+			write(1, "2", 1);
+			nb = -147483648;
+			size--;
+		}
+		nb = -nb;
+	}
+	while (size--)
+	{
+		i = size;
+		pow = 1;
+		while (i--)
+			pow = pow * 10;
+		c = nb / pow % 10 + '0';
+		write(1, &c, 1);
+	}
+}
 
 void	spec_d(t_ctx *ctx, t_flag *flags)
 {
@@ -18,6 +45,7 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	int		size;
 	int		nb;
 	int		neg;
+	int		precision;
 
 	nb = flags->data.d;
 	neg = (nb < 0) ? 1 : 0;
@@ -29,10 +57,12 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		size++;
 	}
 
-	ctx->buff_size += size;
+	precision = (flags->precision == -1) ? 1 : flags->precision;
 
+	ctx->buff_size += size;
+// PRECISION -1 defaut // 0/1 problemes
 	nb_size = (neg || flags->space_for_sign || flags->explicite_sign);
-	nb_size += (flags->precision > size) ? flags->precision : size;
+	nb_size += (precision > size) ? precision : size;
 	nb_size = flags->width - nb_size;
 
 //---------	width
@@ -40,7 +70,7 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	if (nb_size > 0)
 		ctx->buff_size += nb_size;
 
-	if (!flags->left_align)
+	if (!flags->left_align && (flags->precision != -1 || !flags->pad))
 		while (nb_size-- > 0)
 			write(1, " ", 1);
 
@@ -56,38 +86,20 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		else if (flags->space_for_sign)
 			write (1, " ", 1);
 
+	if (!flags->left_align)
+		while (nb_size-- > 0)
+			write(1, "0", 1);
+
 //---------			precision	(dont care signe)
 
-	if (flags->precision > size)
-		ctx->buff_size += flags->precision - size;
-	while (flags->precision-- > size)
+	if (precision > size)
+		ctx->buff_size += precision - size;
+	while (precision-- > size)
 		write(1, "0", 1);
 
 //---------			number
 
-/*POW
-
-int	ft_iterative_power(int nb, int power)
-{
-	int r;
-
-	r = nb;
-	if (power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	while (power > 1)
-	{
-		r *= nb;
-		power--;
-	}
-	return (r);
-}
-*/
-
-	nb = flags->data.d;
-	while (size--)
-		write(1, "1", 1);
+	print_int(flags->data.d, size);
 
 //---------	! width !	(if) left aligne
 
