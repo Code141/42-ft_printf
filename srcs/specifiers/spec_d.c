@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 13:25:36 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:34:24 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,26 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		write(1, "0", 1);
 
 //---------			number
+
+/*POW
+
+int	ft_iterative_power(int nb, int power)
+{
+	int r;
+
+	r = nb;
+	if (power < 0)
+		return (0);
+	if (power == 0)
+		return (1);
+	while (power > 1)
+	{
+		r *= nb;
+		power--;
+	}
+	return (r);
+}
+*/
 
 	nb = flags->data.d;
 	while (size--)
