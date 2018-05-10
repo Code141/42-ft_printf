@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/10 16:55:00 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/11 01:42:50 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	// BZERO FLAG
 	flags = ctx->flags + current_arg;
-	flags->specifier = 0;
+	flags->procedure = NULL;
 	flags->alternate = 0;
 	flags->pad = 0;
 	flags->left_align = 0;
@@ -53,11 +53,11 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	if (arg[pos] && !specifier(arg + pos, flags))
 		error(arg, pos + 1);
-	else if (flags->specifier)
+	else if (flags->procedure)
 	{
 		pos++;
 		get_arg(flags, ctx);
-		flags->specifier(ctx, flags);
+		flags->procedure(ctx, flags);
 	}
 	flags->jump = pos;
 	return (pos);

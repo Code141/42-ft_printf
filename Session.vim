@@ -12,12 +12,12 @@ map  h
 map <NL> j
 map  k
 map  l
-map  cl :clist!
-map  cn :cNext
 map  hea :call Speed_open_header()
 map  sh :tabe:r!
 map  hls :set hlsearch!			" Highlight Search
 map  rel :set relativenumber!	" Switch relative num
+map  cn :cNext
+map  cl :clist!
 map  mak :make:clist!
 map  mks :mksession!				" Fast Mksession 
 map  vrc :-tabe $MYVIMRC			" open vimrc in new tab
@@ -104,8 +104,8 @@ badd +29 srcs/specifiers/spec_s.c
 badd +16 includes/specifiers/spec_s.h
 badd +27 srcs/va_args.c
 badd +10 includes/va_args.h
-badd +48 srcs/specifiers/spec_d.c
-badd +0 srcs/specifiers/spec_x.c
+badd +1 srcs/specifiers/spec_d.c
+badd +1 srcs/specifiers/spec_x.c
 badd +24 includes/specifiers.h
 argglobal
 silent! argdel *
@@ -250,11 +250,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 11) / 22)
+let s:l = 11 - ((10 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+11
 normal! 036|
 wincmd w
 argglobal
@@ -363,12 +363,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 40 - ((28 * winheight(0) + 28) / 56)
+let s:l = 42 - ((30 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-40
-normal! 033|
+42
+normal! 0
 wincmd w
 argglobal
 edit includes/ft_printf.h
@@ -593,12 +593,12 @@ setlocal wrapmargin=0
 silent! normal! zE
 24,44fold
 47,73fold
-let s:l = 71 - ((38 * winheight(0) + 36) / 72)
+let s:l = 74 - ((40 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-71
-normal! 017|
+74
+normal! 0
 wincmd w
 argglobal
 edit includes/s_ctx.h
@@ -707,12 +707,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 51 - ((49 * winheight(0) + 39) / 79)
+let s:l = 38 - ((36 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-51
-normal! 05|
+38
+normal! 015|
 wincmd w
 argglobal
 edit main.c
@@ -828,7 +828,6 @@ normal! zt
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
-2wincmd w
 exe '1resize ' . ((&lines * 22 + 41) / 83)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe '2resize ' . ((&lines * 56 + 41) / 83)
@@ -1093,12 +1092,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 70 - ((51 * winheight(0) + 34) / 68)
+let s:l = 60 - ((41 * winheight(0) + 34) / 68)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-70
-normal! 0
+60
+normal! 05|
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/includes/flags.h
@@ -1321,12 +1320,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 122 - ((63 * winheight(0) + 34) / 68)
+let s:l = 102 - ((44 * winheight(0) + 34) / 68)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-122
-normal! 05|
+102
+normal! 0
 wincmd w
 argglobal
 edit ~/cursus/ft_printf/srcs/va_args.c
@@ -1555,9 +1554,10 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 31
-normal! 021|
+normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
+4wincmd w
 exe '1resize ' . ((&lines * 10 + 41) / 83)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe '2resize ' . ((&lines * 68 + 41) / 83)
@@ -1694,11 +1694,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 50 - ((28 * winheight(0) + 39) / 79)
+let s:l = 106 - ((76 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-50
+106
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -1809,11 +1809,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 47 - ((46 * winheight(0) + 39) / 79)
+let s:l = 70 - ((69 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
+70
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -2037,7 +2037,7 @@ exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 4resize ' . ((&columns * 109 + 182) / 364)
-tabnext 1
+tabnext 2
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

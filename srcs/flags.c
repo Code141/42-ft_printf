@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/10 19:38:27 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/11 01:44:00 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,32 +95,31 @@ int		length(char *str, t_flag *flags)
 int		specifier(char *str, t_flag *flags)
 {
 	if (*str == 'c')
-		flags->specifier = &spec_c;
+		flags->procedure = &spec_c;
 	else if (*str == 'd')
-		flags->specifier = &spec_d;
+		flags->procedure = &spec_d;
 //	else if (*str == 'u')
-//		flags->specifier = &spec_u;
-	else if (*str == 'x')
-		flags->specifier = &spec_x;
-	else if (*str == 'X')
-		flags->specifier = &spec_X;
+//		flags->procedure = &spec_u;
+	else if (*str == 'x' || *str == 'X')
+		flags->procedure = &spec_x;
 /*	else if (*str == 'e')
-		flags->specifier = &spec_e;
+		flags->procedure = &spec_e;
 	else if (*str == 'E')
-		flags->specifier = &spec_E;
+		flags->procedure = &spec_E;
 	else if (*str == 'f')
-		flags->specifier = &spec_f;
+		flags->procedure = &spec_f;
 	else if (*str == 'g')
-		flags->specifier = &spec_g;
+		flags->procedure = &spec_g;
 	else if (*str == 'G')
-		flags->specifier = &spec_G;
+		flags->procedure = &spec_G;
 */	else if (*str == 's')
-		flags->specifier = &spec_s;
+		flags->procedure = &spec_s;
 /*	else if (*str == 'p')
-		flags->specifier = &spec_p;
+		flags->procedure = &spec_p;
 */	else if (*str == '%')
-		flags->specifier = &spec_percent;
+		flags->procedure = &spec_percent;
 	else
 		return (0); // UNKNOW SPECIFIER
+	flags->specifier = *str;
 	return (1);
 }
