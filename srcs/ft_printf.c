@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 21:21:54 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:09:12 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ int	ft_printf(const char *format, ...)
 /*
 	write(1, buff, size);
 */
-
+	va_end(ctx->current_args);
+	va_end(ctx->args);
 	ret = ctx->buff_size;
-//	free(ctx);
+	free(ctx);
 	return (ret);
 }
 

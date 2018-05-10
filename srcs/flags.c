@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 22:05:28 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:02:31 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 	i = 0;
 	nb = 0;
-	if (str[i] == '0')
-		flags->pad = 1;
+
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
-	//IF NB && $
-//	if (str[-1] == '.')
-//		flags->precision = nb;
-	if (str[i] == '$' && nb)
+	if (str[i] == '*')
+		nb = va_arg(ctx->current_args, int);
+	if (str[-1] == '.')
+		flags->precision = nb;
+	else if (str[i] == '$' && nb)
 	{
 		pos_arg(ctx, nb);
 		i++;
@@ -43,12 +43,16 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i++])
 	{
 		if (str[i] == '#')
 			flags->alternate = 1;
+		else if (str[i] == '.')
+			flags->precision = 0;
 		else if (str[i] == '0')
 			flags->pad = 1;
+		else if ((str[i] >= '1' && str[i] <= '9') || str[i] == '*')
+			i += argument_access(str + i, ctx, flags) - 1;
 		else if (str[i] == '-')
 			flags->left_align = 1;
 		else if (str[i] == '+')
@@ -57,44 +61,9 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 			flags->space_for_sign = 1;
 		else
 			return (i);
-		i++;
 	}
 	return (i);
 }
-
-int		width_precision(char *str, t_ctx *ctx, t_flag *flags)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '*')
-	{
-		flags->width = va_arg(ctx->current_args, int);
-		i++;
-	}
-	else
-		while (str[i] >= '0' && str[i] <= '9')
-			flags->width = (flags->width * 10) + str[i++] - '0';
-
-	if (str[i] == '.')
-	{
-		i++;
-		if (str[i] == '*')
-		{
-			flags->precision = va_arg(ctx->current_args, int);
-			i++;
-		}
-		else
-		{
-			flags->precision = 0;
-			while (str[i] >= '0' && str[i] <= '9')
-				flags->precision = (flags->precision * 10) + str[i++] - '0';
-		}
-	}
-	return (i);
-}
-
-//---------
 
 int		length(char *str, t_flag *flags)
 {
