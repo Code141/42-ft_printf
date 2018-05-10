@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/09 19:37:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:24:50 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_int(int nb, int size)
 
 void	spec_d(t_ctx *ctx, t_flag *flags)
 {
-	int		nb_size;
+	int		width;
 	int		size;
 	int		nb;
 	int		neg;
@@ -61,17 +61,17 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 
 	ctx->buff_size += size;
 // PRECISION -1 defaut // 0/1 problemes
-	nb_size = (neg || flags->space_for_sign || flags->explicite_sign);
-	nb_size += (precision > size) ? precision : size;
-	nb_size = flags->width - nb_size;
+	width = (neg || flags->space_for_sign || flags->explicite_sign);
+	width += (precision > size) ? precision : size;
+	width = flags->width - width;
 
 //---------	width
 
-	if (nb_size > 0)
-		ctx->buff_size += nb_size;
+	if (width > 0)
+		ctx->buff_size += width;
 
 	if (!flags->left_align && (flags->precision != -1 || !flags->pad))
-		while (nb_size-- > 0)
+		while (width-- > 0)
 			write(1, " ", 1);
 
 //---------		signe
@@ -87,7 +87,7 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 			write (1, " ", 1);
 
 	if (!flags->left_align)
-		while (nb_size-- > 0)
+		while (width-- > 0)
 			write(1, "0", 1);
 
 //---------			precision	(dont care signe)
@@ -103,6 +103,6 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 
 //---------	! width !	(if) left aligne
 
-	while (nb_size-- > 0)
+	while (width-- > 0)
 			write(1, " ", 1);
 }

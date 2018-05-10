@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/10 17:09:12 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:14:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_printf(const char *format, ...)
 /*
 void foo(char *fmt, ...)
 {
-	va_list ap;
+zva_list ap;
 	int		d;
 	char	c;
 	char	*s;

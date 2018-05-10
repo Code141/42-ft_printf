@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/10 17:02:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:38:27 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ int		specifier(char *str, t_flag *flags)
 		flags->specifier = &spec_c;
 	else if (*str == 'd')
 		flags->specifier = &spec_d;
-/*	else if (*str == 'u')
-		flags->specifier = &spec_u;
+//	else if (*str == 'u')
+//		flags->specifier = &spec_u;
 	else if (*str == 'x')
 		flags->specifier = &spec_x;
 	else if (*str == 'X')
 		flags->specifier = &spec_X;
-	else if (*str == 'e')
+/*	else if (*str == 'e')
 		flags->specifier = &spec_e;
 	else if (*str == 'E')
 		flags->specifier = &spec_E;
