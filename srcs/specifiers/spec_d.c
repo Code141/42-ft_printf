@@ -6,18 +6,20 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 14:39:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:03:26 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+#include <buff_writer.h>
 
-void	print_int(int nb, int size)
+void	print_int(int nb, int size, t_ctx *ctx)
 {
 	char	c;
 	int		pow;
 	int		i;
 
+	ctx->buff_size += size;
 	if (nb < 0)
 	{
 		if (nb == -2147483648)
@@ -45,11 +47,11 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	int		precision;
 	int		size;
 	int		nb;
-	int		neg;
+	char	neg;
 
 	nb = flags->data.d;
-	neg = (nb < 0) ? 1 : 0;
 
+	neg = (nb < 0) ? 1 : 0;					// Differs
 	size = 0;
 	while (nb)
 	{
@@ -63,51 +65,23 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		precision = flags->precision;
 		flags->pad = 0;
 	}
-
-//---------	width
-	width = (neg || flags->space_for_sign || flags->explicite_sign);
-
-
+	width = (neg || flags->space_for_sign || flags->explicite_sign);// Differs
 	width += (precision > size) ? precision : size;
 	width = flags->width - width;
-	if (width > 0)
-		ctx->buff_size += width;
-	if (!flags->left_align && !flags->pad)
-		while (width-- > 0)
-			write(1, " ", 1);
-
-//---------		signe
-
-	if (neg || flags->space_for_sign || flags->explicite_sign)
-		ctx->buff_size++;
-	if (neg)
-		write (1, "-", 1);
-	else
-		if (flags->explicite_sign)
-			write (1, "+", 1);
-		else if (flags->space_for_sign)
-			write (1, " ", 1);
-
-//---------	padded width
-
-	if (!flags->left_align)
-		while (width-- > 0)
-			write(1, "0", 1);
-
-//---------			precision	(dont care signe)
-
+	if (width > 0 && !flags->left_align && !flags->pad)
+	{
+		print_in_buffer(' ', width, ctx);
+		width = 0;
+	}
+	sign(neg, flags->explicite_sign, flags->space_for_sign, ctx);	// Differs
+	if (width > 0 && !flags->left_align)
+	{
+		print_in_buffer('0', width, ctx);
+		width = 0;
+	}
 	if (precision > size)
-		ctx->buff_size += precision - size;
-	while (precision-- > size)
-		write(1, "0", 1);
-
-//---------			number
-
-	print_int(flags->data.d, size);
-	ctx->buff_size += size;
-
-//---------	! width !	(if) left aligne
-
-	while (width-- > 0)
-			write(1, " ", 1);
+		print_in_buffer('0', precision - size, ctx);
+	print_int(flags->data.d, size, ctx);							// Differs
+	if (width > 0)
+		print_in_buffer(' ', width, ctx);
 }

@@ -6,20 +6,22 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 17:06:55 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 14:43:51 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:02:23 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+#include <buff_writer.h>
 
-void	print_hex(unsigned int nb, int size, char style)
+void	print_hex(unsigned int nb, int size, char style, t_ctx *ctx)
 {
 	char	c;
 	int		pow;
 	int		i;
 	int		maj;
 
-	maj = (style) ? 7 : 39;
+	ctx->buff_size += size;
+	maj = (style == 1) ? 39 : 7;
 	while (size--)
 	{
 		i = size;
@@ -41,7 +43,8 @@ void	spec_x(t_ctx *ctx, t_flag *flags)
 	int				style;
 
 	nb = flags->data.x;
-	style = (flags->specifier == 'X') ? 1 : 0;
+	style = (flags->specifier == 'x') ? 1 : 2;
+
 	size = 0;
 	while (nb)
 	{
@@ -56,49 +59,26 @@ void	spec_x(t_ctx *ctx, t_flag *flags)
 		flags->pad = 0;
 	}
 
-//---------	width
 	width = (flags->alternate && flags->data.x != 0) * 2;
 
 
 	width += (precision > size) ? precision : size;
 	width = flags->width - width;
-	if (width > 0)
-		ctx->buff_size += width;
-	if (!flags->left_align && !flags->pad)
-			while (width-- > 0)
-				write(1, " ", 1);
-
-//---------		alternate (signe)
-
-	if (flags->alternate && flags->data.x != 0)
+	if (width > 0 && !flags->left_align && !flags->pad)
 	{
-		if (style)
-			write(1, "0X", 2);
-		else
-			write(1, "0x", 2);
-		ctx->buff_size += 2;
+		print_in_buffer(' ', width, ctx);
+		width = 0;
 	}
-
-//---------	padded width
-
-	if (!flags->left_align)
-		while (width-- > 0)
-			write(1, "0", 1);
-
-//---------			precision	(dont care signe)
-
+	if (flags->alternate && flags->data.x != 0)
+		alternate(style, ctx);
+	if (width > 0 && !flags->left_align)
+	{
+		print_in_buffer('0', width, ctx);
+		width = 0;
+	}
 	if (precision > size)
-		ctx->buff_size += precision - size;
-	while (precision-- > size)
-		write(1, "0", 1);
-
-//---------			number
-
-	print_hex(flags->data.x, size, style);
-	ctx->buff_size += size;
-
-//---------	! width !	(if) left aligne
-
-	while (width-- > 0)
-			write(1, " ", 1);
+		print_in_buffer('0', precision - size, ctx);
+	print_hex(flags->data.x, size, style, ctx);
+	if (width > 0)
+		print_in_buffer(' ', width, ctx);
 }

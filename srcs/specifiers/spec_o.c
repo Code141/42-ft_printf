@@ -6,18 +6,20 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 14:41:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:02:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
+#include <buff_writer.h>
 
-void	print_unsigned_char(int nb, int size)
+void	print_unsigned_char(int nb, int size, t_ctx *ctx)
 {
 	char	c;
 	int		pow;
 	int		i;
 
+	ctx->buff_size += size;
 	while (size--)
 	{
 		i = size;
@@ -52,46 +54,26 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		flags->pad = 0;
 	}
 
-//---------	width
 	width = (flags->alternate);
 
 
 	width += (precision > size) ? precision : size;
 	width = flags->width - width;
-	if (width > 0)
-		ctx->buff_size += width;
-	if (!flags->left_align && !flags->pad)
-		while (width-- > 0)
-			write(1, " ", 1);
-
-//---------		alternate
-
-	if (flags->alternate)
+	if (width > 0 && !flags->left_align && !flags->pad)
 	{
-		write(1, "0", 1);
-		ctx->buff_size += 1;
+		print_in_buffer(' ', width, ctx);
+		width = 0;
 	}
-
-//---------	padded width
-
-	if (!flags->left_align)
-		while (width-- > 0)
-			write(1, "0", 1);
-
-//---------			precision	(dont care signe)
-
+	if (flags->alternate)
+		alternate(0, ctx);
+	if (width > 0 && !flags->left_align)
+	{
+		print_in_buffer('0', width, ctx);
+		width = 0;
+	}
 	if (precision > size)
-		ctx->buff_size += precision - size;
-	while (precision-- > size)
-		write(1, "0", 1);
-
-//---------			number
-
-	print_unsigned_char(flags->data.o, size);
-	ctx->buff_size += size;
-
-//---------	! width !	(if) left aligne
-
-	while (width-- > 0)
-			write(1, " ", 1);
+		print_in_buffer('0', precision - size, ctx);
+	print_unsigned_char(flags->data.o, size, ctx);
+	if (width > 0)
+		print_in_buffer(' ', width, ctx);
 }

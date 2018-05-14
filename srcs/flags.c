@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 13:47:56 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:41:52 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,17 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 			return (i);
 	return (i);
 }
-
+/*
+ static const t_conv g_conv[] = {
+     { "bdiouxX", int_arg },
+     { "DOU", dou_arg },
+     { "Cc", c_arg },
+     { "s", s_arg },
+     { "S", ws_arg },
+     { "p", p_arg },
+     { "%", pct_arg }
+ };
+ */
 int		specifier(char *str, t_flag *flags)
 {
 	if (*str == 'c')

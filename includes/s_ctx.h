@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 03:57:19 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:03:45 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ struct			s_ctx
 	va_list		args;
 	va_list		current_args;
 	char		*format;
-	char		*buff;
-	int			buff_i;
 	int			buff_size;
 	t_flag		flags[];
 };

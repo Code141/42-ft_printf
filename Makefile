@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/14 03:13:28 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/14 18:20:12 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -34,6 +34,7 @@ SRCS		=	ft_printf.c									\
 				interceptor.c								\
 				flags.c										\
 				va_args.c									\
+				buff_writer.c								\
 				specifiers/spec_c.c							\
 				specifiers/spec_d.c							\
 				specifiers/spec_u.c							\
