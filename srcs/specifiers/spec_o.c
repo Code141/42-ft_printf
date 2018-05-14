@@ -1,62 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spec_d.c                                           :+:      :+:    :+:   */
+/*   spec_o.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 14:39:07 by gelambin         ###   ########.fr       */
+/*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
+/*   Updated: 2018/05/14 14:41:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
-void	print_int(int nb, int size)
+void	print_unsigned_char(int nb, int size)
 {
 	char	c;
 	int		pow;
 	int		i;
 
-	if (nb < 0)
-	{
-		if (nb == -2147483648)
-		{
-			write(1, "2", 1);
-			nb = -147483648;
-			size--;
-		}
-		nb = -nb;
-	}
 	while (size--)
 	{
 		i = size;
 		pow = 1;
 		while (i--)
-			pow = pow * 10;
-		c = nb / pow % 10 + '0';
+			pow = pow * 8;
+		c = nb / pow % 8 + '0';
 		write(1, &c, 1);
 	}
 }
 
-void	spec_d(t_ctx *ctx, t_flag *flags)
+void	spec_o(t_ctx *ctx, t_flag *flags)
 {
-	int		width;
-	int		precision;
-	int		size;
-	int		nb;
-	int		neg;
+	int	width;
+	int	precision;
+	int	size;
+	int	nb;
 
-	nb = flags->data.d;
-	neg = (nb < 0) ? 1 : 0;
+	nb = flags->data.o;
 
 	size = 0;
 	while (nb)
 	{
-		nb /= 10;
+		nb /= 8;
 		size++;
 	}
-
+	
 	precision = 1;
 	if (flags->precision != -1)
 	{
@@ -65,7 +53,7 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	}
 
 //---------	width
-	width = (neg || flags->space_for_sign || flags->explicite_sign);
+	width = (flags->alternate);
 
 
 	width += (precision > size) ? precision : size;
@@ -76,17 +64,13 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		while (width-- > 0)
 			write(1, " ", 1);
 
-//---------		signe
+//---------		alternate
 
-	if (neg || flags->space_for_sign || flags->explicite_sign)
-		ctx->buff_size++;
-	if (neg)
-		write (1, "-", 1);
-	else
-		if (flags->explicite_sign)
-			write (1, "+", 1);
-		else if (flags->space_for_sign)
-			write (1, " ", 1);
+	if (flags->alternate)
+	{
+		write(1, "0", 1);
+		ctx->buff_size += 1;
+	}
 
 //---------	padded width
 
@@ -103,7 +87,7 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 
 //---------			number
 
-	print_int(flags->data.d, size);
+	print_unsigned_char(flags->data.o, size);
 	ctx->buff_size += size;
 
 //---------	! width !	(if) left aligne

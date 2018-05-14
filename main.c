@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/10 19:36:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/13 15:11:23 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int	main(void)
 	str = "|Hello world|";
 	str2 = "Salut bebe";
 
+//	ft_printf("%+10X\n", 1563);
+//	printf("%+10X\n", 1563);
 
-
-
-	ft_printf("%X\n", 1563);
-	printf("%X\n", 1563);
+	printf("%d", printf("%.5s", str));
 
 /*
 	ft_printf("%50s\n", str);

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/11 01:44:00 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 13:47:56 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,33 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 	return (i);
 }
 
+int		length(char *str, t_flag *flags)
+{
+	flags->length = 0;
+
+	if (str[0] == 'h' && str[1] == 'h')
+		flags->length = e_length_hh;
+	else if (str[0] == 'l' && str[1] == 'l')
+		flags->length = e_length_ll;
+	if (flags->length)
+		return (1);
+	if (str[0] == 'h')
+		flags->length = e_length_h;
+	else if (str[0] == 'l')
+		flags->length = e_length_l;
+	else if (str[0] == 'j')
+		flags->length = e_length_j;
+	else if (str[0] == 'z')
+		flags->length = e_length_z;
+	return (0);
+}
+
 int		flag(char *str, t_ctx *ctx, t_flag *flags)
 {
 	int	i;
 
 	i = 0;
 	while (str[i++])
-	{
 		if (str[i] == '#')
 			flags->alternate = 1;
 		else if (str[i] == '.')
@@ -59,37 +79,12 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 			flags->explicite_sign = 1;
 		else if (str[i] == ' ')
 			flags->space_for_sign = 1;
+		else if (str[i] == 'h' || str[i] == 'l'
+			|| str[i] == 'j' || str[i] == 'z' )
+			i += length(str + i, flags);
 		else
 			return (i);
-	}
 	return (i);
-}
-
-int		length(char *str, t_flag *flags)
-{
-	flags->length = 0;
-
-	if (str[0] == 'h' && str[1] == 'h')
-		flags->length = e_length_hh;
-	else if (str[0] == 'l' && str[1] == 'l')
-		flags->length = e_length_ll;
-
-	if (flags->length)
-		return (2);
-
-	if (str[0] == 'h')
-		flags->length = e_length_h;
-	else if (str[0] == 'l')
-		flags->length = e_length_l;
-	else if (str[0] == 'j')
-		flags->length = e_length_j;
-	else if (str[0] == 'z')
-		flags->length = e_length_z;
-
-	if (flags->length)
-		return (1);
-
-	return (0);
 }
 
 int		specifier(char *str, t_flag *flags)
@@ -98,10 +93,12 @@ int		specifier(char *str, t_flag *flags)
 		flags->procedure = &spec_c;
 	else if (*str == 'd')
 		flags->procedure = &spec_d;
-//	else if (*str == 'u')
-//		flags->procedure = &spec_u;
+	else if (*str == 'u')
+		flags->procedure = &spec_u;
 	else if (*str == 'x' || *str == 'X')
 		flags->procedure = &spec_x;
+	else if (*str == 'o')
+		flags->procedure = &spec_o;
 /*	else if (*str == 'e')
 		flags->procedure = &spec_e;
 	else if (*str == 'E')

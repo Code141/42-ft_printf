@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/11 01:35:43 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/14 03:57:19 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef union	u_va_data
 {
 	unsigned char	c;
 	int				d;
+	int				o;
 	unsigned int	u;
 	unsigned int	x;
 	unsigned int	X;

@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/10 19:20:09 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/14 03:13:28 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -36,6 +36,8 @@ SRCS		=	ft_printf.c									\
 				va_args.c									\
 				specifiers/spec_c.c							\
 				specifiers/spec_d.c							\
+				specifiers/spec_u.c							\
+				specifiers/spec_o.c							\
 				specifiers/spec_s.c							\
 				specifiers/spec_x.c							\
 				specifiers/spec_percent.c
