@@ -6,12 +6,14 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 18:45:17 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/17 03:06:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <ft_printf.h>
+#include <stdint.h>
+#include <stddef.h>
 
 int	main(void)
 {
@@ -20,19 +22,40 @@ int	main(void)
 	int		i;
 	int		j;
 	int		k;
-
+	unsigned long long	l;
 	i = 5;
 	j = 10;
 	k = 20;
+	l = -21474836471224;
 	str = "|Hello world|";
-	str2 = "Salut bebe";
+	str2 = "Salut";
+
+
+	printf("char : %d\n", sizeof(char));
+	printf("short : %d\n", sizeof(short));
+	printf("int : %d\n", sizeof(int));
+	printf("long : %d\n", sizeof(long));
+	printf("long long : %d\n", sizeof(long long));
+	printf("intmax_t : %d\n", sizeof(intmax_t));
+	printf("ptrdiff_t : %d\n", sizeof(ptrdiff_t));
 
 //	ft_printf("%+10X\n", 1563);
 //	printf("%+10X\n", 1563);
 
+	printf("|%+lld|--\n", l);
+	printf("|%+5u|% 5u|++\n", i, i);
+	ft_printf("|%+5u|% 5u|\n", i, i);
+	
+	printf("--------------");
+
+	ft_printf("|%p|", &i);
+	printf("|%p|", &i);
+	
+	printf("--------------");
+	
 	printf("%d", printf("%.5s\n", str));
 
-ft_printf("XXXXXXXXXXXX");
+	ft_printf("XXXXXXXXXXXX");
 	ft_printf("%50s\n", str);
 	ft_printf("%50.5s\n", str);
 //	printf("%50s\n", str);

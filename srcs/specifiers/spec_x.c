@@ -6,33 +6,12 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 17:06:55 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 19:02:23 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/15 16:13:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <buff_writer.h>
-
-void	print_hex(unsigned int nb, int size, char style, t_ctx *ctx)
-{
-	char	c;
-	int		pow;
-	int		i;
-	int		maj;
-
-	ctx->buff_size += size;
-	maj = (style == 1) ? 39 : 7;
-	while (size--)
-	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * 16;
-		c = (nb / pow) % 16 + '0';
-		c = (c > 57) ? c + maj : c;
-		write(1, &c, 1);
-	}
-}
 
 void	spec_x(t_ctx *ctx, t_flag *flags)
 {
@@ -78,7 +57,10 @@ void	spec_x(t_ctx *ctx, t_flag *flags)
 	}
 	if (precision > size)
 		print_in_buffer('0', precision - size, ctx);
-	print_hex(flags->data.x, size, style, ctx);
+	if (style == 1)
+		print_hex_low(flags->data.x, size, ctx);
+	else
+		print_hex_high(flags->data.x, size, ctx);
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);
 }

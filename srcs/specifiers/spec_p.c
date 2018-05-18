@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spec_o.c                                           :+:      :+:    :+:   */
+/*   spec_p.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/15 16:13:40 by gelambin         ###   ########.fr       */
+/*   Created: 2018/05/15 15:22:27 by gelambin          #+#    #+#             */
+/*   Updated: 2018/05/15 16:10:32 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <buff_writer.h>
 
-void	spec_o(t_ctx *ctx, t_flag *flags)
+void	spec_p(t_ctx *ctx, t_flag *flags)
 {
-	int	width;
-	int	precision;
-	int	size;
-	int	nb;
+	int				width;
+	int				precision;
+	int				size;
+	long long			nb;
+	int				style;
 
-	nb = flags->data.o;
+	nb = flags->data.p;
 
-	size = 0;
-	while (nb)
-	{
-		nb /= 8;
-		size++;
-	}
-	
+	size = 8;
+	flags->alternate = 1;
+	style = 1;
+
 	precision = 1;
 	if (flags->precision != -1)
 	{
@@ -36,7 +34,7 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		flags->pad = 0;
 	}
 
-	width = (flags->alternate);
+	width = (flags->alternate && flags->data.x != 0) * 2;
 
 
 	width += (precision > size) ? precision : size;
@@ -46,8 +44,8 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		print_in_buffer(' ', width, ctx);
 		width = 0;
 	}
-	if (flags->alternate)
-		alternate(0, ctx);
+	if (flags->alternate && flags->data.x != 0)
+		alternate(style, ctx);
 	if (width > 0 && !flags->left_align)
 	{
 		print_in_buffer('0', width, ctx);
@@ -55,7 +53,7 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 	}
 	if (precision > size)
 		print_in_buffer('0', precision - size, ctx);
-	print_unsigned_char(flags->data.o, size, ctx);
+	print_hex_low(flags->data.p, size, ctx);
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);
 }

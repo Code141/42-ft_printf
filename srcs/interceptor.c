@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 19:04:25 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/15 16:07:33 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <s_ctx.h>
 #include <flags.h>
-#include <va_args.h>
 
 //==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
 
@@ -53,7 +52,7 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	else if (flags->procedure)
 	{
 		pos++;
-		get_arg(flags, ctx);
+		flags->data.data = va_arg(ctx->current_args, long long);
 		flags->procedure(ctx, flags);
 	}
 	flags->jump = pos;

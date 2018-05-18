@@ -6,12 +6,11 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 18:41:52 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/15 16:07:39 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
-#include <va_args.h>
 #include <specifiers.h>
 
 int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
@@ -30,7 +29,10 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 		flags->precision = nb;
 	else if (str[i] == '$' && nb)
 	{
-		pos_arg(ctx, nb);
+		va_end(ctx->current_args);
+		va_copy(ctx->current_args, ctx->args);
+		while (nb-- > 1)
+			va_arg(ctx->current_args, void*);
 		i++;
 	}
 	else
@@ -121,9 +123,9 @@ int		specifier(char *str, t_flag *flags)
 		flags->procedure = &spec_G;
 */	else if (*str == 's')
 		flags->procedure = &spec_s;
-/*	else if (*str == 'p')
+	else if (*str == 'p')
 		flags->procedure = &spec_p;
-*/	else if (*str == '%')
+	else if (*str == '%')
 		flags->procedure = &spec_percent;
 	else
 		return (0); // UNKNOW SPECIFIER

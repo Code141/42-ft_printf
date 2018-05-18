@@ -6,13 +6,18 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/14 19:03:45 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/18 03:09:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CTX_H
 # define S_CTX_H
 # include <stdarg.h>
+
+# define 1_OCT	0xff
+# define 2_OCT	0xffff
+# define 4_OCT	0xffffffff
+# define 8_OCT	0xffffffffffffffff
 
 typedef struct	s_ctx	t_ctx;
 typedef struct	s_flag	t_flag;
@@ -35,13 +40,14 @@ typedef union	u_va_data
 
 typedef enum	e_length
 {
-	e_length_hh = 1,
-	e_length_h,
-	e_length_ll,
-	e_length_l,
-	e_length_j,
-	e_length_z
+	e_length_hh = 1_OCT,
+	e_length_h = 2_OCT,
+	e_length_ll = 8_OCT,
+	e_length_l = 8_OCT,
+	e_length_j = 8_OCT,
+	e_length_z = 8_OCT
 }				t_length;
+
 
 struct			s_flag
 {
