@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/15 16:07:39 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/19 15:59:19 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 int		length(char *str, t_flag *flags)
 {
-	flags->length = 0;
 
 	if (str[0] == 'h' && str[1] == 'h')
 		flags->length = e_length_hh;

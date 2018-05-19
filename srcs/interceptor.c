@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/15 16:07:33 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/19 19:23:48 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ void	error(const char *arg, int pos)
 {
 /*
 	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
-			, 63);
+	, 63);
 	write (1, arg, pos);
 	write (1, "\n", 1);
 */
+}
+
+void	get_arg(t_ctx *ctx, t_flag *flags)
+{
+		flags->data.data = va_arg(ctx->current_args, long long);
 }
 
 int		new_arg(char *arg, t_ctx *ctx, int current_arg)
@@ -45,6 +50,8 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	flags->space_for_sign = 0;
 	flags->width = 0;
 	flags->precision = -1;
+	flags->length = 0;
+	flags->data.data = 0;
 
 	pos += flag(arg + pos, ctx, flags);
 	if (arg[pos] && !specifier(arg + pos, flags))
@@ -52,7 +59,7 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	else if (flags->procedure)
 	{
 		pos++;
-		flags->data.data = va_arg(ctx->current_args, long long);
+		get_arg(ctx, flags);
 		flags->procedure(ctx, flags);
 	}
 	flags->jump = pos;

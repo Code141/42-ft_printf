@@ -27,9 +27,17 @@ Modifier		c				s
 l (ell)			wint_t			wchar_t *
 
 
+char : 1
+short : 2
+int : 4
+long : 8
+long long : 8
+intmax_t : 8
+ptrdiff_t : 8
 
 					BITWISE AND ->  &
 FF					1 oct
 FFFF				2 oct
 FFFFFFFF			4 oct
 FFFFFFFFFFFFFFFF	8 oct
+

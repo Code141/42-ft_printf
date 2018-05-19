@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/16 15:28:39 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/19 19:24:47 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	nb = flags->data.d;
 
 	neg = (nb < 0) ? 1 : 0;					// Differs
-/*
+
 	size = 0;
 	while (nb)
 	{
 		nb /= 10;
 		size++;
 	}
-*/
-	size = number_width(flags->data, 10);
+
+//	size = number_width(flags->data, 10);
 
 	precision = 1;
 	if (flags->precision != -1)

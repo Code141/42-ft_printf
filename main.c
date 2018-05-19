@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/17 03:06:38 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/19 16:41:59 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 //	ft_printf("%+10X\n", 1563);
 //	printf("%+10X\n", 1563);
 
-	printf("|%+lld|--\n", l);
+	printf("|%d|--\n", l);
 	printf("|%+5u|% 5u|++\n", i, i);
 	ft_printf("|%+5u|% 5u|\n", i, i);
 	
@@ -76,7 +76,7 @@ int	main(void)
 	ft_printf("%0+5d\n", 42);
 	ft_printf("%05d\n", -42);
 	ft_printf("%0+5d\n", -42);
-/*
+
 	printf("\n\n", 123);
 	printf("%+10.5d\n", 123);
 	printf("%- 10.5d\n", 123);
@@ -93,7 +93,7 @@ int	main(void)
 	printf("%0+5d\n", 42);
 	printf("%05d\n", -42);
 	printf("%0+5d\n", -42);
-*/
+
 
 	//	ft_printf("%d", i, j);
 /*
