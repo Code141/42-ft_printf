@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 15:59:19 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/21 19:03:13 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 			return (i);
 	return (i);
 }
+
 /*
  static const t_conv g_conv[] = {
      { "bdiouxX", int_arg },
@@ -98,36 +99,54 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
      { "%", pct_arg }
  };
  */
-int		specifier(char *str, t_flag *flags)
+
+ //		dDioOuU
+ //		xX
+ //		p
+ //		cC
+ //		sS
+
+int		specifier(char specifier, t_flag *flags)
 {
-	if (*str == 'c')
-		flags->procedure = &spec_c;
-	else if (*str == 'd')
+	if (specifier == 'd' || specifier == 'i')				// 				10
 		flags->procedure = &spec_d;
-	else if (*str == 'u')
+	else if (specifier == 'u')								// unsigned		10
 		flags->procedure = &spec_u;
-	else if (*str == 'x' || *str == 'X')
+	else if (specifier == 'x' || specifier == 'X')			// unsigned		16
 		flags->procedure = &spec_x;
-	else if (*str == 'o')
-		flags->procedure = &spec_o;
-/*	else if (*str == 'e')
-		flags->procedure = &spec_e;
-	else if (*str == 'E')
-		flags->procedure = &spec_E;
-	else if (*str == 'f')
-		flags->procedure = &spec_f;
-	else if (*str == 'g')
-		flags->procedure = &spec_g;
-	else if (*str == 'G')
-		flags->procedure = &spec_G;
-*/	else if (*str == 's')
-		flags->procedure = &spec_s;
-	else if (*str == 'p')
+	else if (specifier == 'p')								// unsigned		16
 		flags->procedure = &spec_p;
-	else if (*str == '%')
+	else if (specifier == 'o')								// unsigned		8
+		flags->procedure = &spec_o;
+
+	if (flags->procedure)
+	{
+		if (flags->precision != -1)
+			flags->pad = 0;
+		else
+			flags->precision = 1;
+		return (1);
+	}
+
+/*	else if (specifier == 'e')
+		flags->procedure = &spec_e;
+	else if (specifier == 'E')
+		flags->procedure = &spec_E;
+	else if (specifier == 'f')
+		flags->procedure = &spec_f;
+	else if (specifier == 'g')
+		flags->procedure = &spec_g;
+	else if (specifier == 'G')
+		flags->procedure = &spec_G;
+*/
+
+	if (specifier == 'c')
+		flags->procedure = &spec_c;
+	else if (specifier == 's')
+		flags->procedure = &spec_s;
+	else if (specifier == '%')
 		flags->procedure = &spec_percent;
 	else
 		return (0); // UNKNOW SPECIFIER
-	flags->specifier = *str;
 	return (1);
 }

@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/16 12:36:36 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/21 18:55:41 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -26,9 +26,7 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 %.o: %.c includes/
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-
 CPPFLAGS	=	-I./includes/
-
 
 SRCS		=	ft_printf.c									\
 				interceptor.c								\

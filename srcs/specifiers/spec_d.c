@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 19:24:47 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/21 23:40:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 void	spec_d(t_ctx *ctx, t_flag *flags)
 {
 	int		width;
-	int		precision;
 	int		size;
 	int		nb;
-	char	neg;
 
 	nb = flags->data.d;
-
-	neg = (nb < 0) ? 1 : 0;					// Differs
 
 	size = 0;
 	while (nb)
@@ -32,31 +28,28 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 		size++;
 	}
 
-//	size = number_width(flags->data, 10);
+	width = (flags->neg || flags->space_for_sign || flags->explicite_sign);
 
-	precision = 1;
-	if (flags->precision != -1)
-	{
-		precision = flags->precision;
-		flags->pad = 0;
-	}
-	width = (neg || flags->space_for_sign || flags->explicite_sign);// Differs
-	width += (precision > size) ? precision : size;
+	width += (flags->precision > size) ? flags->precision : size;
 	width = flags->width - width;
 	if (width > 0 && !flags->left_align && !flags->pad)
 	{
 		print_in_buffer(' ', width, ctx);
 		width = 0;
 	}
-	sign(neg, flags->explicite_sign, flags->space_for_sign, ctx);	// Differs
+
+	sign(flags->neg, flags->explicite_sign, flags->space_for_sign, ctx);
+
 	if (width > 0 && !flags->left_align)
 	{
 		print_in_buffer('0', width, ctx);
 		width = 0;
 	}
-	if (precision > size)
-		print_in_buffer('0', precision - size, ctx);
-	print_int(flags->data.d, size, ctx);							// Differs
+	if (flags->precision > size)
+		print_in_buffer('0', flags->precision - size, ctx);
+
+	print_unsigned_int(flags->data.d, size, ctx);
+
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);
 }

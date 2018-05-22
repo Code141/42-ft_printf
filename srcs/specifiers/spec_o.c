@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 19:24:16 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:39:46 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	spec_o(t_ctx *ctx, t_flag *flags)
 {
 	int	width;
-	int	precision;
 	int	size;
 	int	nb;
 
@@ -29,33 +28,27 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		size++;
 	}
 	
-	precision = 1;
-	if (flags->precision != -1)
-	{
-		precision = flags->precision;
-		flags->pad = 0;
-	}
 
-	width = (flags->alternate);
+	width = (flags->alternate);										// Differs
 
-
-	width += (precision > size) ? precision : size;
+	width += (flags->precision > size) ? flags->precision : size;
 	width = flags->width - width;
 	if (width > 0 && !flags->left_align && !flags->pad)
 	{
 		print_in_buffer(' ', width, ctx);
 		width = 0;
 	}
-	if (flags->alternate)
-		alternate(0, ctx);
+	if (flags->alternate)											// Differs
+		alternate(0, ctx);											// Differs
 	if (width > 0 && !flags->left_align)
 	{
 		print_in_buffer('0', width, ctx);
 		width = 0;
 	}
-	if (precision > size)
-		print_in_buffer('0', precision - size, ctx);
-	print_unsigned_char(flags->data.o, size, ctx);
+	if (flags->precision > size)
+		print_in_buffer('0', flags->precision - size, ctx);
+	print_unsigned_char(flags->data.o, size, ctx);					// Differs
+
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);
 }

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 19:23:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:50:21 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 
 void	error(const char *arg, int pos)
 {
-/*
-	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
-	, 63);
-	write (1, arg, pos);
-	write (1, "\n", 1);
-*/
+	/*
+	   write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
+	   , 63);
+	   write (1, arg, pos);
+	   write (1, "\n", 1);
+	   */
 }
 
 void	get_arg(t_ctx *ctx, t_flag *flags)
 {
-		flags->data.data = va_arg(ctx->current_args, long long);
+	flags->data.data = va_arg(ctx->current_args, long long);
 }
 
 int		new_arg(char *arg, t_ctx *ctx, int current_arg)
@@ -52,14 +52,27 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	flags->precision = -1;
 	flags->length = 0;
 	flags->data.data = 0;
+	flags->neg = 0;
 
 	pos += flag(arg + pos, ctx, flags);
-	if (arg[pos] && !specifier(arg + pos, flags))
+	flags->specifier = *(arg + pos);
+	if (arg[pos] && !specifier(flags->specifier, flags))
 		error(arg, pos + 1);
 	else if (flags->procedure)
 	{
 		pos++;
 		get_arg(ctx, flags);
+
+
+		if (flags->specifier == 'd' || flags->specifier == 'i') 
+		{
+			if (flags->data.d < 0)
+			{
+				flags->data.d = - flags->data.d;
+				flags->neg = 1;
+			}
+		}
+
 		flags->procedure(ctx, flags);
 	}
 	flags->jump = pos;

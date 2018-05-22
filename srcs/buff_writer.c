@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 19:11:11 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/21 21:05:08 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		number_width(t_va_data data, int base)
 
 	return (size);
 }
+
+/*----------------------------------------------------------------------------*/
 
 void	print_in_buffer(char c, int nb, t_ctx *ctx)
 {
@@ -53,35 +55,9 @@ void	alternate(char style, t_ctx *ctx)
 			print_in_buffer('X', 1, ctx);
 }
 
+/*----------------------------------------------------------------------------*/
 
-void	print_int(int nb, int size, t_ctx *ctx)
-{
-	char	c;
-	int		pow;
-	int		i;
-
-	ctx->buff_size += size;
-	if (nb < 0)
-	{
-		if (nb == -2147483648)
-		{
-			write(1, "2", 1);
-			nb = -147483648;
-			size--;
-		}
-		nb = -nb;
-	}
-	while (size--)
-	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * 10;
-		c = nb / pow % 10 + '0';
-		write(1, &c, 1);
-	}
-}
-
+// NE PAS DONNER CTX MAIS UN POINTEUR SUR CHAR !!
 
 void	print_unsigned_int(unsigned int nb, int size, t_ctx *ctx)
 {
