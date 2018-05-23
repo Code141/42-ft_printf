@@ -6,27 +6,11 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 21:05:08 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 23:19:54 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
-
-int		number_width(t_va_data data, int base)
-{
-	int	size;
-
-	size = 0;
-	while (data.data)	// HERE COUNT BYTES
-	{
-		data.data /= base;
-		size++;
-	}
-
-	return (size);
-}
-
-/*----------------------------------------------------------------------------*/
 
 void	print_in_buffer(char c, int nb, t_ctx *ctx)
 {
@@ -59,52 +43,13 @@ void	alternate(char style, t_ctx *ctx)
 
 // NE PAS DONNER CTX MAIS UN POINTEUR SUR CHAR !!
 
-void	print_unsigned_int(unsigned int nb, int size, t_ctx *ctx)
+void	print_number_hex_uint8_t(uint8_t nb, int size, int style)
 {
 	char	c;
 	int		pow;
 	int		i;
 
-	ctx->buff_size += size;
-	while (size--)
-	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * 10;
-		c = nb / pow % 10 + '0';
-		write(1, &c, 1);
-	}
-}
-
-
-void	print_unsigned_char(int nb, int size, t_ctx *ctx)
-{
-	char	c;
-	int		pow;
-	int		i;
-
-	ctx->buff_size += size;
-	while (size--)
-	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * 8;
-		c = nb / pow % 8 + '0';
-		write(1, &c, 1);
-	}
-}
-
-
-
-void	print_hex_high(unsigned int nb, int size, t_ctx *ctx)
-{
-	char	c;
-	int		pow;
-	int		i;
-
-	ctx->buff_size += size;
+	style = (style == 1) ? 39 : 7;
 	while (size--)
 	{
 		i = size;
@@ -112,18 +57,18 @@ void	print_hex_high(unsigned int nb, int size, t_ctx *ctx)
 		while (i--)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
-		c = (c > 57) ? c + 7 : c;
+		c = (c > 57) ? c + style : c;
 		write(1, &c, 1);
 	}
 }
 
-void	print_hex_low(unsigned int nb, int size, t_ctx *ctx)
+void	print_number_hex_uint16_t(uint16_t nb, int size, int style)
 {
 	char	c;
 	int		pow;
 	int		i;
 
-	ctx->buff_size += size;
+	style = (style == 1) ? 39 : 7;
 	while (size--)
 	{
 		i = size;
@@ -131,7 +76,58 @@ void	print_hex_low(unsigned int nb, int size, t_ctx *ctx)
 		while (i--)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
-		c = (c > 57) ? c + 39 : c;
+		c = (c > 57) ? c + style : c;
 		write(1, &c, 1);
 	}
+}
+
+void	print_number_hex_uint32_t(uint32_t nb, int size, int style)
+{
+	char	c;
+	int		pow;
+	int		i;
+
+	style = (style == 1) ? 39 : 7;
+	while (size--)
+	{
+		i = size;
+		pow = 1;
+		while (i--)
+			pow = pow * 16;
+		c = (nb / pow) % 16 + '0';
+		c = (c > 57) ? c + style : c;
+		write(1, &c, 1);
+	}
+}
+
+void	print_number_hex_uint64_t(uint64_t nb, int size, int style)
+{
+	char		c;
+	uint64_t	pow;
+	int			i;
+
+	style = (style == 1) ? 39 : 7;
+	while (size--)
+	{
+		i = size;
+		pow = 1;
+		while (i--)
+			pow = pow * 16;
+		c = (nb / pow) % 16 + '0';
+		c = (c > 57) ? c + style : c;
+		write(1, &c, 1);
+	}
+}
+
+int		print_number_hex(t_va_data data, int size, int style, int length)
+{
+	if (length == 1)
+		print_number_hex_uint8_t(data.uint8, size, style);
+	else if (length == 2)
+		print_number_hex_uint16_t(data.uint16, size, style);
+	else if (length == 4)
+		print_number_hex_uint32_t(data.uint32, size, style);
+	else if (length == 8)
+		print_number_hex_uint64_t(data.uint64, size, style);
+	return (0);
 }

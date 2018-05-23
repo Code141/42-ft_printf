@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 19:03:13 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 23:23:33 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 int		length(char *str, t_flag *flags)
 {
-
-	if (str[0] == 'h' && str[1] == 'h')
+	if (str[0] == 'h' && str[1] == 'h' && flags->length < 1)
+	{
 		flags->length = e_length_hh;
-	else if (str[0] == 'l' && str[1] == 'l')
-		flags->length = e_length_ll;
-	if (flags->length)
 		return (1);
-	if (str[0] == 'h')
+	}
+	else if (str[0] == 'l' && str[1] == 'l' && flags->length < 8)
+	{
+		flags->length = e_length_ll;
+		return (1);
+	}
+
+
+	if (str[0] == 'h' && flags->length < 2)
 		flags->length = e_length_h;
-	else if (str[0] == 'l')
+	else if (str[0] == 'l' && flags->length < 8)
 		flags->length = e_length_l;
-	else if (str[0] == 'j')
+	else if (str[0] == 'j' && flags->length < 8)
 		flags->length = e_length_j;
-	else if (str[0] == 'z')
+	else if (str[0] == 'z' && flags->length < 8)
 		flags->length = e_length_z;
 	return (0);
 }
@@ -108,15 +113,15 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 
 int		specifier(char specifier, t_flag *flags)
 {
-	if (specifier == 'd' || specifier == 'i')				// 				10
+	if (specifier == 'd' || specifier == 'D' || specifier == 'i')
 		flags->procedure = &spec_d;
-	else if (specifier == 'u')								// unsigned		10
+	else if (specifier == 'u' || specifier == 'U')
 		flags->procedure = &spec_u;
-	else if (specifier == 'x' || specifier == 'X')			// unsigned		16
+	else if (specifier == 'x' || specifier == 'X')
 		flags->procedure = &spec_x;
-	else if (specifier == 'p')								// unsigned		16
+	else if (specifier == 'p')
 		flags->procedure = &spec_p;
-	else if (specifier == 'o')								// unsigned		8
+	else if (specifier == 'o' || specifier == 'O')
 		flags->procedure = &spec_o;
 
 	if (flags->procedure)
@@ -140,7 +145,7 @@ int		specifier(char specifier, t_flag *flags)
 		flags->procedure = &spec_G;
 */
 
-	if (specifier == 'c')
+	if (specifier == 'c' || specifier == 'C')
 		flags->procedure = &spec_c;
 	else if (specifier == 's')
 		flags->procedure = &spec_s;

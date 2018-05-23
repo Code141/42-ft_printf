@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 15:39:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:29:44 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,8 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 {
 	int	width;
 	int	size;
-	int	nb;
 
-	nb = flags->data.o;
-
-	size = 0;
-	while (nb)
-	{
-		nb /= 8;
-		size++;
-	}
-	
+	size = number_width(flags->data, 8, flags->length);
 
 	width = (flags->alternate);										// Differs
 
@@ -38,8 +29,10 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		print_in_buffer(' ', width, ctx);
 		width = 0;
 	}
+
 	if (flags->alternate)											// Differs
 		alternate(0, ctx);											// Differs
+
 	if (width > 0 && !flags->left_align)
 	{
 		print_in_buffer('0', width, ctx);
@@ -47,7 +40,9 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 	}
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size, ctx);
-	print_unsigned_char(flags->data.o, size, ctx);					// Differs
+	
+	ctx->buff_size += size;
+	print_number(flags->data, size, 8, flags->length);			// Differs
 
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);

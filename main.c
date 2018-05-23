@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 21:57:20 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 00:57:04 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ft_printf.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <limits.h>
 
 int	main(void)
 {
@@ -31,28 +32,22 @@ int	main(void)
 	str2 = "Salut";
 
 
-	printf("char : %d\n", sizeof(char));
-	printf("short : %d\n", sizeof(short));
-	printf("int : %d\n", sizeof(int));
-	printf("long : %d\n", sizeof(long));
-	printf("long long : %d\n", sizeof(long long));
-	printf("intmax_t : %d\n", sizeof(intmax_t));
-	printf("ptrdiff_t : %d\n", sizeof(ptrdiff_t));
+printf("%c%c%c\n", '\xE2', '\x99', '\xA5');
+ft_printf("%c%c%c\n", '\xE2', '\x99', '\xA5');
 
-//	ft_printf("%+10X\n", 1563);
-//	printf("%+10X\n", 1563);
+printf("\n--------------\n");
 
-	printf("|%d|--\n", l);
-	printf("|%+5u|% 5u|++\n", i, i);
-	ft_printf("|%+5u|% 5u|\n", i, i);
-	
-	printf("--------------");
+printf("%C\n", "\u26653");
+ft_printf("%C\n", "\u26653");
 
-	ft_printf("|%p|", &i);
-	printf("|%060p|", &i);
-	
-	printf("--------------");
-	
+printf("\n--------------\n");
+
+printf("%C\n", L'ÁM-^L´');
+ft_printf("%C\n", L'ÁM-^L´');
+
+
+
+/*	
 	printf("%d", printf("%.5s\n", str));
 
 	ft_printf("XXXXXXXXXXXX");
@@ -96,7 +91,7 @@ ft_printf("{%lhlz}", 9223372036854775807);
 	printf("%05d\n", -42);
 	printf("%0+5d\n", -42);
 
-
+*/
 	//	ft_printf("%d", i, j);
 /*
 	printf("	: [%d] Std", printf("Hello"));

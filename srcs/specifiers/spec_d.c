@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:19:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 23:40:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 20:00:54 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 {
 	int		width;
 	int		size;
-	int		nb;
 
-	nb = flags->data.d;
-
-	size = 0;
-	while (nb)
-	{
-		nb /= 10;
-		size++;
-	}
+	size = number_width(flags->data, 10, flags->length);
 
 	width = (flags->neg || flags->space_for_sign || flags->explicite_sign);
 
@@ -48,7 +40,8 @@ void	spec_d(t_ctx *ctx, t_flag *flags)
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size, ctx);
 
-	print_unsigned_int(flags->data.d, size, ctx);
+	ctx->buff_size += size;
+	print_number(flags->data, size, 10, flags->length);
 
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);

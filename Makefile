@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/21 18:55:41 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/23 16:37:29 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -31,6 +31,8 @@ CPPFLAGS	=	-I./includes/
 SRCS		=	ft_printf.c									\
 				interceptor.c								\
 				flags.c										\
+				number_width.c								\
+				print_number.c								\
 				buff_writer.c								\
 				specifiers/spec_c.c							\
 				specifiers/spec_d.c							\

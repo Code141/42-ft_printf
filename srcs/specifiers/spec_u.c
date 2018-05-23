@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 13:07:35 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 15:06:53 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:28:48 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 {
 	int					width;
 	int					size;
-	unsigned int		nb;
 
-	nb = flags->data.u;
-
-	size = 0;
-	while (nb)
-	{
-		nb /= 10;
-		size++;
-	}
+	size = number_width(flags->data, 10, flags->length);
 
 	width = 0;														// Differs
 
@@ -37,7 +29,9 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 		print_in_buffer(' ', width, ctx);
 		width = 0;
 	}
+
 	//Signe absent en unsigned										// Differs
+
 	if (width > 0 && !flags->left_align)
 	{
 		print_in_buffer('0', width, ctx);
@@ -45,7 +39,10 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 	}
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size, ctx);
-	print_unsigned_int(flags->data.u, size, ctx);					// Differs
+
+	ctx->buff_size += size;
+	print_number(flags->data, size, 10, flags->length);			// Differs
+
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);
 }

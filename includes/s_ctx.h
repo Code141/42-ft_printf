@@ -6,13 +6,14 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/19 18:48:09 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 23:22:45 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CTX_H
 # define S_CTX_H
 # include <stdarg.h>
+# include <stdint.h>
 
 typedef struct	s_ctx	t_ctx;
 typedef struct	s_flag	t_flag;
@@ -31,6 +32,14 @@ typedef union	u_va_data
 	char			*s;
 	void			*p;
 	long long		data;
+	int8_t			int8;
+	int16_t			int16;
+	int32_t			int32;
+	int64_t			int64;
+	uint8_t			uint8;
+	uint16_t		uint16;
+	uint32_t		uint32;
+	uint64_t		uint64;
 }				t_va_data;
 
 typedef enum	e_length

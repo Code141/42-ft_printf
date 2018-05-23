@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/21 18:50:21 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/23 23:27:28 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,41 @@
 #include <s_ctx.h>
 #include <flags.h>
 
-//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
-
 #include <unistd.h>
 
 void	error(const char *arg, int pos)
 {
-	/*
-	   write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
-	   , 63);
-	   write (1, arg, pos);
-	   write (1, "\n", 1);
-	   */
+//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
+/*
+	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
+	, 63);
+	write (1, arg, pos);
+	write (1, "\n", 1);
+*/
 }
 
-void	get_arg(t_ctx *ctx, t_flag *flags)
+void	signed_nb(t_flag *flags)
 {
-	flags->data.data = va_arg(ctx->current_args, long long);
+	if (flags->length == 1 && flags->data.int8 < 0)
+	{
+		flags->data.uint8 = -flags->data.int8;
+		flags->neg = 1;
+	}
+	else if (flags->length == 2 && flags->data.int16 < 0)
+	{
+		flags->data.uint16 = -flags->data.int16;
+		flags->neg = 1;
+	}
+	else if (flags->length == 4 && flags->data.int32 < 0)
+	{
+		flags->data.uint32 = -flags->data.int32;
+		flags->neg = 1;
+	}
+	else if (flags->length == 8 && flags->data.int64 < 0)
+	{
+		flags->data.uint64 = -flags->data.int64;
+		flags->neg = 1;
+	}
 }
 
 int		new_arg(char *arg, t_ctx *ctx, int current_arg)
@@ -61,17 +79,19 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	else if (flags->procedure)
 	{
 		pos++;
-		get_arg(ctx, flags);
+		flags->data.data = va_arg(ctx->current_args, long long);
 
-
-		if (flags->specifier == 'd' || flags->specifier == 'i') 
-		{
-			if (flags->data.d < 0)
-			{
-				flags->data.d = - flags->data.d;
-				flags->neg = 1;
-			}
-		}
+		if (!flags->length)
+			flags->length = 4;
+		
+		if (flags->specifier == 'U' || flags->specifier == 'D'
+			|| flags->specifier == 'O')
+			flags->length = 8;
+		if (flags->specifier == 'C')
+			flags->length = 4;
+		if (flags->specifier == 'd' || flags->specifier == 'i'
+			|| flags->specifier == 'D')
+			signed_nb(flags);
 
 		flags->procedure(ctx, flags);
 	}
