@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/23 23:27:28 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 17:38:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 #include <s_ctx.h>
 #include <flags.h>
 
+#include <specifiers.h>
 #include <unistd.h>
 
 void	error(const char *arg, int pos)
 {
-//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
-/*
-	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
-	, 63);
-	write (1, arg, pos);
-	write (1, "\n", 1);
-*/
+	//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
+	/*
+	   write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
+	   , 63);
+	   write (1, arg, pos);
+	   write (1, "\n", 1);
+	 */
 }
 
 void	signed_nb(t_flag *flags)
@@ -60,7 +61,7 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	pos = 0;
 	flags = ctx->flags + current_arg;
 
-	flags->procedure = NULL;
+	flags->procedure = &spec_c;
 	flags->alternate = 0;
 	flags->pad = 0;
 	flags->left_align = 0;
@@ -74,23 +75,26 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 
 	pos += flag(arg + pos, ctx, flags);
 	flags->specifier = *(arg + pos);
-	if (arg[pos] && !specifier(flags->specifier, flags))
-		error(arg, pos + 1);
-	else if (flags->procedure)
+
+	if (arg[pos])
 	{
 		pos++;
-		flags->data.data = va_arg(ctx->current_args, long long);
+
+		if (specifier(flags->specifier, flags))
+			flags->data.data = va_arg(ctx->current_args, long long);
+		else
+			flags->data.c = flags->specifier;
 
 		if (!flags->length)
 			flags->length = 4;
-		
+
 		if (flags->specifier == 'U' || flags->specifier == 'D'
-			|| flags->specifier == 'O')
+				|| flags->specifier == 'O')
 			flags->length = 8;
-		if (flags->specifier == 'C')
+		if (flags->specifier == 'C' || flags->specifier == 'S')
 			flags->length = 4;
 		if (flags->specifier == 'd' || flags->specifier == 'i'
-			|| flags->specifier == 'D')
+				|| flags->specifier == 'D')
 			signed_nb(flags);
 
 		flags->procedure(ctx, flags);

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 17:06:55 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/23 20:33:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:01:05 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	spec_x(t_ctx *ctx, t_flag *flags)
 	style = (flags->specifier == 'x') ? 1 : 2;
 
 
-	width = (flags->alternate && flags->data.x != 0) * 2;			// Differs
+	width = (flags->alternate && flags->data.uint64 != 0) * 2;			// Differs
 
 	width += (flags->precision > size) ? flags->precision : size;
 	width = flags->width - width;

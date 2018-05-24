@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/23 23:23:33 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 17:37:57 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int		specifier(char specifier, t_flag *flags)
 	else if (specifier == 'o' || specifier == 'O')
 		flags->procedure = &spec_o;
 
-	if (flags->procedure)
+	if (flags->procedure != &spec_c)
 	{
 		if (flags->precision != -1)
 			flags->pad = 0;
@@ -147,7 +147,7 @@ int		specifier(char specifier, t_flag *flags)
 
 	if (specifier == 'c' || specifier == 'C')
 		flags->procedure = &spec_c;
-	else if (specifier == 's')
+	else if (specifier == 's' || specifier == 'S')
 		flags->procedure = &spec_s;
 	else if (specifier == '%')
 		flags->procedure = &spec_percent;

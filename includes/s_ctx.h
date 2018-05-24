@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/23 23:22:45 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:51:43 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_flag	t_flag;
 
 typedef union	u_va_data
 {
-	unsigned char	c;
+	char	c;
 	int				d;
 	int				o;
 	unsigned int	u;
