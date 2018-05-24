@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 17:37:57 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 19:23:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,25 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 	i = 0;
 	nb = 0;
-
+	if (str[i] == '.')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
 	if (str[i] == '*')
+	{
 		nb = va_arg(ctx->current_args, int);
-	if (str[-1] == '.')
-		flags->precision = nb;
+		if (nb < 0 && str[0] != '.')
+		{
+			flags->left_align = 1;
+			nb = -nb;
+		}
+		i++;
+	}
+	if (str[0] == '.')
+	{
+		if (nb >= 0)
+			flags->precision = nb;
+	}
 	else if (str[i] == '$' && nb)
 	{
 		va_end(ctx->current_args);
@@ -73,11 +85,10 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 	while (str[i++])
 		if (str[i] == '#')
 			flags->alternate = 1;
-		else if (str[i] == '.')
-			flags->precision = 0;
 		else if (str[i] == '0')
 			flags->pad = 1;
-		else if ((str[i] >= '1' && str[i] <= '9') || str[i] == '*')
+		else if ((str[i] >= '1' && str[i] <= '9') || str[i] == '*'
+			|| str[i] == '.')
 			i += argument_access(str + i, ctx, flags) - 1;
 		else if (str[i] == '-')
 			flags->left_align = 1;

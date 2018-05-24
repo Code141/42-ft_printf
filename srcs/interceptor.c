@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 17:38:53 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:49:03 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	flags = ctx->flags + current_arg;
 
 	flags->procedure = &spec_c;
+	flags->precision = -1;
+
 	flags->alternate = 0;
 	flags->pad = 0;
 	flags->left_align = 0;
 	flags->explicite_sign = 0;
 	flags->space_for_sign = 0;
 	flags->width = 0;
-	flags->precision = -1;
 	flags->length = 0;
 	flags->data.data = 0;
 	flags->neg = 0;

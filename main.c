@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 18:00:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/24 19:19:51 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,23 @@ int	main(void)
 	l = -21474836471224;
 	str = "|Hello world|";
 	str2 = "Salut";
-printf("%S\n", L"Á±≥");
-ft_printf("%S\n", L"Á±≥");
-printf("\n-----------\n");
 
-ft_printf("%*d\n", 101, 10);
 
+printf("%*d\n", -10, 10);
+ft_printf("--%*d\n", -10, 10);
+
+printf("{%.*d}", -5, 42);
+ft_printf("--{%.*d}", -5, 42);
+
+printf("[%.*s]", -5, "42");
+ft_printf("--[%.*s]", -5, "42");
+
+/*WARNING TO THIS*/
+printf("[[%.*d]", -10, 0);
+ft_printf("--[[%.*d]", -10, 0);
+printf("\n---------------------------------------------------\n");
+printf("{TOTO%05.*d}", -15, 42);
+ft_printf("--{TOTO%05.*d}", -15, 42);
 /*	
 	printf("%d", printf("%.5s\n", str));
 

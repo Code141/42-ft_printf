@@ -3,60 +3,220 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/cursus/ft_printf
+cd ~/myConf/.vim
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 Makefile
-badd +38 srcs/ft_printf.c
-badd +13 srcs/eval.c
-badd +1 cheatsheet
-badd +1 ~/myConf/.vim/vimrc
-badd +18 includes/ft_printf.h
-badd +45 includes/u_arg.h
-badd +33 main.c
-badd +15 includes/s_flags.h
-badd +1 srcs/flags.c
-badd +11 includes/flags.h
+badd +1 ~/cursus/ft_printf/Makefile
+badd +38 ~/cursus/ft_printf/srcs/ft_printf.c
+badd +13 ~/cursus/ft_printf/srcs/eval.c
+badd +1 ~/cursus/ft_printf/cheatsheet
+badd +1 vimrc
+badd +18 ~/cursus/ft_printf/includes/ft_printf.h
+badd +45 ~/cursus/ft_printf/includes/u_arg.h
+badd +33 ~/cursus/ft_printf/main.c
+badd +15 ~/cursus/ft_printf/includes/s_flags.h
+badd +1 ~/cursus/ft_printf/srcs/flags.c
+badd +11 ~/cursus/ft_printf/includes/flags.h
 badd +12 src/width.c
-badd +1 srcs/precision>c
-badd +15 srcs/precision.c
-badd +15 includes/precision.h
-badd +17 includes/width.h
-badd +19 srcs/width.c
-badd +12 srcs/length.c
-badd +67 includes/s_printf_flags.h
-badd +53 includes/s_ctx.h
-badd +17 includes/eval.h
-badd +68 srcs/interceptor.c
-badd +1 includes/interceptor.h
-badd +9 srcs/specifiers/spec_s.c
+badd +1 ~/cursus/ft_printf/srcs/precision>c
+badd +15 ~/cursus/ft_printf/srcs/precision.c
+badd +15 ~/cursus/ft_printf/includes/precision.h
+badd +17 ~/cursus/ft_printf/includes/width.h
+badd +19 ~/cursus/ft_printf/srcs/width.c
+badd +12 ~/cursus/ft_printf/srcs/length.c
+badd +67 ~/cursus/ft_printf/includes/s_printf_flags.h
+badd +53 ~/cursus/ft_printf/includes/s_ctx.h
+badd +17 ~/cursus/ft_printf/includes/eval.h
+badd +68 ~/cursus/ft_printf/srcs/interceptor.c
+badd +1 ~/cursus/ft_printf/includes/interceptor.h
+badd +9 ~/cursus/ft_printf/srcs/specifiers/spec_s.c
 badd +16 includes/specifiers/spec_s.h
-badd +26 srcs/va_args.c
-badd +10 includes/va_args.h
-badd +1 srcs/specifiers/spec_d.c
-badd +1 srcs/specifiers/spec_x.c
-badd +30 includes/specifiers.h
-badd +15 srcs/specifiers/spec_u.c
-badd +1 srcs/specifiers/spec_o.c
-badd +1 srcs/buff_writer.c
-badd +13 includes/buff_writer.c
-badd +21 includes/buff_writer.h
-badd +22 srcs/specifiers/spec_c.c
-badd +9 srcs/specifiers/spec_percent.c
-badd +1 e
-badd +1 NetrwTreeListing\ 2
-badd +1 NetrwTreeListing\ 3
-badd +0 srcs/number_width.c
-badd +88 print.c
-badd +0 srcs/print_number.c
-badd +45 srcs/specifiers/spec_p.c
+badd +26 ~/cursus/ft_printf/srcs/va_args.c
+badd +10 ~/cursus/ft_printf/includes/va_args.h
+badd +1 ~/cursus/ft_printf/srcs/specifiers/spec_d.c
+badd +1 ~/cursus/ft_printf/srcs/specifiers/spec_x.c
+badd +30 ~/cursus/ft_printf/includes/specifiers.h
+badd +15 ~/cursus/ft_printf/srcs/specifiers/spec_u.c
+badd +1 ~/cursus/ft_printf/srcs/specifiers/spec_o.c
+badd +1 ~/cursus/ft_printf/srcs/buff_writer.c
+badd +13 ~/cursus/ft_printf/includes/buff_writer.c
+badd +21 ~/cursus/ft_printf/includes/buff_writer.h
+badd +31 ~/cursus/ft_printf/srcs/specifiers/spec_c.c
+badd +9 ~/cursus/ft_printf/srcs/specifiers/spec_percent.c
+badd +1 ~/cursus/ft_printf/e
+badd +1 ~/cursus/ft_printf/NetrwTreeListing\ 2
+badd +1 ~/cursus/ft_printf/NetrwTreeListing\ 3
+badd +1 ~/cursus/ft_printf/srcs/number_width.c
+badd +88 ~/cursus/ft_printf/print.c
+badd +1 ~/cursus/ft_printf/srcs/print_number.c
+badd +39 ~/cursus/ft_printf/srcs/specifiers/spec_p.c
+badd +1 comportement.vim
+badd +1 colors.vim
+badd +1 display.vim
+badd +1 keymap.vim
+badd +1 plugins.vim
 argglobal
 silent! argdel *
-$argadd Makefile
+$argadd vimrc
+$argadd comportement.vim
 set stal=2
-edit cheatsheet
+edit vimrc
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+3wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+exe '1resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
+exe '2resize ' . ((&lines * 48 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
+exe '3resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
+exe '4resize ' . ((&lines * 48 + 42) / 84)
+exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 5resize ' . ((&columns * 85 + 182) / 364)
+exe 'vert 6resize ' . ((&columns * 108 + 182) / 364)
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 13 - ((12 * winheight(0) + 15) / 31)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+13
+normal! 0
+wincmd w
+argglobal
+if bufexists('keymap.vim') | buffer keymap.vim | else | edit keymap.vim | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 20 - ((19 * winheight(0) + 24) / 48)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+20
+normal! 053|
+wincmd w
+argglobal
+2argu
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 8 - ((7 * winheight(0) + 15) / 31)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+8
+normal! 0
+wincmd w
+argglobal
+2argu
+if bufexists('display.vim') | buffer display.vim | else | edit display.vim | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+argglobal
+2argu
+if bufexists('colors.vim') | buffer colors.vim | else | edit colors.vim | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 2 - ((1 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2
+normal! 0
+wincmd w
+argglobal
+2argu
+if bufexists('plugins.vim') | buffer plugins.vim | else | edit plugins.vim | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+exe '1resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
+exe '2resize ' . ((&lines * 48 + 42) / 84)
+exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
+exe '3resize ' . ((&lines * 31 + 42) / 84)
+exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
+exe '4resize ' . ((&lines * 48 + 42) / 84)
+exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 5resize ' . ((&columns * 85 + 182) / 364)
+exe 'vert 6resize ' . ((&columns * 108 + 182) / 364)
+tabedit ~/cursus/ft_printf/cheatsheet
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -91,6 +251,8 @@ exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 6resize ' . ((&columns * 109 + 182) / 364)
 argglobal
+1argu
+if bufexists('~/cursus/ft_printf/cheatsheet') | buffer ~/cursus/ft_printf/cheatsheet | else | edit ~/cursus/ft_printf/cheatsheet | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -100,15 +262,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 9) / 19)
+let s:l = 5 - ((4 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 035|
+5
+normal! 04|
 wincmd w
 argglobal
-if bufexists('Makefile') | buffer Makefile | else | edit Makefile | endif
+1argu
+if bufexists('~/cursus/ft_printf/Makefile') | buffer ~/cursus/ft_printf/Makefile | else | edit ~/cursus/ft_printf/Makefile | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -118,15 +281,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 35 - ((21 * winheight(0) + 30) / 60)
+let s:l = 10 - ((9 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-35
-normal! 022|
+10
+normal! 0
 wincmd w
 argglobal
-if bufexists('includes/ft_printf.h') | buffer includes/ft_printf.h | else | edit includes/ft_printf.h | endif
+1argu
+if bufexists('~/cursus/ft_printf/includes/ft_printf.h') | buffer ~/cursus/ft_printf/includes/ft_printf.h | else | edit ~/cursus/ft_printf/includes/ft_printf.h | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -144,7 +308,8 @@ normal! zt
 normal! 0
 wincmd w
 argglobal
-if bufexists('srcs/ft_printf.c') | buffer srcs/ft_printf.c | else | edit srcs/ft_printf.c | endif
+1argu
+if bufexists('~/cursus/ft_printf/srcs/ft_printf.c') | buffer ~/cursus/ft_printf/srcs/ft_printf.c | else | edit ~/cursus/ft_printf/srcs/ft_printf.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -160,15 +325,16 @@ silent! normal! zE
 normal! zo
 47
 normal! zo
-let s:l = 69 - ((59 * winheight(0) + 36) / 73)
+let s:l = 74 - ((54 * winheight(0) + 36) / 73)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-69
+74
 normal! 0
 wincmd w
 argglobal
-if bufexists('includes/s_ctx.h') | buffer includes/s_ctx.h | else | edit includes/s_ctx.h | endif
+1argu
+if bufexists('~/cursus/ft_printf/includes/s_ctx.h') | buffer ~/cursus/ft_printf/includes/s_ctx.h | else | edit ~/cursus/ft_printf/includes/s_ctx.h | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -178,15 +344,16 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 56 - ((55 * winheight(0) + 40) / 80)
+let s:l = 80 - ((76 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-56
+80
 normal! 0
 wincmd w
 argglobal
-if bufexists('main.c') | buffer main.c | else | edit main.c | endif
+1argu
+if bufexists('~/cursus/ft_printf/main.c') | buffer ~/cursus/ft_printf/main.c | else | edit ~/cursus/ft_printf/main.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -196,11 +363,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 42 - ((35 * winheight(0) + 40) / 80)
+let s:l = 33 - ((32 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-42
+33
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -249,6 +416,7 @@ exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 5resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 6resize ' . ((&columns * 109 + 182) / 364)
 argglobal
+if bufexists('~/cursus/ft_printf/includes/interceptor.h') | buffer ~/cursus/ft_printf/includes/interceptor.h | else | edit ~/cursus/ft_printf/includes/interceptor.h | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -276,11 +444,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 87 - ((57 * winheight(0) + 35) / 71)
+let s:l = 90 - ((42 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-87
+90
 normal! 0
 wincmd w
 argglobal
@@ -312,12 +480,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal nofen
 silent! normal! zE
-let s:l = 116 - ((29 * winheight(0) + 35) / 71)
+let s:l = 34 - ((33 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-116
-normal! 043|
+34
+normal! 0
 wincmd w
 argglobal
 if bufexists('~/cursus/ft_printf/includes/s_ctx.h') | buffer ~/cursus/ft_printf/includes/s_ctx.h | else | edit ~/cursus/ft_printf/includes/s_ctx.h | endif
@@ -330,12 +498,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 42 - ((41 * winheight(0) + 40) / 80)
+let s:l = 25 - ((24 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-42
-normal! 017|
+25
+normal! 05|
 lcd ~/cursus/ft_printf
 wincmd w
 argglobal
@@ -349,15 +517,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 47 - ((46 * winheight(0) + 40) / 80)
+let s:l = 40 - ((26 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
-normal! 019|
+40
+normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
-2wincmd w
 exe '1resize ' . ((&lines * 8 + 42) / 84)
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe '2resize ' . ((&lines * 71 + 42) / 84)
@@ -386,9 +553,10 @@ wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 3resize ' . ((&columns * 107 + 182) / 364)
-exe 'vert 4resize ' . ((&columns * 86 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 4resize ' . ((&columns * 109 + 182) / 364)
 argglobal
+if bufexists('~/cursus/ft_printf/srcs/buff_writer.c') | buffer ~/cursus/ft_printf/srcs/buff_writer.c | else | edit ~/cursus/ft_printf/srcs/buff_writer.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -398,11 +566,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 36 - ((35 * winheight(0) + 40) / 80)
+let s:l = 45 - ((44 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-36
+45
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -436,11 +604,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 68 - ((52 * winheight(0) + 40) / 80)
+let s:l = 69 - ((53 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-68
+69
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -465,8 +633,8 @@ lcd ~/cursus/ft_printf
 wincmd w
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 3resize ' . ((&columns * 107 + 182) / 364)
-exe 'vert 4resize ' . ((&columns * 86 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 4resize ' . ((&columns * 109 + 182) / 364)
 tabedit ~/cursus/ft_printf/srcs/specifiers/spec_d.c
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -478,10 +646,10 @@ vsplit
 3wincmd h
 wincmd w
 wincmd w
+wincmd w
 wincmd _ | wincmd |
 split
 1wincmd k
-wincmd w
 wincmd w
 set nosplitbelow
 set nosplitright
@@ -489,12 +657,13 @@ wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
 exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe '3resize ' . ((&lines * 39 + 42) / 84)
 exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
-exe '4resize ' . ((&lines * 40 + 42) / 84)
-exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
+exe '4resize ' . ((&lines * 39 + 42) / 84)
+exe 'vert 4resize ' . ((&columns * 109 + 182) / 364)
+exe '5resize ' . ((&lines * 40 + 42) / 84)
 exe 'vert 5resize ' . ((&columns * 109 + 182) / 364)
 argglobal
+if bufexists('~/cursus/ft_printf/srcs/specifiers/spec_d.c') | buffer ~/cursus/ft_printf/srcs/specifiers/spec_d.c | else | edit ~/cursus/ft_printf/srcs/specifiers/spec_d.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -504,11 +673,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 40) / 80)
+let s:l = 29 - ((28 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
+29
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -523,11 +692,30 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((22 * winheight(0) + 40) / 80)
+let s:l = 45 - ((44 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
+45
+normal! 0
+lcd ~/cursus/ft_printf
+wincmd w
+argglobal
+if bufexists('~/cursus/ft_printf/srcs/specifiers/spec_o.c') | buffer ~/cursus/ft_printf/srcs/specifiers/spec_o.c | else | edit ~/cursus/ft_printf/srcs/specifiers/spec_o.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 32 - ((31 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+32
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -542,11 +730,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 17 - ((8 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
+1
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
@@ -561,16 +749,35 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 39 - ((25 * winheight(0) + 20) / 40)
+let s:l = 1 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-39
-normal! 041|
+1
+normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
+exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
+exe '4resize ' . ((&lines * 39 + 42) / 84)
+exe 'vert 4resize ' . ((&columns * 109 + 182) / 364)
+exe '5resize ' . ((&lines * 40 + 42) / 84)
+exe 'vert 5resize ' . ((&columns * 109 + 182) / 364)
+tabedit ~/cursus/ft_printf/srcs/specifiers/spec_s.c
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
+exe 'vert 2resize ' . ((&columns * 279 + 182) / 364)
 argglobal
-if bufexists('~/cursus/ft_printf/srcs/specifiers/spec_o.c') | buffer ~/cursus/ft_printf/srcs/specifiers/spec_o.c | else | edit ~/cursus/ft_printf/srcs/specifiers/spec_o.c | endif
+if bufexists('~/cursus/ft_printf/srcs/specifiers/spec_s.c') | buffer ~/cursus/ft_printf/srcs/specifiers/spec_s.c | else | edit ~/cursus/ft_printf/srcs/specifiers/spec_s.c | endif
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -580,22 +787,36 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 43 - ((42 * winheight(0) + 40) / 80)
+let s:l = 38 - ((37 * winheight(0) + 40) / 80)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-43
+38
+normal! 0
+lcd ~/cursus/ft_printf
+wincmd w
+argglobal
+if bufexists('~/cursus/ft_printf/srcs/specifiers/spec_c.c') | buffer ~/cursus/ft_printf/srcs/specifiers/spec_c.c | else | edit ~/cursus/ft_printf/srcs/specifiers/spec_c.c | endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 31 - ((30 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+31
 normal! 0
 lcd ~/cursus/ft_printf
 wincmd w
 exe 'vert 1resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 2resize ' . ((&columns * 84 + 182) / 364)
-exe '3resize ' . ((&lines * 39 + 42) / 84)
-exe 'vert 3resize ' . ((&columns * 84 + 182) / 364)
-exe '4resize ' . ((&lines * 40 + 42) / 84)
-exe 'vert 4resize ' . ((&columns * 84 + 182) / 364)
-exe 'vert 5resize ' . ((&columns * 109 + 182) / 364)
-tabnext 2
+exe 'vert 2resize ' . ((&columns * 279 + 182) / 364)
+tabnext 6
 set stal=1
 if exists('s:wipebuf') && s:wipebuf != bufnr('%')
   silent exe 'bwipe ' . s:wipebuf
