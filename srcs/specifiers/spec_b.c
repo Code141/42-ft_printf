@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spec_u.c                                           :+:      :+:    :+:   */
+/*   spec_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/13 13:07:35 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/25 18:01:33 by gelambin         ###   ########.fr       */
+/*   Created: 2018/05/25 18:18:23 by gelambin          #+#    #+#             */
+/*   Updated: 2018/05/25 18:19:22 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <buff_writer.h>
 
-void	spec_u(t_ctx *ctx, t_flag *flags)
+void	spec_b(t_ctx *ctx, t_flag *flags)
 {
-	int					width;
-	int					size;
+	int	width;
+	int	size;
 
-	size = number_width(flags->data, 10, flags->length);
+	size = number_width(flags->data, 2, flags->length);
 
-	width = 0;														// Differs
+	width = (flags->alternate && flags->precision <= size);			// differs
 
 	width += (flags->precision > size) ? flags->precision : size;
+
 	width = flags->width - width;
 	if (width > 0 && !flags->left_align && !flags->pad)
 	{
@@ -30,7 +31,8 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 		width = 0;
 	}
 
-	//Signe absent en unsigned										// Differs
+	if (flags->alternate  && flags->precision <= size)					// differs
+		alternate(0, ctx);											// differs
 
 	if (width > 0 && !flags->left_align)
 	{
@@ -40,8 +42,8 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size, ctx);
 
-	ctx->buff_size += size;
-	print_number(flags->data, size, 10, flags->length);			// Differs
+		ctx->buff_size += size;
+		print_number(flags->data, size, 2, flags->length);			// differs
 
 	if (width > 0)
 		print_in_buffer(' ', width, ctx);

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 14:51:43 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:09:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 # define S_CTX_H
 # include <stdarg.h>
 # include <stdint.h>
+# include <wchar.h>
 
 typedef struct	s_ctx	t_ctx;
 typedef struct	s_flag	t_flag;
 
 typedef union	u_va_data
 {
-	char	c;
+	char			c;
+	wchar_t			wc;
+	char			wcc[4];
 	int				d;
 	int				o;
 	unsigned int	u;

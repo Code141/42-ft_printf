@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 13:11:40 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:14:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,33 +73,3 @@ int	ft_printf(const char *format, ...)
 //	free(ctx);
 	return (ret);
 }
-
-/*
-void foo(char *fmt, ...)
-{
-zva_list ap;
-	int		d;
-	char	c;
-	char	*s;
-
-	aa_start(ap, fmt);
-
-	while (*fmt)
-		switch(*fmt++) {
-			case 's':                       // string
-				s = va_args(ap, char *);
-				printf("string %s\n", s);
-				break;
-			case 'd':                       // int
-				d = va_args(ap, int);
-				printf("int %d\n", d);
-				break;
-			case 'c':                       // char
-				// Note: char is promoted to int.
-				c = va_args(ap, int);
-				printf("char %c\n", c);
-				break;
-		}
-	va_end(ap);
-}
-*/

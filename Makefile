@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/05/24 17:41:20 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/05/25 18:20:43 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -38,6 +38,7 @@ SRCS		=	ft_printf.c									\
 				specifiers/spec_d.c							\
 				specifiers/spec_u.c							\
 				specifiers/spec_o.c							\
+				specifiers/spec_b.c							\
 				specifiers/spec_s.c							\
 				specifiers/spec_p.c							\
 				specifiers/spec_x.c							\

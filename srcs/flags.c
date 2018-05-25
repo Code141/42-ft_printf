@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 19:23:36 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:21:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ int		specifier(char specifier, t_flag *flags)
 		flags->procedure = &spec_p;
 	else if (specifier == 'o' || specifier == 'O')
 		flags->procedure = &spec_o;
+	else if (specifier == 'b')
+		flags->procedure = &spec_b;
 
 	if (flags->procedure != &spec_c)
 	{
