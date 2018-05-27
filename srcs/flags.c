@@ -6,12 +6,32 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/25 18:21:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/26 21:33:50 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <specifiers.h>
+
+int		precision(char *str, t_ctx *ctx, t_flag *flags)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = 0;
+	if (*str == '*')
+	{
+		nb = va_arg(ctx->current_args, int);
+		if (nb >= 0)
+			flags->precision = nb;
+		return (1);
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+		nb = (nb * 10) + str[i++] - '0';
+	flags->precision = nb;
+	return (i);
+}
 
 int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 {
@@ -20,36 +40,33 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 	i = 0;
 	nb = 0;
-	if (str[i] == '.')
-		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
+
 	if (str[i] == '*')
 	{
 		nb = va_arg(ctx->current_args, int);
-		if (nb < 0 && str[0] != '.')
+		if (nb < 0)
 		{
 			flags->left_align = 1;
 			nb = -nb;
 		}
 		i++;
+		flags->width = nb;
+		return (i - 1);
 	}
-	if (str[0] == '.')
-	{
-		if (nb >= 0)
-			flags->precision = nb;
-	}
-	else if (str[i] == '$' && nb)
+	flags->width = nb;
+
+	if (str[i] == '$' && nb > 0)
 	{
 		va_end(ctx->current_args);
 		va_copy(ctx->current_args, ctx->args);
 		while (nb-- > 1)
 			va_arg(ctx->current_args, void*);
-		i++;
+		return (i - 1);
 	}
-	else
-		flags->width = nb;
-	return (i);
+
+	return (i -1);
 }
 
 int		length(char *str, t_flag *flags)
@@ -64,7 +81,6 @@ int		length(char *str, t_flag *flags)
 		flags->length = e_length_ll;
 		return (1);
 	}
-
 
 	if (str[0] == 'h' && flags->length < 2)
 		flags->length = e_length_h;
@@ -87,9 +103,10 @@ int		flag(char *str, t_ctx *ctx, t_flag *flags)
 			flags->alternate = 1;
 		else if (str[i] == '0')
 			flags->pad = 1;
-		else if ((str[i] >= '1' && str[i] <= '9') || str[i] == '*'
-			|| str[i] == '.')
-			i += argument_access(str + i, ctx, flags) - 1;
+		else if (str[i] == '.')
+			i += precision(str + i + 1, ctx, flags);
+		else if ((str[i] >= '1' && str[i] <= '9')  || str[i] == '$'|| str[i] == '*')
+			i += argument_access(str + i, ctx, flags);
 		else if (str[i] == '-')
 			flags->left_align = 1;
 		else if (str[i] == '+')

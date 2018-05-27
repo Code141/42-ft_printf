@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/25 18:21:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/26 21:32:43 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -42,24 +42,54 @@ int	main(void)
 	wchar_t myChar2 = 0x2126;  // hexadecimal encoding of char Ω using UTF-16
 
 
-ft_printf("%b", myChar1);
 
-	/*
-	   printf("%*d\n", -10, 10);
-	   ft_printf("--%*d\n", -10, 10);
+	ft_printf("{%b}\n", myChar1);
 
-	   printf("{%.*d}", -5, 42);
-	   ft_printf("--{%.*d}", -5, 42);
+	   printf("[%d]}\n", printf("{%C", myChar1));
+	ft_printf("[%d]\n", ft_printf("%C", myChar1));
 
-	   printf("[%.*s]", -5, "42");
-	   ft_printf("--[%.*s]", -5, "42");
 
-	   printf("[[%.*d]", -10, 0);
-	   ft_printf("--[[%.*d]", -10, 0);
+/*
+
+	//	WEIRD TEST
+	   printf(" {%d-%*3$d--%d\n", 40, 10, 5, 100);
+	ft_printf("-{%d-%*3$d--%d\n", 40, 10, 5, 100);
+
+	   printf("|%#2$d\n", 3, 10, 2, 4);
+	   ft_printf("-|%#2$d\n", 3, 10, 2, 4);
+
+	   printf("%-*$20#mm\n", 3, 10, 2, 4);
+	   ft_printf("-%-*$20#mm\n", 3, 10, 2, 4);
+*/
+
+/*
+	   printf("%.*5d\n", 20, 10);
+	   ft_printf("%.*5d\n", 20, 10);
+
+
+	   printf("%*.*d\n", 20, 10, 3);
+	   ft_printf("%*.*d\n", 20, 10, 3);
+
+	   printf("%.5*d\n", 20, 10);
+	   ft_printf("%.5*d\n", 20, 10);
+
+	   printf("~%*d\n", -10, 10);
+	   ft_printf("~--%*d\n", -10, 10);
+
+	   printf("{%.*d}\n", -5, 42);
+	   ft_printf("--{%.*d}\n", -5, 42);
+
+	   printf("[%.*s]\n", -5, "42");
+	   ft_printf("--[%.*s]\n", -5, "42");
+
+	   printf("[[%.*d]\n", -10, 0);
+	   ft_printf("--[[%.*d]\n", -10, 0);
 	   printf("\n---------------------------------------------------\n");
-	   printf("{TOTO%05.*d}", -15, 42);
-	   ft_printf("--{TOTO%05.*d}", -15, 42);
-	   */
+	   printf("{TOTO%05.*d}\n", -15, 42);
+	   ft_printf("--{TOTO%05.*d}\n", -15, 42);
+
+*/
+
 	/*	
 		printf("%d", printf("%.5s\n", str));
 

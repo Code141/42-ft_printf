@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/24 18:49:03 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/05/27 20:21:46 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 		else
 			flags->data.c = flags->specifier;
 
+
+/*----------------------------------------------------------------------------*/
+
 		if (!flags->length)
 			flags->length = 4;
 
@@ -94,10 +97,11 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 			flags->length = 8;
 		if (flags->specifier == 'C' || flags->specifier == 'S')
 			flags->length = 4;
-		if (flags->specifier == 'd' || flags->specifier == 'i'
-				|| flags->specifier == 'D')
+		if (flags->specifier == 'd' || flags->specifier == 'D'
+				|| flags->specifier == 'i')
 			signed_nb(flags);
 
+/*----------------------------------------------------------------------------*/
 		flags->procedure(ctx, flags);
 	}
 	flags->jump = pos;
