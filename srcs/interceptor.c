@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/27 20:21:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/13 13:35:26 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 			flags->data.data = va_arg(ctx->current_args, long long);
 		else
 			flags->data.c = flags->specifier;
-
 
 /*----------------------------------------------------------------------------*/
 

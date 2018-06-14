@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/27 20:23:55 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/13 13:36:50 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	spec_o(t_ctx *ctx, t_flag *flags)
 		width = 0;
 	}
 
-	if (flags->alternate  && flags->precision <= size)					// Differs
+	if (flags->alternate  && flags->precision <= size)				// Differs
 		alternate(0, ctx);											// Differs
 
 	if (width > 0 && !flags->left_align)

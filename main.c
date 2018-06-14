@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/26 21:32:43 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/13 23:37:48 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -38,15 +38,22 @@ int	main(void)
 
 
 	setlocale(LC_ALL,"");
+
 	wchar_t myChar1 = L'\x2126';
 	wchar_t myChar2 = 0x2126;  // hexadecimal encoding of char Ω using UTF-16
+	wchar_t myChar3 = 0xC3B6;  // hexadecimal encoding of char Ω using UTF-16
+	//	01000110 11000011 10111000 11000011 10110110
 
 
 
-	ft_printf("{%b}\n", myChar1);
 
-	   printf("[%d]}\n", printf("{%C", myChar1));
-	ft_printf("[%d]\n", ft_printf("%C", myChar1));
+	   printf("[%d]\n", ft_printf("%.32b", myChar3));
+	   printf("[%d]\n", printf("%C", myChar3));
+	ft_printf("[%d]\n", ft_printf("%C", myChar3));
+
+	   printf("[%d]\n", ft_printf("%.32b", myChar2));
+	   printf("[%d]\n", printf("%C", myChar2));
+	ft_printf("[%d]\n", ft_printf("%C", myChar2));
 
 
 /*
