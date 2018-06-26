@@ -6,9 +6,11 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/13 23:37:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/25 17:30:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 #include <stdio.h>
 #include <wchar.h>
 #include <stdlib.h>
@@ -24,7 +26,7 @@ int	main(void)
 {
 	char	*str;
 	char	*str2;
-	int		i;
+	long int		i;
 	int		j;
 	int		k;
 	unsigned long long	l;
@@ -36,24 +38,59 @@ int	main(void)
 	str2 = "Salut";
 
 
-
 	setlocale(LC_ALL,"");
+/*
+ft_printf("[%d]\n", ft_printf("%S", L"Á"));
+ft_printf("[%d]\n", printf("%S", L"Á"));
+*/
+printf("%lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
+ft_printf("%lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
+/*
+ft_printf("[%d]\n", ft_printf("%S", L'𫝆'));
+ft_printf("[%d]\n", printf("%S", L'𫝆'));
+*/
+/*
+	wchar_t myChar2 = 0x03a9;
 
-	wchar_t myChar1 = L'\x2126';
-	wchar_t myChar2 = 0x2126;  // hexadecimal encoding of char Ω using UTF-16
-	wchar_t myChar3 = 0xC3B6;  // hexadecimal encoding of char Ω using UTF-16
-	//	01000110 11000011 10111000 11000011 10110110
+//	wchar_t myChar2 = 0xe188b4;
+//	wchar_t myChar2 = 0xEFA3BF;
+//	wchar_t myChar2 = 0xF0908D88;
+//	wchar_t myChar3 = 0xC3B6;
 
+	printf("%lc\n", (wint_t)536);
+	ft_printf("{%C}\n", (wint_t)536);
 
-
-
-	   printf("[%d]\n", ft_printf("%.32b", myChar3));
-	   printf("[%d]\n", printf("%C", myChar3));
-	ft_printf("[%d]\n", ft_printf("%C", myChar3));
-
-	   printf("[%d]\n", ft_printf("%.32b", myChar2));
-	   printf("[%d]\n", printf("%C", myChar2));
+	printf("[%d]\n", printf("-%C", myChar2));
 	ft_printf("[%d]\n", ft_printf("%C", myChar2));
+
+ft_printf("11110000\n10101011\n10011101\n10000110\n--------\n");
+ft_printf("[%d]\n", ft_printf("%C", L'𫝆'));
+ft_printf("[%d]\n", printf("%C", 'c'));
+ft_printf("[%d]\n", ft_printf("%C", 'c'));
+
+
+ft_printf("[%d]\n", printf("%C", L'ÁM-^L´'));
+ft_printf("[%d]\n", ft_printf("%C", L'ÁM-^L´'));
+
+ft_printf("\n----------------------------------\n", 'X');
+
+
+
+ft_printf("11100000\n10101111\n10110011\n-----------------\n");
+
+ft_printf("%C", L'௳');
+
+
+ft_printf("\n----------------------------------\n", 'X');
+ft_printf("%C", 'X');
+
+ft_printf("\n----------------------------------\n", 'X');
+printf("%c", 200);
+ft_printf("%c", 200);
+*/
+
+
+
 
 
 /*
@@ -162,9 +199,6 @@ int	main(void)
 	   printf("-|%.11d-%d-%d|\n", i, j, k, str);
 	   printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
 	   */
-	char c;
-	c = 'x';
-	//	foo("c", c);
 	//	while (1);
 	return (0);
 }

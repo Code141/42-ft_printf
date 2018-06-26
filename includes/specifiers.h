@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:11:07 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/25 18:20:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/25 15:58:21 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	spec_E(t_ctx *ctx, t_flag *flags);
 void	spec_f(t_ctx *ctx, t_flag *flags);
 void	spec_g(t_ctx *ctx, t_flag *flags);
 void	spec_s(t_ctx *ctx, t_flag *flags);
+void	spec_S(t_ctx *ctx, t_flag *flags);
 void	spec_p(t_ctx *ctx, t_flag *flags);
 void	spec_percent(t_ctx *ctx, t_flag *flags);
 

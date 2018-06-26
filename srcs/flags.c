@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/26 21:33:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/25 15:57:56 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		argument_access(char *str, t_ctx *ctx, t_flag *flags)
 
 	if (str[i] == '$' && nb > 0)
 	{
-		va_end(ctx->current_args);
+//		va_end(ctx->current_args);
 		va_copy(ctx->current_args, ctx->args);
 		while (nb-- > 1)
 			va_arg(ctx->current_args, void*);
@@ -177,8 +177,10 @@ int		specifier(char specifier, t_flag *flags)
 
 	if (specifier == 'c' || specifier == 'C')
 		flags->procedure = &spec_c;
-	else if (specifier == 's' || specifier == 'S')
+	else if (specifier == 's')
 		flags->procedure = &spec_s;
+	else if (specifier == 'S')
+		flags->procedure = &spec_S;
 	else if (specifier == '%')
 		flags->procedure = &spec_percent;
 	else

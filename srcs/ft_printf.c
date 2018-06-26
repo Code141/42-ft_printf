@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/13 13:48:30 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/25 16:50:06 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ static t_ctx	*init(const char *format)
 		if (format[i] == '%')
 			i++;
 	}
-	ctx = (t_ctx*)malloc(sizeof(t_ctx) + sizeof(t_flag) * nb_arg);
+	ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
 	if (!ctx)
 		exit (0);
 	ctx->format = (char*)format;
 	return (ctx);
 }
-
+// CHECK STATICS FUNCTIONS
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	t_ctx	*ctx;
+	t_ctx	*ctx;		// GLOBALIZE IT
 	int		ret;
 
 	if (format == NULL)
