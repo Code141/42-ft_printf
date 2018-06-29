@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/25 17:30:38 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/29 22:44:15 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 int	main(void)
 {
+	setlocale(LC_ALL,"");
 	char	*str;
 	char	*str2;
 	long int		i;
@@ -38,17 +39,44 @@ int	main(void)
 	str2 = "Salut";
 
 
-	setlocale(LC_ALL,"");
+
 /*
 ft_printf("[%d]\n", ft_printf("%S", L"Á"));
 ft_printf("[%d]\n", printf("%S", L"Á"));
 */
+/*
 printf("%lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
 ft_printf("%lc, %lc", L'ÊM-^ZM-^V', L'ÿ≠');
-/*
-ft_printf("[%d]\n", ft_printf("%S", L'𫝆'));
-ft_printf("[%d]\n", printf("%S", L'𫝆'));
 */
+
+/*
+ft_printf("[%d]\n", printf("%S", L"Á±≥"));
+ft_printf("[%d]\n", ft_printf("%S", L"Á±≥"));
+*/
+/*
+ft_printf("[%d]\n", printf("\n%.1S\n", L"ÊÊuM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.2S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.3S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.4S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.5S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.6S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.7S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.8S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.9S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.10S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.11S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.12S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printf("[%d]\n", printf("\n%.13S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+//ft_printf("[%d]\n", ft_printf("\n[%.4S]\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B"));
+printf("---------------------------\n");
+ft_printf("[%d]\n", printf("%c", 200));
+ft_printf("[%d]\n", ft_printf("%c", 200));
+printf("---------------------------\n");
+*/
+
+printf("[%d])\n", printf("({%60S}\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B"));
+printf("[%d]", ft_printf("{%60S}\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B"));
+
 /*
 	wchar_t myChar2 = 0x03a9;
 
@@ -88,7 +116,6 @@ ft_printf("\n----------------------------------\n", 'X');
 printf("%c", 200);
 ft_printf("%c", 200);
 */
-
 
 
 

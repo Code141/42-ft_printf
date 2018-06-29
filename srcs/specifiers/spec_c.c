@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:18:36 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/25 17:32:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/06/29 20:11:31 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 
 //WARNING    MB_CUR_MAX (jamais afficher plus que MBCURMAX, setlocal ou pas)
 
+
+int	unicode_size(uint32_t ca)
+{
+	if (ca < 0x80)
+		return (1);
+	else if (ca < 0x800)
+		return (2);
+	else if (ca < 0x10000)
+		return (3);
+	else if (ca < 0x200000)
+		return (4);
+	return (0);
+}
+
 int	spec_c_unicode(uint32_t ca,  t_ctx *ctx)
 {
 	char str[4];
 	int nb_octets;
-
-	nb_octets = 1;
 
 	if (ca < 0x80)
 	{
@@ -48,11 +60,10 @@ int	spec_c_unicode(uint32_t ca,  t_ctx *ctx)
 		nb_octets = 4;
 	}
 
-
-		write(1, str, nb_octets);
-		ctx->buff_size += nb_octets;
-
+	write(1, str, nb_octets);
+	ctx->buff_size += nb_octets;
 	return (nb_octets);
+
 	/*----------------------------------------------------------------------*/
 /*
 	str[0] = 0;
@@ -69,7 +80,7 @@ char mask;
 	{
 		write (1, &ca, 1);
 		ctx->buff_size++;
-		return;
+		return (1);
 	}
 
 	i = 0;
@@ -98,8 +109,9 @@ char mask;
 
 void	spec_c(t_ctx *ctx, t_flag *flags)
 {
-	char *c;
-	c = flags->data.wcc;
+	char c;
+
+	c = flags->data.c;
 
 	if (flags->width)
 		ctx->buff_size += flags->width - 1;
@@ -113,7 +125,14 @@ void	spec_c(t_ctx *ctx, t_flag *flags)
 				write(1, "0", 1);
 	}
 
-		spec_c_unicode(flags->data.uint32,ctx);
+	if (flags->specifier == 'C')
+		spec_c_unicode(flags->data.uint32, ctx);
+	else
+	{
+		write(1, &c, 1);
+		ctx->buff_size++;
+	}
+
 
 	while (flags->width-- > 1)
 		write(1, " ", 1);
