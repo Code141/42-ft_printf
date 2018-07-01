@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/25 16:46:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:32:21 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include <specifiers.h>
 #include <unistd.h>
+
+extern t_ctx *g_ctx;
 
 void	error(const char *arg, int pos)
 {
@@ -53,13 +55,13 @@ void	signed_nb(t_flag *flags)
 	}
 }
 
-int		new_arg(char *arg, t_ctx *ctx, int current_arg)
+int		new_arg(const char *arg, int current_arg)
 {
 	int		pos;
 	t_flag	*flags;
 
 	pos = 0;
-	flags = ctx->flags + current_arg;
+	flags = g_ctx->flags + current_arg;
 	
 	flags->procedure = &spec_c;
 	flags->precision = -1;
@@ -74,15 +76,15 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 	flags->data.data = 0;
 	flags->neg = 0;
 
-	pos += flag(arg + pos, ctx, flags);
+	pos += flag(arg + pos, flags);
 	flags->specifier = *(arg + pos);
 
 	if (arg[pos])
 	{
 		pos++;
 
-		if (specifier(flags->specifier, flags))
-			flags->data.data = va_arg(ctx->current_args, long long);
+		if (specifier(flags->specifier, flags) && flags->specifier != '%')
+			flags->data.data = va_arg(g_ctx->current_args, long long);
 		else
 			flags->data.c = flags->specifier;
 
@@ -99,31 +101,30 @@ int		new_arg(char *arg, t_ctx *ctx, int current_arg)
 		if (flags->specifier == 'd' || flags->specifier == 'D'
 				|| flags->specifier == 'i')
 			signed_nb(flags);
-
+		if (flags->specifier == 's' && flags->length == 8)
+			flags->procedure = &spec_S;
 /*----------------------------------------------------------------------------*/
-		flags->procedure(ctx, flags);
+		flags->procedure(flags);
 	}
 	flags->jump = pos;
 	return (pos);
 }
 
 
-void		interceptor(t_ctx *ctx)
+void		interceptor(const char *format)
 {
 	int		i;
 	int		j;
 	int		current_arg;
-	char	*format;
 
 	i = 0;
 	j = 0;
 	current_arg = 0;
-	ctx->buff_size = 0;
-	format = ctx->format;
+	g_ctx->buff_size = 0;
 	while (format[i + j])
 		if (format[i + j] == '%')
-			i += new_arg(format + i + j, ctx, current_arg++);
+			i += new_arg(format + i + j, current_arg++);
 		else
 			write(1, format + i + j++, 1);
-	ctx->buff_size += j;
+	g_ctx->buff_size += j;
 }

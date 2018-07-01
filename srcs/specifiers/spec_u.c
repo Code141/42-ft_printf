@@ -6,14 +6,16 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 13:07:35 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/13 15:34:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:36:21 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <buff_writer.h>
 
-void	spec_u(t_ctx *ctx, t_flag *flags)
+extern t_ctx *g_ctx;
+
+void	spec_u(t_flag *flags)
 {
 	int					width;
 	int					size;
@@ -26,7 +28,7 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 	width = flags->width - width;
 	if (width > 0 && !flags->left_align && !flags->pad)
 	{
-		print_in_buffer(' ', width, ctx);
+		print_in_buffer(' ', width);
 		width = 0;
 	}
 
@@ -34,15 +36,15 @@ void	spec_u(t_ctx *ctx, t_flag *flags)
 
 	if (width > 0 && !flags->left_align)
 	{
-		print_in_buffer('0', width, ctx);
+		print_in_buffer('0', width);
 		width = 0;
 	}
 	if (flags->precision > size)
-		print_in_buffer('0', flags->precision - size, ctx);
+		print_in_buffer('0', flags->precision - size);
 
-	ctx->buff_size += size;
+	g_ctx->buff_size += size;
 	print_number(flags->data, size, 10, flags->length);				// Differs
 
 	if (width > 0)
-		print_in_buffer(' ', width, ctx);
+		print_in_buffer(' ', width);
 }

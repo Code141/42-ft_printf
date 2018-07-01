@@ -6,14 +6,37 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:18:36 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/29 20:11:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:38:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
+extern t_ctx *g_ctx;
+
 //WARNING    MB_CUR_MAX (jamais afficher plus que MBCURMAX, setlocal ou pas)
 
+int	strlen_unicode(int *str, unsigned int limit) // !! CAST -1 devient max int
+{
+	int i;
+
+	i = 0;
+	while (*str)
+	{
+		if (*str < 0x80 && i + 1 <= limit)
+			i += 1;
+		else if (*str < 0x800 && i + 2 <= limit)
+			i += 2;
+		else if (*str < 0x10000 && i + 3 <= limit)
+			i += 3;
+		else if (*str < 0x200000 && i + 4 <= limit)
+			i += 4;
+		else
+			return (i);
+		str++;
+	}
+	return (i);
+}
 
 int	unicode_size(uint32_t ca)
 {
@@ -28,7 +51,7 @@ int	unicode_size(uint32_t ca)
 	return (0);
 }
 
-int	spec_c_unicode(uint32_t ca,  t_ctx *ctx)
+int	spec_c_unicode(uint32_t ca)
 {
 	char str[4];
 	int nb_octets;
@@ -61,60 +84,60 @@ int	spec_c_unicode(uint32_t ca,  t_ctx *ctx)
 	}
 
 	write(1, str, nb_octets);
-	ctx->buff_size += nb_octets;
+	g_ctx->buff_size += nb_octets;
 	return (nb_octets);
 
 	/*----------------------------------------------------------------------*/
-/*
+	/*
 	str[0] = 0;
 	str[1] = 0;
 	str[2] = 0;
 	str[3] = 0;
 
 
-int i;
-char mask;
+	int i;
+	char mask;
 
 
 	if (ca < 0x80)
 	{
-		write (1, &ca, 1);
-		ctx->buff_size++;
-		return (1);
+	write (1, &ca, 1);
+	g_ctx->buff_size++;
+	return (1);
 	}
 
 	i = 0;
 	mask = 0x80;
 	while (ca)
 	{
-		str[i] = ca & 0x3f;
-		ca = ca >> 6;
-		if (ca)
-			str[i] += 0x80;
-		else if (str[i] & ((mask >> 1) + 0x80))
-		{
-				str[i++] += 0x80;
-				str[i--] = mask >> 1 + 0x80;
-		}
-		else
-			str[i--] += mask;
-		mask = mask >> 1 + 0x80;
-		i++;
+	str[i] = ca & 0x3f;
+	ca = ca >> 6;
+	if (ca)
+	str[i] += 0x80;
+	else if (str[i] & ((mask >> 1) + 0x80))
+	{
+	str[i++] += 0x80;
+	str[i--] = mask >> 1 + 0x80;
 	}
-	ctx->buff_size += i + 1;
+	else
+	str[i--] += mask;
+	mask = mask >> 1 + 0x80;
+	i++;
+	}
+	g_ctx->buff_size += i + 1;
 	while (i >= 0)
-		write(1, str + i--, 1);
-*/
+	write(1, str + i--, 1);
+	*/
 }
 
-void	spec_c(t_ctx *ctx, t_flag *flags)
+void	spec_c(t_flag *flags)
 {
 	char c;
 
 	c = flags->data.c;
 
 	if (flags->width)
-		ctx->buff_size += flags->width - 1;
+		g_ctx->buff_size += flags->width - 1;
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
@@ -125,12 +148,12 @@ void	spec_c(t_ctx *ctx, t_flag *flags)
 				write(1, "0", 1);
 	}
 
-	if (flags->specifier == 'C')
-		spec_c_unicode(flags->data.uint32, ctx);
+	if (flags->specifier == 'C' || flags->length == 8)
+		spec_c_unicode(flags->data.uint32);
 	else
 	{
 		write(1, &c, 1);
-		ctx->buff_size++;
+		g_ctx->buff_size++;
 	}
 
 

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/25 16:50:06 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:27:24 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <s_ctx.h>
 #include <ft_printf.h>
 
+t_ctx			*g_ctx;
+
 static t_ctx	*init(const char *format)
 {
 	t_ctx	*ctx;
@@ -29,47 +31,38 @@ static t_ctx	*init(const char *format)
 	i = 0;
 	nb_arg = 0;
 	while (format[i])
-	{
-		if (format[i] == '%')
+		if (format[i++] == '%')
 			nb_arg++;
-		i++;
-		if (format[i] == '%')
-			i++;
-	}
-	ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
-	if (!ctx)
+	g_ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
+	if (!g_ctx)
 		exit (0);
-	ctx->format = (char*)format;
 	return (ctx);
 }
+
 // CHECK STATICS FUNCTIONS
+
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	t_ctx	*ctx;		// GLOBALIZE IT
 	int		ret;
+
 
 	if (format == NULL)
 		return (0);
+	init(format);
 
-	ctx = init(format);
-	va_start(ctx->args, format);
-	va_copy(ctx->current_args, ctx->args);
+	va_start(g_ctx->args, format);
+	va_copy(g_ctx->current_args, g_ctx->args);
 
-	interceptor(ctx);
+	interceptor(format);
 
 //	calculator(ctx);
 		// mallocator
 //	rewritor(ctx);
 
-	va_end(args);
+	va_end(g_ctx->current_args);
+	va_end(g_ctx->args);
 
-/*
-	write(1, buff, size);
-*/
-	va_end(ctx->current_args);
-	va_end(ctx->args);
-	ret = ctx->buff_size;
-//	free(ctx);
+	ret = g_ctx->buff_size;
+	free(g_ctx);
 	return (ret);
 }

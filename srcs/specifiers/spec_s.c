@@ -6,13 +6,15 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/29 23:01:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:42:32 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
-void	spec_s(t_ctx *ctx, t_flag *flags)
+extern t_ctx *g_ctx;
+
+void	spec_s(t_flag *flags)
 {
 	int		i;
 	int		size;
@@ -31,7 +33,7 @@ void	spec_s(t_ctx *ctx, t_flag *flags)
 		i = (flags->precision != -1) ? flags->precision : i;
 	size = (flags->width > i) ? flags->width - i : 0;
 	if (size)
-		ctx->buff_size += size;
+		g_ctx->buff_size += size;
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
@@ -42,7 +44,7 @@ void	spec_s(t_ctx *ctx, t_flag *flags)
 				write(1, "0", 1);
 	}
 
-	ctx->buff_size += i;
+	g_ctx->buff_size += i;
 
 	write(1, str, i);
 
@@ -50,32 +52,33 @@ void	spec_s(t_ctx *ctx, t_flag *flags)
 		write(1, " ", 1);
 }
 
-void	spec_S(t_ctx *ctx, t_flag *flags)
+void	spec_S(t_flag *flags)
 {
-	int		i;
+	int		octal_size;
 	int		size;
-	int	*str;
+	int		*str;
+
+	int		j;
+	int		k;
 
 	if (!flags->data.s)
 	{
 		write (1, "(null)", 6);
-		ctx->buff_size += 6;
+		g_ctx->buff_size += 6;
 		return ;
 	}
 
 	str = flags->data.s;
-	i = 0;
-	while (str[i])
-		i++;
+	octal_size = strlen_unicode(str, flags->precision);
 
-	if (i > flags->precision)
-		i = (flags->precision != -1) ? flags->precision : i;
+	if (octal_size > flags->precision)
+		octal_size = (flags->precision != -1) ? flags->precision : octal_size;
 
-	size = (flags->width > i) ? flags->width - i : 0;
-
+	size = (flags->width > octal_size) ? flags->width - octal_size : 0;
 
 	if (size)
-		ctx->buff_size += size;
+		g_ctx->buff_size += size;
+
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
@@ -86,17 +89,15 @@ void	spec_S(t_ctx *ctx, t_flag *flags)
 				write(1, "0", 1);
 	}
 
-	int	j;
 	j = 0;
-
-	int k;
 	k = 0;
 
-	while (j < i)
-	{
-		spec_c_unicode(str[j++], ctx);
-	}
-
+	if (flags->precision != -1)
+		while (str[j] && k + unicode_size(*str) <= flags->precision )
+			k += spec_c_unicode(str[j++]);
+	else
+		while (str[j])
+			spec_c_unicode(str[j++]);
 
 	while (size-- > 0)
 		write(1, " ", 1);

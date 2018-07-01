@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/27 20:18:12 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:32:15 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ struct			s_flag
 	t_length	length;
 	t_va_data	data;
 	char		neg;
-	void		(*procedure)(t_ctx *ctx, t_flag *flags);
+	void		(*procedure)(t_flag *flags);
 };
 
 struct			s_ctx

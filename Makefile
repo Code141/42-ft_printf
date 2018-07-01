@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/06/25 16:51:25 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/07/01 23:22:19 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -21,13 +21,14 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 				-Wmissing-prototypes -Wstrict-prototypes	\
 				-Wold-style-definition
 
+CPPFLAGS	=	-I./includes/
+
 # DEPENDENCIES .H FILES || Maybe commande or keyword MD to dress dependencies list
 
 %.o: %.c includes/
-	$(CC) -g $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 #	$(CC) -g -fsanitize=address $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-CPPFLAGS	=	-I./includes/
 
 SRCS		=	ft_printf.c									\
 				interceptor.c								\
@@ -66,7 +67,7 @@ re			:
 
 ################################################################################
 
-test		:	$(NAME)
+test		:
 	$(CC) -g -fsanitize=address -I./includes -L./ -lftprintf main.c -o a.out
 
 g			:	$(OBJS)

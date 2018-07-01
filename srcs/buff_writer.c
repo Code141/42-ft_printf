@@ -6,37 +6,39 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/06/23 15:40:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/01 23:40:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 
-void	print_in_buffer(char c, int nb, t_ctx *ctx)
+extern t_ctx *g_ctx;
+
+void	print_in_buffer(char c, int nb)
 {
-	ctx->buff_size += nb;
+	g_ctx->buff_size += nb;
 	while (nb --)
 		write(1, &c, 1);
 }
 
-void	sign(char neg, char explicite, char space, t_ctx *ctx)
+void	sign(char neg, char explicite, char space)
 {
 	if (neg)
-		print_in_buffer('-', 1, ctx);
+		print_in_buffer('-', 1);
 	else
 		if (explicite)
-			print_in_buffer('+', 1, ctx);
+			print_in_buffer('+', 1);
 		else if (space)
-			print_in_buffer(' ', 1, ctx);
+			print_in_buffer(' ', 1);
 }
 
-void	alternate(char style, t_ctx *ctx)
+void	alternate(char style)
 {
-		print_in_buffer('0', 1, ctx);
+		print_in_buffer('0', 1);
 		if (style == 1)
-			print_in_buffer('x', 1, ctx);
+			print_in_buffer('x', 1);
 		else if (style == 2)
-			print_in_buffer('X', 1, ctx);
+			print_in_buffer('X', 1);
 }
 
 /*----------------------------------------------------------------------------*/
