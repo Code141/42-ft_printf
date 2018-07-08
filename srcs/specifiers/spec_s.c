@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:42:32 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:07:06 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,25 @@ void	spec_s(t_flag *flags)
 	}
 	if (i > flags->precision)
 		i = (flags->precision != -1) ? flags->precision : i;
+
 	size = (flags->width > i) ? flags->width - i : 0;
-	if (size)
-		g_ctx->buff_size += size;
+	
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
-			while (size-- > 0)
-				write(1, " ", 1);
+			print_in_buffer(' ', size);
 		else
-			while (size-- > 0)
-				write(1, "0", 1);
+			print_in_buffer('0', size);
+		size = 0;
 	}
 
-	g_ctx->buff_size += i;
+	int k;
 
-	write(1, str, i);
+	k = 0;
+	while (k < i)
+		print_in_buffer(str[k++], 1);
 
-	while (size-- > 0)
-		write(1, " ", 1);
+	print_in_buffer(' ', size);
 }
 
 void	spec_S(t_flag *flags)
@@ -61,44 +61,34 @@ void	spec_S(t_flag *flags)
 	int		j;
 	int		k;
 
+
 	if (!flags->data.s)
 	{
-		write (1, "(null)", 6);
-		g_ctx->buff_size += 6;
+		spec_s(flags);
 		return ;
 	}
 
 	str = flags->data.s;
 	octal_size = strlen_unicode(str, flags->precision);
-
 	if (octal_size > flags->precision)
 		octal_size = (flags->precision != -1) ? flags->precision : octal_size;
-
 	size = (flags->width > octal_size) ? flags->width - octal_size : 0;
-
-	if (size)
-		g_ctx->buff_size += size;
-
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
-			while (size-- > 0)
-				write(1, " ", 1);
+			print_in_buffer(' ', size);
 		else
-			while (size-- > 0)
-				write(1, "0", 1);
+			print_in_buffer('0', size);
+		size = 0;
 	}
 
 	j = 0;
 	k = 0;
-
 	if (flags->precision != -1)
-		while (str[j] && k + unicode_size(*str) <= flags->precision )
+		while (str[j] && k + unicode_size(str[j]) <= flags->precision )
 			k += spec_c_unicode(str[j++]);
 	else
 		while (str[j])
 			spec_c_unicode(str[j++]);
-
-	while (size-- > 0)
-		write(1, " ", 1);
+	print_in_buffer(' ', size);
 }

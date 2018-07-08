@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/07/01 23:22:19 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/07/02 14:04:21 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -63,7 +63,7 @@ re			:
 	$(MAKE) $(MFLAGS) fclean
 	$(MAKE) $(MFLAGS) all
 
-.PHONY		:	 all clean fclean re
+.PHONY		:	all clean fclean re
 
 ################################################################################
 

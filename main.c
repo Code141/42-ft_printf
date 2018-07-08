@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:31:10 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:22:31 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ int	main(void)
 {
 
 
-
-	setlocale(LC_ALL,"");
-
-	char	*str;
-	char	*str2;
-	long int		i;
-	int		j;
-	int		k;
+	char				*str;
+	char				*str2;
+	long int			i;
+	int					j;
+	int					k;
 	unsigned long long	l;
 
 	i = 5;
@@ -44,7 +41,25 @@ int	main(void)
 	str2 = "Salut";
 
 
+//	setlocale(LC_ALL,"");
 
+
+/*
+ft_printf("\n[%d]\n", printf());
+printf("\n[%d]\n", ft_printf());
+*/
+
+
+ft_printf("%5%");                             
+ft_printf("\n[%d]\n", printf("%5%"));
+printf("\n[%d]\n", ft_printf("%5%"));
+/*
+ft_printf("\n[%d]\n", printf("\n%+-12.7dt%0 4i %% et %lc titi\n", 125, 124, 256));
+printf("\n[%d]\n", ft_printf("\n%+-12.7dt%0 4i %% et %lc titi\n", 125, 124, 256));
+*/
+
+
+/*
 ft_printf("[%d]\n", ft_printf("%S", L"Á"));
 ft_printf("[%d]\n", printf("%S", L"Á"));
 
@@ -62,7 +77,7 @@ ft_printf("[%d]\n", printf("\n%.1S\n", L"ÊÊuM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM
 ft_printf("[%d]\n", printf("\n%.2S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.3S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.4S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
-ft_printf("[%d]\n", printf("\n%.5S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+ft_printntf is inf times slower thanf("[%d]\n", printf("\n%.5S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.6S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.7S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.8S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
@@ -107,12 +122,9 @@ ft_printf("[%d]\n", ft_printf("%C", L'ÁM-^L´'));
 
 ft_printf("\n----------------------------------\n", 'X');
 
-
-
 ft_printf("11100000\n10101111\n10110011\n-----------------\n");
 
 ft_printf("%C", L'௳');
-
 
 ft_printf("\n----------------------------------\n", 'X');
 ft_printf("%C", 'X');
@@ -125,7 +137,7 @@ ft_printf("\n----------------------------------\n", 'X');
 
 
 
-
+*/
 
 	//	WEIRD TEST          WARNING MAKE INFINITE WHILE 
 /*
@@ -140,7 +152,7 @@ ft_printf("\n----------------------------------\n", 'X');
 	   ft_printf("%.*5d\n", 20, 10);
 */
 
-
+/*
 
 
 	   printf("%*.*d\n", 20, 10, 3);
@@ -226,6 +238,6 @@ ft_printf("\n----------------------------------\n", 'X');
 	   printf("|%02$*d|\n", i, j, k);
 	   printf("-|%.11d-%d-%d|\n", i, j, k, str);
 	   printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
-
+*/
 	return (0);
 }

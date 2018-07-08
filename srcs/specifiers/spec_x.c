@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 17:06:55 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:36:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:56:58 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	spec_x(t_flag *flags)
 	style = (flags->specifier == 'x') ? 1 : 2;
 
 
-	width = (flags->alternate && flags->data.uint64 != 0) * 2;			// Differs
+	width = (flags->alternate && size != 0) ? 2 : 0;			// Differs
 
 	width += (flags->precision > size) ? flags->precision : size;
 	width = flags->width - width;
@@ -35,7 +35,7 @@ void	spec_x(t_flag *flags)
 		print_in_buffer(' ', width);
 		width = 0;
 	}
-	if (flags->alternate && flags->data.x != 0)						// Differs
+	if (flags->alternate && size != 0)						// Differs
 		alternate(style);										// Differs
 	if (width > 0 && !flags->left_align)
 	{
@@ -45,7 +45,6 @@ void	spec_x(t_flag *flags)
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size);
 
-	g_ctx->buff_size += size;
 	print_number_hex(flags->data, size, style, flags->length);	// Differs
 
 	if (width > 0)

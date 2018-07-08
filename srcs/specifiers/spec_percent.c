@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:15:42 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:37:06 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:22:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ extern t_ctx *g_ctx;
 
 void	spec_percent(t_flag *flags)
 {
-	if (flags->width)
-		g_ctx->buff_size += flags->width - 1;
+	int width;
+
+	width = (flags->width > 0) ? flags->width - 1 : 0;
 	if (!flags->left_align)
 	{
-		while (flags->width-- > 1)
-			if (flags->pad)
-				write(1, "0", 1);
-			else
-				write(1, " ", 1);
+		if (!flags->pad)
+			print_in_buffer(' ', width);
+		else
+			print_in_buffer('0', width);
+		width = 0;
 	}
-	write(1, "%", 1);
-	g_ctx->buff_size++;
-	while (flags->width-- > 1)
-			write(1, " ", 1);
+	print_in_buffer('%', 1);
+	print_in_buffer(' ', width);
 }

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:15:29 by gelambin          #+#    #+#             */
-/*   Updated: 2018/05/27 20:19:20 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:42:04 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_number_uint8_t(uint8_t nb, int size, int base)
 		while (i--)
 			pow = pow * base;
 		c = nb / pow % base + '0';
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -43,7 +43,7 @@ void	print_number_uint16_t(uint16_t nb, int size, int base)
 		while (i--)
 			pow = pow * base;
 		c = nb / pow % base + '0';
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -60,7 +60,7 @@ void	print_number_uint32_t(uint32_t nb, int size, int base)
 		while (i--)
 			pow = pow * base;
 		c = nb / pow % base + '0';
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -77,7 +77,7 @@ void	print_number_uint64_t(uint64_t nb, int size, int base)
 		while (i--)
 			pow = pow * base;
 		c = nb / pow % base + '0';
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 

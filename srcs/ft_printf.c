@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:27:24 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:51:10 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static t_ctx	*init(const char *format)
 	g_ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
 	if (!g_ctx)
 		exit (0);
+	g_ctx->buff_pos = 0;
 	return (ctx);
 }
 
@@ -45,11 +46,10 @@ int	ft_printf(const char *format, ...)
 {
 	int		ret;
 
-
 	if (format == NULL)
 		return (0);
-	init(format);
 
+	init(format);
 	va_start(g_ctx->args, format);
 	va_copy(g_ctx->current_args, g_ctx->args);
 
@@ -59,10 +59,12 @@ int	ft_printf(const char *format, ...)
 		// mallocator
 //	rewritor(ctx);
 
+	write(1, g_ctx->buffer, g_ctx->buff_size);
+	ret = g_ctx->buff_size;
+
 	va_end(g_ctx->current_args);
 	va_end(g_ctx->args);
-
-	ret = g_ctx->buff_size;
 	free(g_ctx);
+
 	return (ret);
 }

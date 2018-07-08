@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:40:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:58:25 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,19 @@ extern t_ctx *g_ctx;
 
 void	print_in_buffer(char c, int nb)
 {
+int i;
 	g_ctx->buff_size += nb;
-	while (nb --)
-		write(1, &c, 1);
+
+
+
+	if (1 == 1)
+		i = 2;
+
+
+
+	while (nb--)
+		g_ctx->buffer[g_ctx->buff_pos++] = c;
+
 }
 
 void	sign(char neg, char explicite, char space)
@@ -60,7 +70,7 @@ void	print_number_hex_uint8_t(uint8_t nb, int size, int style)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -79,7 +89,7 @@ void	print_number_hex_uint16_t(uint16_t nb, int size, int style)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -98,7 +108,7 @@ void	print_number_hex_uint32_t(uint32_t nb, int size, int style)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 
@@ -117,7 +127,7 @@ void	print_number_hex_uint64_t(uint64_t nb, int size, int style)
 			pow = pow * 16;
 		c = (nb / pow) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		write(1, &c, 1);
+		print_in_buffer(c, 1);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:32:21 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 14:55:36 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		new_arg(const char *arg, int current_arg)
 
 	pos = 0;
 	flags = g_ctx->flags + current_arg;
-	
+
 	flags->procedure = &spec_c;
 	flags->precision = -1;
 
@@ -89,10 +89,8 @@ int		new_arg(const char *arg, int current_arg)
 			flags->data.c = flags->specifier;
 
 /*----------------------------------------------------------------------------*/
-
 		if (!flags->length)
 			flags->length = 4;
-
 		if (flags->specifier == 'U' || flags->specifier == 'D'
 				|| flags->specifier == 'O')
 			flags->length = 8;
@@ -110,7 +108,6 @@ int		new_arg(const char *arg, int current_arg)
 	return (pos);
 }
 
-
 void		interceptor(const char *format)
 {
 	int		i;
@@ -125,6 +122,5 @@ void		interceptor(const char *format)
 		if (format[i + j] == '%')
 			i += new_arg(format + i + j, current_arg++);
 		else
-			write(1, format + i + j++, 1);
-	g_ctx->buff_size += j;
+			print_in_buffer(*(format + i + j++), 1);
 }

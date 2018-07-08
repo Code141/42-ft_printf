@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:32:15 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:48:43 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ struct			s_flag
 
 struct			s_ctx
 {
+	char		buffer[4096];
+	int			buff_pos;
 	va_list		args;
 	va_list		current_args;
-	char		*format;
 	int			buff_size;
 	t_flag		flags[];
 };
