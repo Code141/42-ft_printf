@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 16:51:10 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/11 13:26:11 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static t_ctx	*init(const char *format)
 	if (!g_ctx)
 		exit (0);
 	g_ctx->buff_pos = 0;
+	g_ctx->buff_size = 0;
 	return (ctx);
 }
 
@@ -54,10 +55,6 @@ int	ft_printf(const char *format, ...)
 	va_copy(g_ctx->current_args, g_ctx->args);
 
 	interceptor(format);
-
-//	calculator(ctx);
-		// mallocator
-//	rewritor(ctx);
 
 	write(1, g_ctx->buffer, g_ctx->buff_size);
 	ret = g_ctx->buff_size;

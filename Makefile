@@ -6,9 +6,12 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/07/02 14:04:21 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/07/11 17:44:03 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
+
+# DEPENDENCIES .H FILES
+# Maybe commande or keyword MD to dress dependencies list
 
 NAME		=	libftprintf.a
 
@@ -23,19 +26,20 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 
 CPPFLAGS	=	-I./includes/
 
-# DEPENDENCIES .H FILES || Maybe commande or keyword MD to dress dependencies list
-
 %.o: %.c includes/
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 #	$(CC) -g -fsanitize=address $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 
 SRCS		=	ft_printf.c									\
+				precalculated_decimales.c					\
 				interceptor.c								\
 				flags.c										\
 				number_width.c								\
 				print_number.c								\
+				print_number_hex.c							\
 				buff_writer.c								\
+				integer.c									\
 				specifiers/spec_c.c							\
 				specifiers/spec_d.c							\
 				specifiers/spec_u.c							\
@@ -48,7 +52,7 @@ SRCS		=	ft_printf.c									\
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
 
-all			:	$(NAME) test
+all			:	$(NAME)	test
 
 $(NAME)		:	$(OBJS)
 	ar rc $(NAME) $?
@@ -68,7 +72,7 @@ re			:
 ################################################################################
 
 test		:
-	$(CC) -g -fsanitize=address -I./includes -L./ -lftprintf main.c -o a.out
+	$(CC) -I./includes -L./ -lftprintf main.c -o a.out
 
 g			:	$(OBJS)
 	$(CC) -g $(OBJS) -o $(NAME)

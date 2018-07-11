@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/01 23:31:50 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/11 13:26:25 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,36 +61,40 @@ int		argument_access(char *str, t_flag *flags)
 
 	if (str[i] == '$' && nb > 0)
 	{
-//		va_end(g_ctx->current_args);
+		va_end(g_ctx->current_args);
 		va_copy(g_ctx->current_args, g_ctx->args);
 		while (nb-- > 1)
 			va_arg(g_ctx->current_args, void*);
 		return (i - 1);
 	}
 
-	return (i -1);
+	return (i - 1);
 }
 
 int		length(char *str, t_flag *flags)
 {
-	if (str[0] == 'h' && str[1] == 'h' && flags->length < 1)
+	if (str[0] == 'h')
 	{
-		flags->length = e_length_hh;
-		return (1);
+		if (str[1] == 'h' && flags->length < 1)
+		{
+			flags->length = e_length_hh;
+			return (1);
+		}
+		if (flags->length < 2)
+			flags->length = e_length_h;
 	}
-	else if (str[0] == 'l' && str[1] == 'l' && flags->length < 8)
+	else if (str[0] == 'l')
 	{
-		flags->length = e_length_ll;
-		return (1);
-	}
-
-	if (str[0] == 'h' && flags->length < 2)
-		flags->length = e_length_h;
-	else if (str[0] == 'l' && flags->length < 8)
+		if (str[1] == 'l')
+		{
+			flags->length = e_length_ll;
+			return (1);
+		}
 		flags->length = e_length_l;
-	else if (str[0] == 'j' && flags->length < 8)
+	}
+	else if (str[0] == 'j')
 		flags->length = e_length_j;
-	else if (str[0] == 'z' && flags->length < 8)
+	else if (str[0] == 'z')
 		flags->length = e_length_z;
 	return (0);
 }
@@ -143,29 +147,24 @@ int		flag(char *str, t_flag *flags)
 
 int		specifier(char specifier, t_flag *flags)
 {
-	if (specifier == 'd' || specifier == 'D' || specifier == 'i')
-		flags->procedure = &spec_d;
-	else if (specifier == 'u' || specifier == 'U')
-		flags->procedure = &spec_u;
-	else if (specifier == 'x' || specifier == 'X')
-		flags->procedure = &spec_x;
-	else if (specifier == 'p')
-		flags->procedure = &spec_p;
-	else if (specifier == 'o' || specifier == 'O')
-		flags->procedure = &spec_o;
-	else if (specifier == 'b')
-		flags->procedure = &spec_b;
 
-	if (flags->procedure != &spec_c)
+	if (integer_dDi(specifier, flags) || integer(specifier, flags))
 	{
 		if (flags->precision != -1)
 			flags->pad = 0;
 		else
 			flags->precision = 1;
+		if (flags->data.uint64 < 0x100)
+			flags->length = 1;
+		else if (flags->data.uint64 < 0x10000 && flags->length > 2)
+			flags->length = 2;
+		else if (flags->data.uint64 < 0x100000000 && flags->length > 4)
+			flags->length = 4;
 		return (1);
 	}
 
-/*	else if (specifier == 'e')
+/*
+	else if (specifier == 'e')
 		flags->procedure = &spec_e;
 	else if (specifier == 'E')
 		flags->procedure = &spec_E;
@@ -177,15 +176,31 @@ int		specifier(char specifier, t_flag *flags)
 		flags->procedure = &spec_G;
 */
 
-	if (specifier == 'c' || specifier == 'C')
+
+	if (specifier == 'c')
 		flags->procedure = &spec_c;
+	else if (specifier == 'C')
+	{
+		flags->length = 4;
+		flags->procedure = &spec_c;
+	}
 	else if (specifier == 's')
+	{
 		flags->procedure = &spec_s;
+		if (flags->length == 8)
+			flags->procedure = &spec_S;
+	}
 	else if (specifier == 'S')
 		flags->procedure = &spec_S;
-	else if (specifier == '%')
+
+
+	if (flags->procedure)
+		flags->data.data = va_arg(g_ctx->current_args, long long);
+
+	if (specifier == '%')
 		flags->procedure = &spec_percent;
-	else
-		return (0); // UNKNOW SPECIFIER
+
+	if (!flags->procedure)
+		return (0);
 	return (1);
 }

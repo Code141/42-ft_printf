@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 14:55:36 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/11 13:26:31 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,6 @@ void	error(const char *arg, int pos)
 	 */
 }
 
-void	signed_nb(t_flag *flags)
-{
-	if (flags->length == 1 && flags->data.int8 < 0)
-	{
-		flags->data.uint8 = -flags->data.int8;
-		flags->neg = 1;
-	}
-	else if (flags->length == 2 && flags->data.int16 < 0)
-	{
-		flags->data.uint16 = -flags->data.int16;
-		flags->neg = 1;
-	}
-	else if (flags->length == 4 && flags->data.int32 < 0)
-	{
-		flags->data.uint32 = -flags->data.int32;
-		flags->neg = 1;
-	}
-	else if (flags->length == 8 && flags->data.int64 < 0)
-	{
-		flags->data.uint64 = -flags->data.int64;
-		flags->neg = 1;
-	}
-}
-
 int		new_arg(const char *arg, int current_arg)
 {
 	int		pos;
@@ -63,7 +39,7 @@ int		new_arg(const char *arg, int current_arg)
 	pos = 0;
 	flags = g_ctx->flags + current_arg;
 
-	flags->procedure = &spec_c;
+	flags->procedure = NULL;
 	flags->precision = -1;
 
 	flags->alternate = 0;
@@ -79,29 +55,17 @@ int		new_arg(const char *arg, int current_arg)
 	pos += flag(arg + pos, flags);
 	flags->specifier = *(arg + pos);
 
+	if (!flags->length)
+		flags->length = 4;
+
 	if (arg[pos])
 	{
 		pos++;
-
-		if (specifier(flags->specifier, flags) && flags->specifier != '%')
-			flags->data.data = va_arg(g_ctx->current_args, long long);
-		else
+		if (!specifier(flags->specifier, flags))
+		{
+			flags->procedure = &spec_c;
 			flags->data.c = flags->specifier;
-
-/*----------------------------------------------------------------------------*/
-		if (!flags->length)
-			flags->length = 4;
-		if (flags->specifier == 'U' || flags->specifier == 'D'
-				|| flags->specifier == 'O')
-			flags->length = 8;
-		if (flags->specifier == 'C' || flags->specifier == 'S')
-			flags->length = 4;
-		if (flags->specifier == 'd' || flags->specifier == 'D'
-				|| flags->specifier == 'i')
-			signed_nb(flags);
-		if (flags->specifier == 's' && flags->length == 8)
-			flags->procedure = &spec_S;
-/*----------------------------------------------------------------------------*/
+		}
 		flags->procedure(flags);
 	}
 	flags->jump = pos;
@@ -111,16 +75,13 @@ int		new_arg(const char *arg, int current_arg)
 void		interceptor(const char *format)
 {
 	int		i;
-	int		j;
 	int		current_arg;
 
 	i = 0;
-	j = 0;
 	current_arg = 0;
-	g_ctx->buff_size = 0;
-	while (format[i + j])
-		if (format[i + j] == '%')
-			i += new_arg(format + i + j, current_arg++);
+	while (format[i])
+		if (format[i] == '%')
+			i += new_arg(format + i, current_arg++);
 		else
-			print_in_buffer(*(format + i + j++), 1);
+			print_in_buffer(format[i++], 1);
 }

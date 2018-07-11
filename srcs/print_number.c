@@ -6,26 +6,21 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:15:29 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 14:42:04 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:57:07 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <stdint.h>
+#include <precalculated_decimales.h>
 
 void	print_number_uint8_t(uint8_t nb, int size, int base)
 {
 	char	c;
-	int		pow;
-	int		i;
 
 	while (size--)
 	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * base;
-		c = nb / pow % base + '0';
+		c = nb / g_precalculated_uint_8[base][size] % base + '0';
 		print_in_buffer(c, 1);
 	}
 }
@@ -33,16 +28,10 @@ void	print_number_uint8_t(uint8_t nb, int size, int base)
 void	print_number_uint16_t(uint16_t nb, int size, int base)
 {
 	char	c;
-	int		pow;
-	int		i;
 
 	while (size--)
 	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * base;
-		c = nb / pow % base + '0';
+		c = nb / g_precalculated_uint_16[base][size] % base + '0';
 		print_in_buffer(c, 1);
 	}
 }
@@ -50,16 +39,10 @@ void	print_number_uint16_t(uint16_t nb, int size, int base)
 void	print_number_uint32_t(uint32_t nb, int size, int base)
 {
 	char	c;
-	int		pow;
-	int		i;
 
 	while (size--)
 	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * base;
-		c = nb / pow % base + '0';
+		c = nb / g_precalculated_uint_32[base][size] % base + '0';
 		print_in_buffer(c, 1);
 	}
 }
@@ -67,16 +50,10 @@ void	print_number_uint32_t(uint32_t nb, int size, int base)
 void	print_number_uint64_t(uint64_t nb, int size, int base)
 {
 	char		c;
-	uint64_t	pow;
-	int			i;
 
 	while (size--)
 	{
-		i = size;
-		pow = 1;
-		while (i--)
-			pow = pow * base;
-		c = nb / pow % base + '0';
+		c = nb / g_precalculated_uint_64[base][size] % base + '0';
 		print_in_buffer(c, 1);
 	}
 }

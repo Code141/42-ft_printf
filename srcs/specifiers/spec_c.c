@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:18:36 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 16:36:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 18:02:11 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,9 @@ void	spec_c(t_flag *flags)
 
 	if (flags->width)
 		width = flags->width - unicode_size(flags->data.uint32);
+
 	width = (width > 0) ? width : 0;
+
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
@@ -153,10 +155,12 @@ void	spec_c(t_flag *flags)
 			print_in_buffer('0', width);
 		width = 0;
 	}
+
 	if (flags->specifier == 'C' || flags->length == 8)
 		spec_c_unicode(flags->data.uint32);
 	else
 		print_in_buffer(c, 1);
+
 	print_in_buffer(' ', width);
 }
 

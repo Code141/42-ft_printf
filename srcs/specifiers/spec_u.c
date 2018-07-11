@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 13:07:35 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 14:56:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/08 22:36:38 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	spec_u(t_flag *flags)
 
 	size = number_width(flags->data, 10, flags->length);
 
-	width = 0;														// Differs
+	width = (flags->precision > size) ? flags->precision : size;
 
-	width += (flags->precision > size) ? flags->precision : size;
 	width = flags->width - width;
+
 	if (width > 0 && !flags->left_align && !flags->pad)
 	{
 		print_in_buffer(' ', width);
