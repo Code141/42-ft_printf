@@ -6,12 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 13:24:31 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/14 11:57:27 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_CTX_H
 # define S_CTX_H
+# include <ft_printf.h>
 # include <stdarg.h>
 # include <stdint.h>
 # include <wchar.h>
@@ -76,7 +77,7 @@ struct			s_flag
 
 struct			s_ctx
 {
-	char		buffer[4096];
+	char		buffer[FT_PRINTF_BUFF_SIZE];
 	int			buff_pos;
 	int			buff_size;
 	va_list		args;

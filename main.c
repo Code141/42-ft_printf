@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/10 18:49:05 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/12 00:08:15 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ pow = 1;
 while (i--)
 {
 	pow = pow * 16;
-	ft_printf("%70ld - ", pow);
-	ft_printf("%70lx - ", pow);
+	ft_printf("%ld - ", pow);
+	ft_printf("%lx - ", pow);
 	ft_printf("  [%d]",ft_printf("%lb", pow));
 	ft_printf("\n");
 }
 
 printf("-%lx\n\n", 4294967296);
 ft_printf("%lx", 4294967296);
-while (1);
+
+
 /*
 ft_printf("%5%");
 ft_printf("\n[%d]\n", printf("%5%"));
