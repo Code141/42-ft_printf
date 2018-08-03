@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 22:26:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 13:07:15 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/20 21:35:00 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	signed_nb(t_flag *flags)
 	}
 }
 
-int	integer_dDi(char specifier, t_flag *flags)
+int	signed_integer(char specifier, t_flag *flags)
 {
 	if (specifier == 'd' || specifier == 'i')
 		flags->procedure = &spec_d;
@@ -55,7 +55,7 @@ int	integer_dDi(char specifier, t_flag *flags)
 	return (1);
 }
 
-int	integer(char specifier, t_flag *flags)
+int	unsigned_integer(char specifier, t_flag *flags)
 {
 	if (specifier == 'u')
 		flags->procedure = &spec_u;
@@ -82,3 +82,28 @@ int	integer(char specifier, t_flag *flags)
 	flags->data.data = va_arg(g_ctx->current_args, long long);
 	return (1);
 }
+
+int character(char specifier, t_flag *flags)
+{
+	if (specifier == 'c')
+		flags->procedure = &spec_c;
+	else if (specifier == 'C')
+	{
+		flags->length = 4;
+		flags->procedure = &spec_c;
+	}
+	else if (specifier == 's')
+	{
+		flags->procedure = &spec_s;
+		if (flags->length == 8)
+			flags->procedure = &spec_S;
+	}
+	else if (specifier == 'S')
+		flags->procedure = &spec_S;
+	else
+		return (0);
+		flags->data.data = va_arg(g_ctx->current_args, long long);
+	return (1);
+}
+
+

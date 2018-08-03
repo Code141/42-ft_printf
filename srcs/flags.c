@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 13:26:25 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:03:57 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,13 @@ int		flag(char *str, t_flag *flags)
 int		specifier(char specifier, t_flag *flags)
 {
 
-	if (integer_dDi(specifier, flags) || integer(specifier, flags))
+	if (signed_integer(specifier, flags) || unsigned_integer(specifier, flags))
 	{
 		if (flags->precision != -1)
 			flags->pad = 0;
 		else
 			flags->precision = 1;
+
 		if (flags->data.uint64 < 0x100)
 			flags->length = 1;
 		else if (flags->data.uint64 < 0x10000 && flags->length > 2)
@@ -176,31 +177,14 @@ int		specifier(char specifier, t_flag *flags)
 		flags->procedure = &spec_G;
 */
 
+	if (character(specifier, flags))
+		return (1);
 
-	if (specifier == 'c')
-		flags->procedure = &spec_c;
-	else if (specifier == 'C')
-	{
-		flags->length = 4;
-		flags->procedure = &spec_c;
-	}
-	else if (specifier == 's')
-	{
-		flags->procedure = &spec_s;
-		if (flags->length == 8)
-			flags->procedure = &spec_S;
-	}
-	else if (specifier == 'S')
-		flags->procedure = &spec_S;
-
-
-	if (flags->procedure)
-		flags->data.data = va_arg(g_ctx->current_args, long long);
 
 	if (specifier == '%')
+	{
 		flags->procedure = &spec_percent;
-
-	if (!flags->procedure)
-		return (0);
-	return (1);
+		return (1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 13:26:11 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:03:32 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@
 #include <s_ctx.h>
 #include <ft_printf.h>
 
-t_ctx			*g_ctx;
+// CHECK STATICS FUNCTIONS
+
+t_ctx			*g_ctx;			// NE GERE PAS 2 PRINTF RECURSIFS CONFLICT
+
+static void	ft_bzero(char *s, size_t n)
+{
+	while (n--)
+		s[n] = 0;
+}
 
 static t_ctx	*init(const char *format)
 {
@@ -36,12 +44,12 @@ static t_ctx	*init(const char *format)
 	g_ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
 	if (!g_ctx)
 		exit (0);
+//	PERFORMANCES KILLER
+//	ft_bzero((char*)(g_ctx->flags), sizeof(t_flag) * nb_arg);
 	g_ctx->buff_pos = 0;
 	g_ctx->buff_size = 0;
 	return (ctx);
 }
-
-// CHECK STATICS FUNCTIONS
 
 int	ft_printf(const char *format, ...)
 {

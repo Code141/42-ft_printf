@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/14 12:00:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/27 14:53:23 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 extern t_ctx *g_ctx;
 
-void	print_in_buffer(char c, int nb)
+void	print_str_buffer(char *str, int nb)
 {
+/*
 	g_ctx->buff_size += nb;
 	// DEPASSEMENT BUFFER !!!!!!!!
 	// write(1, g_ctx->buffer, g_ctx->buff_size);
@@ -28,7 +29,26 @@ void	print_in_buffer(char c, int nb)
 
 	while (nb--)
 		g_ctx->buffer[g_ctx->buff_pos++] = c;
+*/
+}
 
+void	print_in_buffer(char c, int nb)
+{
+	if (g_ctx->buff_size != -1)
+	{
+		g_ctx->buff_size += nb;
+		// DEPASSEMENT BUFFER !!!!!!!!
+		// write(1, g_ctx->buffer, g_ctx->buff_size);
+
+		if (g_ctx->buff_pos + nb >= FT_PRINTF_BUFF_SIZE)
+		{
+			write(1, g_ctx->buffer, g_ctx->buff_size);
+			g_ctx->buff_pos = 0;
+		}
+
+		while (nb--)
+			g_ctx->buffer[g_ctx->buff_pos++] = c;
+	}
 }
 
 void	sign(char neg, char explicite, char space)

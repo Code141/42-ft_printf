@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 18:18:23 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 13:12:25 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/15 19:46:47 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	spec_b(t_flag *flags)
 	if (flags->precision > size)
 		print_in_buffer('0', flags->precision - size);
 
-		print_number(flags->data, size, 2, flags->length);			// differs
+	print_number(flags->data, size, 2, flags->length);			// differs
 
 	if (width > 0)
 		print_in_buffer(' ', width);

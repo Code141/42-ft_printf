@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/12 00:08:15 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/07/27 17:06:12 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,13 @@ ft_printf("\n[%d]\n", printf());
 printf("\n[%d]\n", ft_printf());
 */
 
-int			base;
-long long	pow;
+printf("[%d]", printf("-----------%C----------",0xbffe));
+printf("([%d])", ft_printf("----------%C---------",0xbffe));
 
-base = 16;
-i = 25;
-pow = 1;
+printf("\n------------------------------------------------------\n");
 
-while (i--)
-{
-	pow = pow * 16;
-	ft_printf("%ld - ", pow);
-	ft_printf("%lx - ", pow);
-	ft_printf("  [%d]",ft_printf("%lb", pow));
-	ft_printf("\n");
-}
-
-printf("-%lx\n\n", 4294967296);
-ft_printf("%lx", 4294967296);
+printf("[%d]", printf("---%lc---", 254));
+printf("([%d])", ft_printf("---%lc---", 254));
 
 
 /*
