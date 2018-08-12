@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 03:13:19 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/08 14:56:52 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/11 19:41:48 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	spec_o(t_flag *flags)
 	}
 
 	if (flags->alternate  && flags->precision <= size)				// Differs
-		alternate(0);											// Differs
+		alternate(0);												// Differs
 
 	if (width > 0 && !flags->left_align)
 	{

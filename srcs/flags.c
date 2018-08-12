@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/21 18:03:57 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/11 19:03:15 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int		flag(char *str, t_flag *flags)
 			flags->pad = 1;
 		else if (str[i] == '.')
 			i += precision(str + i + 1, flags);
-		else if ((str[i] >= '1' && str[i] <= '9')  || str[i] == '$'|| str[i] == '*')
+		else if ((str[i] >= '1' && str[i] <= '9')
+				|| str[i] == '$'|| str[i] == '*')
 			i += argument_access(str + i, flags);
 		else if (str[i] == '-')
 			flags->left_align = 1;

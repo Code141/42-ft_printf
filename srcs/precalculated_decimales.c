@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 17:40:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 18:03:09 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/11 19:25:47 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,14 @@ static uint64_t	base_2_uint_64[] = {
 	0x8000000000000000
 };
 
-static uint8_t		base_8_uint_8[] = {
+static uint8_t				base_8_uint_8[] = {
 	0x1,
 	0x8,
 	0x40,
 	0x200
 };
 
-static uint16_t	base_8_uint_16[] = {
+static uint16_t				base_8_uint_16[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -160,7 +160,7 @@ static uint16_t	base_8_uint_16[] = {
 	0x8000
 };
 
-static uint32_t	base_8_uint_32[] = {
+static uint32_t				base_8_uint_32[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -174,7 +174,7 @@ static uint32_t	base_8_uint_32[] = {
 	0x40000000
 };
 
-static uint64_t	base_8_uint_64[] = {
+static uint64_t				base_8_uint_64[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -205,7 +205,7 @@ static const uint8_t		base_10_uint_8[] = {
 	100
 };
 
-static const uint16_t	base_10_uint_16[] = {
+static const uint16_t		base_10_uint_16[] = {
 	1,
 	10,
 	100,
@@ -213,7 +213,7 @@ static const uint16_t	base_10_uint_16[] = {
 	10000
 };
 
-static const uint32_t	base_10_uint_32[] = {
+static const uint32_t		base_10_uint_32[] = {
 	1,
 	10,
 	100,
@@ -226,7 +226,7 @@ static const uint32_t	base_10_uint_32[] = {
 	1000000000
 };
 
-static const uint64_t	base_10_uint_64[] = {
+static const uint64_t		base_10_uint_64[] = {
 	1,
 	10,
 	100,
@@ -254,14 +254,14 @@ static const uint8_t		base_16_uint_8[] = {
 	0x10
 };
 
-static const uint16_t	base_16_uint_16[] = {
+static const uint16_t		base_16_uint_16[] = {
 	0x1,
 	0x10,
 	0x100,
 	0x1000
 };
 
-static const uint32_t	base_16_uint_32[] = {
+static const uint32_t		base_16_uint_32[] = {
 	0x1,
 	0x10,
 	0x100,
@@ -272,7 +272,7 @@ static const uint32_t	base_16_uint_32[] = {
 	0x10000000
 };
 
-static const uint64_t	base_16_uint_64[] = {
+static const uint64_t		base_16_uint_64[] = {
 	0x1,
 	0x10,
 	0x100,
@@ -292,7 +292,7 @@ static const uint64_t	base_16_uint_64[] = {
 };
 
 
-uint8_t		*g_precalculated_uint_8[] = 
+uint8_t						*g_precalculated_uint_8[] = 
 {
 	0,	// base 0
 	0,
@@ -313,7 +313,7 @@ uint8_t		*g_precalculated_uint_8[] =
 	base_16_uint_8
 };
 
-uint16_t		*g_precalculated_uint_16[] =
+uint16_t					*g_precalculated_uint_16[] =
 {
 	0,	// base 0
 	0,
@@ -335,7 +335,7 @@ uint16_t		*g_precalculated_uint_16[] =
 };
 
 
-uint32_t	*g_precalculated_uint_32[] =
+uint32_t					*g_precalculated_uint_32[] =
 {
 	0,	// base 0
 	0,
@@ -356,7 +356,7 @@ uint32_t	*g_precalculated_uint_32[] =
 	base_16_uint_32
 };
 
-uint64_t	*g_precalculated_uint_64[] =
+uint64_t					*g_precalculated_uint_64[] =
 {
 	0,	// base 0
 	0,

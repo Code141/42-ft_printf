@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 22:26:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/20 21:35:00 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/11 19:14:45 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,4 @@ int character(char specifier, t_flag *flags)
 		flags->data.data = va_arg(g_ctx->current_args, long long);
 	return (1);
 }
-
 

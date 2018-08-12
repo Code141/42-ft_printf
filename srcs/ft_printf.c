@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/21 18:03:32 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/03 15:06:07 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@
 
 t_ctx			*g_ctx;			// NE GERE PAS 2 PRINTF RECURSIFS CONFLICT
 
-static void	ft_bzero(char *s, size_t n)
+static void	ft_bzero(void *s, size_t n)
 {
+	char	*c;
+
+	c = (char*)s;
 	while (n--)
-		s[n] = 0;
+		c[n] = 0;
 }
 
 static t_ctx	*init(const char *format)

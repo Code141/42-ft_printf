@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/07/15 20:05:36 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/08/11 18:48:46 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -52,7 +52,7 @@ SRCS		=	ft_printf.c									\
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
 
-all			:	$(NAME)	test
+all			:	$(NAME)	a.out
 
 $(NAME)		:	$(OBJS)
 	ar rc $(NAME) $?
@@ -71,7 +71,7 @@ re			:
 
 ################################################################################
 
-test		:
+a.out		:	main.c $(OBJS)
 	$(CC) -I./includes -L./ -lftprintf main.c -o a.out
 
 g			:	$(OBJS)
