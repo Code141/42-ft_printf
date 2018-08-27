@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:18:36 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/11 19:42:37 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/23 18:51:04 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ int	spec_c_unicode(uint32_t ca)
 		return (-1);
 	}
 
-	if (ca < 0x80 || MB_CUR_MAX < 2)
+	if (ca < 0x80 && MB_CUR_MAX > 0)
 	{
 		str[0] = ca;
 		nb_octets = 1;
 	}
-	else if (ca < 0x800 || MB_CUR_MAX < 3)
+	else if (ca < 0x800 && MB_CUR_MAX > 1)
 	{
 		str[0] = 0x80 | (ca & 0x3F);
 		str[1] = 0xC0 | ((ca & 0x7C0) >> 6);
 		nb_octets = 2;
 	}
-	else if (ca < 0x10000 || MB_CUR_MAX < 4)
+	else if (ca < 0x10000 && MB_CUR_MAX > 2)
 	{
 		str[0] = 0x80 | (ca & 0x3F);
 		str[1] = 0x80 | ((ca & 0xFC0) >> 6);
@@ -98,7 +98,6 @@ int	spec_c_unicode(uint32_t ca)
 		g_ctx->buff_size = -1;
 		return (-1);
 	}
-		
 
 	int i;			// reverse octal position and supress I counter | decrement on octal_size
 

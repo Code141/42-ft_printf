@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/08/11 18:48:46 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/08/27 15:28:31 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -27,7 +27,7 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 CPPFLAGS	=	-I./includes/
 
 %.o: %.c includes/
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) -O3 $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 #	$(CC) -g -fsanitize=address $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 

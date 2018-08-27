@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/27 17:06:12 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/23 18:56:22 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ ft_printf("\n[%d]\n", printf());
 printf("\n[%d]\n", ft_printf());
 */
 
+i = 0x80 - 10;
+while (i < 0x800 + 10)
+{
+
+	ft_printf("[%d]", i);
+	ft_printf("%d|", ft_printf("		%C		", i));
+	ft_printf("%d|", printf("		%C		", i));
+fflush(stdout); // Will now print everything in the stdout buffer
+	i++;
+}
+printf("\n------------------------------------------------------\n");
 printf("[%d]", printf("-----------%C----------",0xbffe));
 printf("([%d])", ft_printf("----------%C---------",0xbffe));
 

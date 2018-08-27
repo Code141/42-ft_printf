@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 17:40:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/11 19:25:47 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:49:10 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,6 @@ static const uint64_t		base_16_uint_64[] = {
 	0x1000000000000000
 };
 
-
 uint8_t						*g_precalculated_uint_8[] = 
 {
 	0,	// base 0
@@ -333,7 +332,6 @@ uint16_t					*g_precalculated_uint_16[] =
 	0,
 	base_16_uint_16
 };
-
 
 uint32_t					*g_precalculated_uint_32[] =
 {
