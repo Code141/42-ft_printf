@@ -6,14 +6,12 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 15:44:41 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:53:02 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <specifiers.h>
-
-extern t_ctx *g_ctx;
 
 int		precision(char *str, t_flag *flags)
 {
@@ -24,7 +22,7 @@ int		precision(char *str, t_flag *flags)
 	nb = 0;
 	if (*str == '*')
 	{
-		nb = va_arg(g_ctx->current_args, int);
+		nb = va_arg(g_ctx.current_args, int);
 		if (nb >= 0)
 			flags->precision = nb;
 		return (1);
@@ -47,7 +45,7 @@ int		argument_access(char *str, t_flag *flags)
 
 	if (str[i] == '*')
 	{
-		nb = va_arg(g_ctx->current_args, int);
+		nb = va_arg(g_ctx.current_args, int);
 		if (nb < 0)
 		{
 			flags->left_align = 1;
@@ -61,10 +59,10 @@ int		argument_access(char *str, t_flag *flags)
 
 	if (str[i] == '$' && nb > 0)
 	{
-		va_end(g_ctx->current_args);
-		va_copy(g_ctx->current_args, g_ctx->args);
+		va_end(g_ctx.current_args);
+		va_copy(g_ctx.current_args, g_ctx.args);
 		while (nb-- > 1)
-			va_arg(g_ctx->current_args, void*);
+			va_arg(g_ctx.current_args, void*);
 		return (i - 1);
 	}
 
@@ -128,24 +126,6 @@ int		flag(char *str, t_flag *flags)
 	return (i);
 }
 
-/*
- static const t_conv g_conv[] = {
-     { "bdiouxX", int_arg },
-     { "DOU", dou_arg },
-     { "Cc", c_arg },
-     { "s", s_arg },
-     { "S", ws_arg },
-     { "p", p_arg },
-     { "%", pct_arg }
- };
- */
-
- //		dDioOuU
- //		xX
- //		p
- //		cC
- //		sS
-
 int		specifier(char specifier, t_flag *flags)
 {
 
@@ -180,7 +160,6 @@ int		specifier(char specifier, t_flag *flags)
 
 	if (character(specifier, flags))
 		return (1);
-
 
 	if (specifier == '%')
 	{

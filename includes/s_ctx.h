@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:04:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/19 18:04:29 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:10:17 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct	s_ctx	t_ctx;
 typedef struct	s_flag	t_flag;
+extern			t_ctx	g_ctx;
 
 typedef union	u_va_data
 {
@@ -85,7 +86,6 @@ struct			s_ctx
 	int			buff_size;
 	va_list		args;
 	va_list		current_args;
-	t_flag		flags[];
 };
 
 #endif

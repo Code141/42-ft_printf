@@ -6,13 +6,11 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:19:21 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/19 18:39:29 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:27:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
-
-extern t_ctx *g_ctx;
 
 void	spec_s(t_flag *flags)
 {
@@ -37,9 +35,9 @@ void	spec_s(t_flag *flags)
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
-			print_in_buffer(' ', size);
+			print_in_buffer_nb(' ', size);
 		else
-			print_in_buffer('0', size);
+			print_in_buffer_nb('0', size);
 		size = 0;
 	}
 
@@ -47,9 +45,9 @@ void	spec_s(t_flag *flags)
 
 	k = 0;
 	while (k < i)
-		print_in_buffer(str[k++], 1);
+		print_in_buffer_nb(str[k++], 1);
 
-	print_in_buffer(' ', size);
+	print_in_buffer_nb(' ', size);
 }
 
 void	spec_S(t_flag *flags)
@@ -76,9 +74,9 @@ void	spec_S(t_flag *flags)
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
-			print_in_buffer(' ', size);
+			print_in_buffer_nb(' ', size);
 		else
-			print_in_buffer('0', size);
+			print_in_buffer_nb('0', size);
 		size = 0;
 	}
 
@@ -90,5 +88,5 @@ void	spec_S(t_flag *flags)
 	else
 		while (str[j])
 			spec_c_unicode(str[j++]);
-	print_in_buffer(' ', size);
+	print_in_buffer_nb(' ', size);
 }

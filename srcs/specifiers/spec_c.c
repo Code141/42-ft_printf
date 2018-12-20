@@ -6,14 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:18:36 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/23 18:51:04 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:27:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <stdlib.h> // MB_CUR_MAX
 
-extern t_ctx *g_ctx;
 
 //WARNING    MB_CUR_MAX (jamais afficher plus que MBCURMAX, setlocal ou pas)
 
@@ -63,7 +62,7 @@ int	spec_c_unicode(uint32_t ca)
 
 	if (ca >= 0x11ffff || (ca >= 0xd800 && ca <= 0xdfff))
 	{
-		g_ctx->buff_size = -1;
+		g_ctx.buff_size = -1;
 		return (-1);
 	}
 
@@ -95,7 +94,7 @@ int	spec_c_unicode(uint32_t ca)
 	}
 	else
 	{
-		g_ctx->buff_size = -1;
+		g_ctx.buff_size = -1;
 		return (-1);
 	}
 
@@ -103,7 +102,7 @@ int	spec_c_unicode(uint32_t ca)
 
 	i = nb_octets;
 	while (i--)
-		print_in_buffer(str[i], 1);
+		print_in_buffer_nb(str[i], 1);
 	return (nb_octets);
 
 	/*----------------------------------------------------------------------*/
@@ -121,7 +120,7 @@ int	spec_c_unicode(uint32_t ca)
 	if (ca < 0x80)
 	{
 		write (1, &ca, 1);
-		g_ctx->buff_size++;
+		g_ctx.buff_size++;
 		return (1);
 	}
 
@@ -143,7 +142,7 @@ int	spec_c_unicode(uint32_t ca)
 		mask = mask >> 1 + 0x80;
 		i++;
 	}
-	g_ctx->buff_size += i + 1;
+	g_ctx.buff_size += i + 1;
 	while (i >= 0)
 		write (1, str + i--, 1);
 	*/
@@ -165,17 +164,17 @@ void	spec_c(t_flag *flags)
 	if (!flags->left_align)
 	{
 		if (!flags->pad)
-			print_in_buffer(' ', width);
+			print_in_buffer_nb(' ', width);
 		else
-			print_in_buffer('0', width);
+			print_in_buffer_nb('0', width);
 		width = 0;
 	}
 
 	if (flags->specifier == 'C' || flags->length == 8)
 		spec_c_unicode(flags->data.uint32);
 	else
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 
-	print_in_buffer(' ', width);
+	print_in_buffer_nb(' ', width);
 }
 

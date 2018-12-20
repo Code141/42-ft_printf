@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 16:07:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:57:49 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,62 +20,28 @@
 #include <s_ctx.h>
 #include <ft_printf.h>
 
-// CHECK STATICS FUNCTIONS
-
-t_ctx			*g_ctx;			// NE GERE PAS 2 PRINTF RECURSIFS CONFLICT
-
-static void	ft_bzero(void *s, size_t n)
-{
-	char	*c;
-
-	c = (char*)s;
-	while (n--)
-		c[n] = 0;
-}
-
-static t_ctx	*init(const char *format)
-{
-	t_ctx	*ctx;
-	int		i;
-	int		nb_arg;
-
-	i = 0;
-	nb_arg = 0;
-	while (format[i])
-		if (format[i++] == '%')
-			nb_arg++;
-	g_ctx = (t_ctx*)malloc(sizeof(t_ctx) + (sizeof(t_flag) * nb_arg));
-	if (!g_ctx)
-		exit (0);
-//	PERFORMANCES KILLER
-//	ft_bzero((char*)(g_ctx->flags), sizeof(t_flag) * nb_arg);
-	g_ctx->buff_pos = 0;
-	g_ctx->buff_size = 0;
-	return (g_ctx);
-}
+t_ctx			g_ctx;
 
 int	ft_printf(const char *format, ...)
 {
 	int		ret;
 
-	if (!format || !init(format))
+	if (!format )
 		return (0);
-	va_start(g_ctx->args, format);
-	va_copy(g_ctx->current_args, g_ctx->args);
-//	interceptor(format);
-	int		i;
-	int		current_arg;
-	i = 0;
-	current_arg = 0;
-	while (format[i])
-		if (format[i] == '%')
-			i += new_arg(format + i, current_arg++);
-		else
-			print_in_buffer(format[i++], 1);
-	write(1, g_ctx->buffer, g_ctx->buff_pos);
-	ret = g_ctx->buff_size;
-	va_end(g_ctx->current_args);
-	va_end(g_ctx->args);
-	free(g_ctx);
+
+	g_ctx.buff_pos = 0;
+	g_ctx.buff_size = 0;
+
+	va_start(g_ctx.args, format);
+	va_copy(g_ctx.current_args, g_ctx.args);
+
+	interceptor(format);
+
+	write(1, g_ctx.buffer, g_ctx.buff_pos);
+	ret = g_ctx.buff_size;
+
+	va_end(g_ctx.current_args);
+	va_end(g_ctx.args);
+
 	return (ret);
 }

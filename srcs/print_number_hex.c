@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 13:13:45 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/19 18:32:16 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:27:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_number_hex_uint8_t(uint8_t nb, int size, int style)
 	{
 		c = (nb / g_precalculated_uint_8[16][size]) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -35,7 +35,7 @@ void	print_number_hex_uint16_t(uint16_t nb, int size, int style)
 	{
 		c = (nb / g_precalculated_uint_16[16][size]) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -48,7 +48,7 @@ void	print_number_hex_uint32_t(uint32_t nb, int size, int style)
 	{
 		c = (nb / g_precalculated_uint_32[16][size]) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -61,7 +61,7 @@ void	print_number_hex_uint64_t(uint64_t nb, int size, int style)
 	{
 		c = (nb / g_precalculated_uint_64[16][size]) % 16 + '0';
 		c = (c > 57) ? c + style : c;
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 

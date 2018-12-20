@@ -6,14 +6,12 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 22:26:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/19 15:23:52 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:53:07 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <s_ctx.h>
 #include <specifiers.h>
-
-extern t_ctx *g_ctx;
 
 void	signed_nb(t_flag *flags)
 {
@@ -50,7 +48,7 @@ int	signed_integer(char specifier, t_flag *flags)
 	}
 	else
 		return (0);
-	flags->data.data = va_arg(g_ctx->current_args, long long);
+	flags->data.data = va_arg(g_ctx.current_args, long long);
 	signed_nb(flags);
 	return (1);
 }
@@ -79,7 +77,7 @@ int	unsigned_integer(char specifier, t_flag *flags)
 		flags->procedure = &spec_b;
 	else
 		return (0);
-	flags->data.data = va_arg(g_ctx->current_args, long long);
+	flags->data.data = va_arg(g_ctx.current_args, long long);
 	return (1);
 }
 
@@ -102,7 +100,7 @@ int character(char specifier, t_flag *flags)
 		flags->procedure = &spec_S;
 	else
 		return (0);
-		flags->data.data = va_arg(g_ctx->current_args, long long);
+		flags->data.data = va_arg(g_ctx.current_args, long long);
 	return (1);
 }
 

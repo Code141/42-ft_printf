@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:15:29 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 13:33:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 17:27:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_number_uint8_t(uint8_t nb, int size, int base)
 	while (size--)
 	{
 		c = nb / g_precalculated_uint_8[base][size] % base + '0';
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -32,7 +32,7 @@ void	print_number_uint16_t(uint16_t nb, int size, int base)
 	while (size--)
 	{
 		c = nb / g_precalculated_uint_16[base][size] % base + '0';
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -43,7 +43,7 @@ void	print_number_uint32_t(uint32_t nb, int size, int base)
 	while (size--)
 	{
 		c = nb / g_precalculated_uint_32[base][size] % base + '0';
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
@@ -54,7 +54,7 @@ void	print_number_uint64_t(uint64_t nb, int size, int base)
 	while (size--)
 	{
 		c = nb / g_precalculated_uint_64[base][size] % base + '0';
-		print_in_buffer(c, 1);
+		print_in_buffer_nb(c, 1);
 	}
 }
 
