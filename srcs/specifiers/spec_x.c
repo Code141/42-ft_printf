@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 17:06:55 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:27:53 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 21:07:41 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	spec_x(t_flag *flags)
 {
-	int				width;
-	int				size;
+	int	width;
+	int	size;
 	int				style;
 
 	size = number_width(flags->data, 16, flags->length);

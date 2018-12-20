@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/12/19 15:40:05 by gelambin         ###   ########.fr       *#
+#*   Updated: 2018/12/20 20:43:00 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,7 +19,8 @@ SRCSPATH	=	srcs
 
 CC			=	gcc
 
-CFLAGS		=	#-Wall -Wextra -Werror						\
+CFLAGS		= -Wconversion
+				#-Wall -Wextra -Werror						\
 				-std=c89 -pedantic							\
 				-Wmissing-prototypes -Wstrict-prototypes	\
 				-Wold-style-definition
@@ -27,8 +28,8 @@ CFLAGS		=	#-Wall -Wextra -Werror						\
 CPPFLAGS	=	-I./includes/
 
 %.o: %.c includes/
-	$(CC) -O3 $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
-#	$(CC) -g -fsanitize=address $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+#	$(CC) -O3 $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) -g $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 
 SRCS		=	ft_printf.c									\

@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:59:54 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 21:13:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,17 @@
 #include <specifiers.h>
 #include <unistd.h>
 
-/*
 void	error(const char *arg, int pos)
 {
-	//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
-	write (1,
-	"WARNING: unexpected format specifier in ft_printf interceptor: ", 63);
+	write (1, "WARNING: unexpected format specifier in ft_printf interceptor: ", 63);
 	write (1, arg, pos);
 	write (1, "\n", 1);
 }
-*/
 
-int		new_arg(const char *arg, int current_arg)
+int		new_arg(const char *arg)
 {
 	int		pos;
 	t_flag	flags;
-
-	pos = 0;
-
-	flags.procedure = NULL;
-	flags.precision = -1;
 
 	flags.alternate = 0;
 	flags.pad = 0;
@@ -49,13 +40,14 @@ int		new_arg(const char *arg, int current_arg)
 	flags.data.data = 0;
 	flags.neg = 0;
 
+	flags.procedure = NULL;
+	flags.precision = -1;
+
+	pos = 0;
 	pos += flag(arg + pos, &flags);
-
 	flags.specifier = arg[pos];
-
 	if (!flags.length)
 		flags.length = 4;
-
 	if (arg[pos])
 	{
 		pos++;
@@ -78,7 +70,7 @@ void		interceptor(const char *format)
 	current_arg = 0;
 	while (format[i])
 		if (format[i] == '%')
-			i += new_arg(format + i, current_arg++);
+			i += new_arg(format + i);
 		else
 			print_in_buffer_nb(format[i++], 1);
 }

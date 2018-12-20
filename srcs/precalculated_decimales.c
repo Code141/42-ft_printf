@@ -6,13 +6,13 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 17:40:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/14 17:49:10 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:53:42 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 
-static uint8_t		base_2_uint_8[] = {
+static uint8_t		g_base_2_uint_8[] = {
 	0x1,
 	0x2,
 	0x4,
@@ -23,7 +23,7 @@ static uint8_t		base_2_uint_8[] = {
 	0x80,
 };
 
-static uint16_t		base_2_uint_16[] = {
+static uint16_t		g_base_2_uint_16[] = {
 	0x1,
 	0x2,
 	0x4,
@@ -42,7 +42,7 @@ static uint16_t		base_2_uint_16[] = {
 	0x8000
 };
 
-static uint32_t	base_2_uint_32[] = {
+static uint32_t		g_base_2_uint_32[] = {
 	0x1,
 	0x2,
 	0x4,
@@ -77,7 +77,7 @@ static uint32_t	base_2_uint_32[] = {
 	0x80000000
 };
 
-static uint64_t	base_2_uint_64[] = {
+static uint64_t		g_base_2_uint_64[] = {
 	0x1,
 	0x2,
 	0x4,
@@ -144,14 +144,14 @@ static uint64_t	base_2_uint_64[] = {
 	0x8000000000000000
 };
 
-static uint8_t				base_8_uint_8[] = {
+static uint8_t			g_base_8_uint_8[] = {
 	0x1,
 	0x8,
 	0x40,
 	0x200
 };
 
-static uint16_t				base_8_uint_16[] = {
+static uint16_t			g_base_8_uint_16[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -160,7 +160,7 @@ static uint16_t				base_8_uint_16[] = {
 	0x8000
 };
 
-static uint32_t				base_8_uint_32[] = {
+static uint32_t			g_base_8_uint_32[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -174,7 +174,7 @@ static uint32_t				base_8_uint_32[] = {
 	0x40000000
 };
 
-static uint64_t				base_8_uint_64[] = {
+static uint64_t			g_base_8_uint_64[] = {
 	0x1,
 	0x8,
 	0x40,
@@ -199,13 +199,13 @@ static uint64_t				base_8_uint_64[] = {
 	0x8000000000000000
 };
 
-static const uint8_t		base_10_uint_8[] = {
+static const uint8_t		g_base_10_uint_8[] = {
 	1,
 	10,
 	100
 };
 
-static const uint16_t		base_10_uint_16[] = {
+static const uint16_t		g_base_10_uint_16[] = {
 	1,
 	10,
 	100,
@@ -213,7 +213,7 @@ static const uint16_t		base_10_uint_16[] = {
 	10000
 };
 
-static const uint32_t		base_10_uint_32[] = {
+static const uint32_t		g_base_10_uint_32[] = {
 	1,
 	10,
 	100,
@@ -226,7 +226,7 @@ static const uint32_t		base_10_uint_32[] = {
 	1000000000
 };
 
-static const uint64_t		base_10_uint_64[] = {
+static const uint64_t		g_base_10_uint_64[] = {
 	1,
 	10,
 	100,
@@ -249,19 +249,19 @@ static const uint64_t		base_10_uint_64[] = {
 	10000000000000000000
 };
 
-static const uint8_t		base_16_uint_8[] = {
+static const uint8_t		g_base_16_uint_8[] = {
 	0x1,
 	0x10
 };
 
-static const uint16_t		base_16_uint_16[] = {
+static const uint16_t		g_base_16_uint_16[] = {
 	0x1,
 	0x10,
 	0x100,
 	0x1000
 };
 
-static const uint32_t		base_16_uint_32[] = {
+static const uint32_t		g_base_16_uint_32[] = {
 	0x1,
 	0x10,
 	0x100,
@@ -272,7 +272,7 @@ static const uint32_t		base_16_uint_32[] = {
 	0x10000000
 };
 
-static const uint64_t		base_16_uint_64[] = {
+static const uint64_t		g_base_16_uint_64[] = {
 	0x1,
 	0x10,
 	0x100,
@@ -291,86 +291,86 @@ static const uint64_t		base_16_uint_64[] = {
 	0x1000000000000000
 };
 
-uint8_t						*g_precalculated_uint_8[] = 
+uint8_t						*g_precalculated_uint_8[] =
 {
-	0,	// base 0
-	0,
-	base_2_uint_8,
 	0,
 	0,
-	0,
-	0,
-	0,
-	base_8_uint_8,
-	0,
-	base_10_uint_8,
+	g_base_2_uint_8,
 	0,
 	0,
 	0,
 	0,
 	0,
-	base_16_uint_8
+	g_base_8_uint_8,
+	0,
+	g_base_10_uint_8,
+	0,
+	0,
+	0,
+	0,
+	0,
+	g_base_16_uint_8
 };
 
 uint16_t					*g_precalculated_uint_16[] =
 {
-	0,	// base 0
-	0,
-	base_2_uint_16,
 	0,
 	0,
-	0,
-	0,
-	0,
-	base_8_uint_16,
-	0,
-	base_10_uint_16,
+	g_base_2_uint_16,
 	0,
 	0,
 	0,
 	0,
 	0,
-	base_16_uint_16
+	g_base_8_uint_16,
+	0,
+	g_base_10_uint_16,
+	0,
+	0,
+	0,
+	0,
+	0,
+	g_base_16_uint_16
 };
 
 uint32_t					*g_precalculated_uint_32[] =
 {
-	0,	// base 0
-	0,
-	base_2_uint_32,
 	0,
 	0,
-	0,
-	0,
-	0,
-	base_8_uint_32,
-	0,
-	base_10_uint_32,
+	g_base_2_uint_32,
 	0,
 	0,
 	0,
 	0,
 	0,
-	base_16_uint_32
+	g_base_8_uint_32,
+	0,
+	g_base_10_uint_32,
+	0,
+	0,
+	0,
+	0,
+	0,
+	g_base_16_uint_32
 };
 
 uint64_t					*g_precalculated_uint_64[] =
 {
-	0,	// base 0
-	0,
-	base_2_uint_64,
 	0,
 	0,
-	0,
-	0,
-	0,
-	base_8_uint_64,
-	0,
-	base_10_uint_64,
+	g_base_2_uint_64,
 	0,
 	0,
 	0,
 	0,
 	0,
-	base_16_uint_64
+	g_base_8_uint_64,
+	0,
+	g_base_10_uint_64,
+	0,
+	0,
+	0,
+	0,
+	0,
+	g_base_16_uint_64
 };

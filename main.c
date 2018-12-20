@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:53:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 20:47:16 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 int	main(void)
 {
+
+	char	b;
+	read(0, &b, 1);
 
 
 	char				*str;
@@ -79,7 +82,6 @@ printf("\n[%d]\n", ft_printf("\n%+-12.7dt%0 4i %% et %lc titi\n", 125, 124, 256)
 */
 
 
-/*
 ft_printf("[%d]\n", ft_printf("%S", L"Á"));
 ft_printf("[%d]\n", printf("%S", L"Á"));
 
@@ -97,7 +99,7 @@ ft_printf("[%d]\n", printf("\n%.1S\n", L"ÊÊuM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM
 ft_printf("[%d]\n", printf("\n%.2S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.3S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.4S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
-ft_printntf is inf times slower thanf("[%d]\n", printf("\n%.5S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
+//ft_printntf is inf times slower thanf("[%d]\n", printf("\n%.5S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.6S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.7S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
 ft_printf("[%d]\n", printf("\n%.8S\n", L"ÊÊÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B") - 2);
@@ -152,10 +154,10 @@ ft_printf("%c", 200);
 ft_printf("\n----------------------------------\n", 'X');
 
 
-*/
+
 	//	WEIRD TEST          WARNING MAKE INFINITE WHILE 
 /*
-	   printf(" {%d-%*3$d--%d\n", 40, 10, 5, 100);
+	printf(" {%d-%*3$d--%d\n", 40, 10, 5, 100);
 
 	ft_printf("-{%d-%*3$d--%d\n", 40, 10, 5, 100);
 	rintf("|%#2$d\n", 3, 10, 2, 4);
@@ -165,14 +167,12 @@ ft_printf("\n----------------------------------\n", 'X');
 	rintf("%.*5d\n", 20, 10);
 	t_printf("%.*5d\n", 20, 10);
 */
-
 /*
+	printf("%*.*d\n", 20, 10, 3);
+	ft_printf("%*.*d\n", 20, 10, 3);
 
-	rintf("%*.*d\n", 20, 10, 3);
-	t_printf("%*.*d\n", 20, 10, 3);
-
-	rintf("%.5*d\n", 20, 10);
-	t_printf("%.5*d\n", 20, 10);
+	printf("%.5*d\n", 20, 10);
+	ft_printf("%.5*d\n", 20, 10);
 
 	rintf("~%*d\n", -10, 10);
 	t_printf("~--%*d\n", -10, 10);
@@ -188,7 +188,7 @@ ft_printf("\n----------------------------------\n", 'X');
 	rintf("\n---------------------------------------------------\n");
 	rintf("{TOTO%05.*d}\n", -15, 42);
 	t_printf("--{TOTO%05.*d}\n", -15, 42);
-
+*/
 
 	printf("%d", printf("%.5s\n", str));
 
@@ -251,6 +251,6 @@ ft_printf("\n----------------------------------\n", 'X');
 	printf("|%02$*d|\n", i, j, k);
 	printf("-|%.11d-%d-%d|\n", i, j, k, str);
 	printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
-*/
+	read(0, &b, 1);
 	return (0);
 }

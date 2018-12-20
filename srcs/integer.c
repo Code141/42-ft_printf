@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 22:26:53 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:53:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 20:34:44 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	signed_nb(t_flag *flags)
 	}
 }
 
-int	signed_integer(char specifier, t_flag *flags)
+int		signed_integer(char specifier, t_flag *flags)
 {
 	if (specifier == 'd' || specifier == 'i')
 		flags->procedure = &spec_d;
 	else if (specifier == 'D')
 	{
-			flags->length = 8;
-			flags->procedure = &spec_d;
+		flags->length = 8;
+		flags->procedure = &spec_d;
 	}
 	else
 		return (0);
@@ -53,7 +53,7 @@ int	signed_integer(char specifier, t_flag *flags)
 	return (1);
 }
 
-int	unsigned_integer(char specifier, t_flag *flags)
+int		unsigned_integer(char specifier, t_flag *flags)
 {
 	if (specifier == 'u')
 		flags->procedure = &spec_u;
@@ -81,7 +81,7 @@ int	unsigned_integer(char specifier, t_flag *flags)
 	return (1);
 }
 
-int character(char specifier, t_flag *flags)
+int		character(char specifier, t_flag *flags)
 {
 	if (specifier == 'c')
 		flags->procedure = &spec_c;
@@ -100,7 +100,6 @@ int character(char specifier, t_flag *flags)
 		flags->procedure = &spec_S;
 	else
 		return (0);
-		flags->data.data = va_arg(g_ctx.current_args, long long);
+	flags->data.data = va_arg(g_ctx.current_args, long long);
 	return (1);
 }
-

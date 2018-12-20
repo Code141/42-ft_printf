@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:41:33 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 19:43:41 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ void	sign(char neg, char explicite, char space)
 	if (neg)
 		print_in_buffer_nb('-', 1);
 	else
+	{
 		if (explicite)
 			print_in_buffer_nb('+', 1);
 		else if (space)
 			print_in_buffer_nb(' ', 1);
+	}
 }
 
 void	alternate(char style)
@@ -66,4 +68,3 @@ void	alternate(char style)
 	else if (style == 2)
 		print_in_buffer_nb('X', 1);
 }
-

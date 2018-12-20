@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:44:31 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:53:02 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 20:25:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		argument_access(char *str, t_flag *flags)
 	nb = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = (nb * 10) + str[i++] - '0';
-
 	if (str[i] == '*')
 	{
 		nb = va_arg(g_ctx.current_args, int);
@@ -56,7 +55,6 @@ int		argument_access(char *str, t_flag *flags)
 		return (i - 1);
 	}
 	flags->width = nb;
-
 	if (str[i] == '$' && nb > 0)
 	{
 		va_end(g_ctx.current_args);
@@ -65,7 +63,6 @@ int		argument_access(char *str, t_flag *flags)
 			va_arg(g_ctx.current_args, void*);
 		return (i - 1);
 	}
-
 	return (i - 1);
 }
 
@@ -110,7 +107,7 @@ int		flag(char *str, t_flag *flags)
 		else if (str[i] == '.')
 			i += precision(str + i + 1, flags);
 		else if ((str[i] >= '1' && str[i] <= '9')
-				|| str[i] == '$'|| str[i] == '*')
+			|| str[i] == '$'|| str[i] == '*')
 			i += argument_access(str + i, flags);
 		else if (str[i] == '-')
 			flags->left_align = 1;
@@ -135,7 +132,6 @@ int		specifier(char specifier, t_flag *flags)
 			flags->pad = 0;
 		else
 			flags->precision = 1;
-
 		if (flags->data.uint64 < 0x100)
 			flags->length = 1;
 		else if (flags->data.uint64 < 0x10000 && flags->length > 2)
