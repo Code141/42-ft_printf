@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 13:13:45 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/07 23:25:34 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:32:16 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_number_hex_uint64_t(uint64_t nb, int size, int style)
 	}
 }
 
-int		print_number_hex(t_va_data data, int size, int style, int length)
+void	print_number_hex(t_va_data data, int size, int style, int length)
 {
 	if (length == 1)
 		print_number_hex_uint8_t(data.uint8, size, style);
@@ -75,5 +75,4 @@ int		print_number_hex(t_va_data data, int size, int style, int length)
 		print_number_hex_uint32_t(data.uint32, size, style);
 	else if (length == 8)
 		print_number_hex_uint64_t(data.uint64, size, style);
-	return (0);
 }

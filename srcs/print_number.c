@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 16:15:29 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/11 17:57:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 13:33:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_number_uint64_t(uint64_t nb, int size, int base)
 	}
 }
 
-int		print_number(t_va_data data, int size, int base, int length)
+void	print_number(t_va_data data, int size, int base, int length)
 {
 	if (length == 1)
 		print_number_uint8_t(data.uint8, size, base);
@@ -68,5 +68,4 @@ int		print_number(t_va_data data, int size, int base, int length)
 		print_number_uint32_t(data.uint32, size, base);
 	else if (length == 8)
 		print_number_uint64_t(data.uint64, size, base);
-	return (0);
 }

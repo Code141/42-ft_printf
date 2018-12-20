@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 17:18:28 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/11 19:19:30 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:32:53 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,25 @@ void	print_in_buffer(char c, int nb)
 	if (g_ctx->buff_size != -1)
 	{
 		g_ctx->buff_size += nb;
-
-		// DEPASSEMENT BUFFER !!!!!!!!
-		// write(1, g_ctx->buffer, g_ctx->buff_size);
-
-		if (g_ctx->buff_pos + nb >= FT_PRINTF_BUFF_SIZE)
+		if (g_ctx->buff_pos + nb > FT_PRINTF_BUFF_SIZE)
 		{
-			write(1, g_ctx->buffer, g_ctx->buff_size);
+			write(1, g_ctx->buffer, g_ctx->buff_pos);
 			g_ctx->buff_pos = 0;
+			while (nb--)
+			{
+				if (g_ctx->buff_pos == FT_PRINTF_BUFF_SIZE)
+				{
+					write(1, g_ctx->buffer, g_ctx->buff_pos);
+					g_ctx->buff_pos = 0;
+				}
+				g_ctx->buffer[g_ctx->buff_pos++] = c;
+			}
 		}
-		while (nb--)
-			g_ctx->buffer[g_ctx->buff_pos++] = c;
+		else
+		{
+			while (nb--)
+				g_ctx->buffer[g_ctx->buff_pos++] = c;
+		}
 	}
 }
 

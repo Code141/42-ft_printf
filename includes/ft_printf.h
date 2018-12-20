@@ -6,13 +6,15 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:48:17 by gelambin          #+#    #+#             */
-/*   Updated: 2018/07/14 11:56:48 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:32:43 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define FT_PRINTF_BUFF_SIZE 4096
+
+# define FT_PRINTF_BUFF_SIZE 256
+
 int ft_printf(const char *format, ...);
 
 #endif

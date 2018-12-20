@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 23:31:05 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/11 19:09:45 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/19 18:18:00 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 
 extern t_ctx *g_ctx;
 
+/*
 void	error(const char *arg, int pos)
 {
 	//==77134==WARNING: unexpected format specifier in printf interceptor: %-01+
-	/*
-	   write (1, "WARNING: unexpected format specifier in ft_printf interceptor: "
-	   , 63);
-	   write (1, arg, pos);
-	   write (1, "\n", 1);
-	 */
+	write (1,
+	"WARNING: unexpected format specifier in ft_printf interceptor: ", 63);
+	write (1, arg, pos);
+	write (1, "\n", 1);
 }
+*/
 
 int		new_arg(const char *arg, int current_arg)
 {

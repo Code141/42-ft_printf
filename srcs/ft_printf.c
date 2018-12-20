@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:41:06 by gelambin          #+#    #+#             */
-/*   Updated: 2018/08/03 15:06:07 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/20 16:07:34 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,31 @@ static t_ctx	*init(const char *format)
 //	ft_bzero((char*)(g_ctx->flags), sizeof(t_flag) * nb_arg);
 	g_ctx->buff_pos = 0;
 	g_ctx->buff_size = 0;
-	return (ctx);
+	return (g_ctx);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	int		ret;
 
-	if (format == NULL)
+	if (!format || !init(format))
 		return (0);
-
-	init(format);
 	va_start(g_ctx->args, format);
 	va_copy(g_ctx->current_args, g_ctx->args);
-
-	interceptor(format);
-
-	write(1, g_ctx->buffer, g_ctx->buff_size);
+//	interceptor(format);
+	int		i;
+	int		current_arg;
+	i = 0;
+	current_arg = 0;
+	while (format[i])
+		if (format[i] == '%')
+			i += new_arg(format + i, current_arg++);
+		else
+			print_in_buffer(format[i++], 1);
+	write(1, g_ctx->buffer, g_ctx->buff_pos);
 	ret = g_ctx->buff_size;
-
 	va_end(g_ctx->current_args);
 	va_end(g_ctx->args);
 	free(g_ctx);
-
 	return (ret);
 }
