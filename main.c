@@ -6,7 +6,7 @@
 /*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 19:38:04 by gelambin          #+#    #+#             */
-/*   Updated: 2018/12/20 17:53:46 by gelambin         ###   ########.fr       */
+/*   Updated: 2018/12/23 17:51:45 by gelambin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 int	main(void)
 {
 
-
+/*
 	char				*str;
 	char				*str2;
 	long int			i;
@@ -42,10 +42,10 @@ int	main(void)
 
 //	setlocale(LC_ALL,"");
 
-/*
+
 ft_printf("\n[%d]\n", printf());
 printf("\n[%d]\n", ft_printf());
-*/
+
 
 i = 0x80 - 10;
 while (i < 0x800 + 10)
@@ -66,7 +66,7 @@ printf("\n------------------------------------------------------\n");
 printf("[%d]", printf("---%lc---", 254));
 printf("([%d])", ft_printf("---%lc---", 254));
 
-
+*/
 /*
 ft_printf("%5%");
 ft_printf("\n[%d]\n", printf("%5%"));
@@ -252,5 +252,25 @@ ft_printf("\n----------------------------------\n", 'X');
 	printf("-|%.11d-%d-%d|\n", i, j, k, str);
 	printf("|%d-%d-%d-%1$*d-%d-%d|\n", i, j, k, str);
 */
+
+
+
+
+float fl;
+
+
+fl = 1.23;
+
+printf("%f\n", fl);
+printf("%b", fl);
+
+//ft_printf("%f", fl);
+
+
+
+
+
+
+
 	return (0);
 }
