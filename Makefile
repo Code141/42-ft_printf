@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2018/12/20 20:43:00 by gelambin         ###   ########.fr       *#
+#*   Updated: 2019/01/07 18:25:06 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -49,6 +49,7 @@ SRCS		=	ft_printf.c									\
 				specifiers/spec_s.c							\
 				specifiers/spec_p.c							\
 				specifiers/spec_x.c							\
+				specifiers/spec_f.c							\
 				specifiers/spec_percent.c
 
 OBJS		=	$(addprefix $(SRCSPATH)/, $(SRCS:.c=.o))
