@@ -6,7 +6,7 @@
 #*   By: gelambin <gelambin@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/04/04 15:30:23 by gelambin          #+#    #+#             *#
-#*   Updated: 2019/01/07 18:25:06 by gelambin         ###   ########.fr       *#
+#*   Updated: 2019/01/22 12:40:07 by gelambin         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -28,8 +28,8 @@ CFLAGS		= -Wconversion
 CPPFLAGS	=	-I./includes/
 
 %.o: %.c includes/
-#	$(CC) -O3 $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
-	$(CC) -g $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+	$(CC) -O3 $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+#	$(CC) -g $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 
 SRCS		=	ft_printf.c									\
